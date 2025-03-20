@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 // COMPLETE ARTICLES ROUTE!
 // make middlewares for users when theres no token or it is
-// in middleware make verifying token and checking by it if user is authorized
+// create saves system
 
 app.use("/", articles) // route for articles viewing
 app.use("/users", users) // route for authorizing
