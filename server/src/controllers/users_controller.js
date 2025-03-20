@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
 import jwt from "jsonwebtoken";
 import pool from './pool.js';
+import { v4 as uuidv4 } from "uuid";
 
 
 // CREATE TABLE Users (
@@ -16,18 +17,10 @@ import pool from './pool.js';
 // 3 integrate likes system
 
 export async function Register(req, res) {
-    // check if user logged in
-    if (req.cookies.token)
-    {
-        res.status(500).json({
-            message: "You have already logged in"
-        })
-        return
-    }
-
     // generate token with password
     const token = jwt.sign(
         { 
+            api_key: uuidv4(),
             password: req.body.password 
         }, 
         process.env.SECRET_KEY, 
@@ -81,15 +74,6 @@ export async function Register(req, res) {
 }
 
 export async function Login(req, res) {
-    // check if user logged in
-    if (req.cookies.token)
-    {
-        res.status(500).json({
-            message: "You have already logged in"
-        })
-        return
-    }
-
     try {
         // run db query 
         const [rows] = await pool.query(
@@ -147,15 +131,6 @@ export async function Login(req, res) {
 }
 
 export function Logout(req, res) {
-    // check if user logged in
-    if (!req.cookies.token)
-    {
-        res.status(500).json({
-            message: "You have not logged in yet"
-        })
-        return
-    }
-
     // clear cookies
     res
         .clearCookie("user_data")

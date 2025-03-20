@@ -1,13 +1,14 @@
 import express from "express"
-import * as likes from "../controllers/likes.js"
+import * as likesController from "../controllers/likes_controller.js"
 
 
 const router = express.Router()
 
-router.post('/like', await likes.LikeArticle) // ?article_id="id of article"
+router.post('/:id', await likesController.Like)
 
-router.post('/dislike', await likes.DislikeArticle) // ?article_id="id of article"
+router.delete('/:id', await likesController.Dislike) 
 
-router.get('/likes', await likes.GetLikes)  // ?article_id="id of article"
+router.get('/:id', await likesController.GetLikes)
+
 
 export default router

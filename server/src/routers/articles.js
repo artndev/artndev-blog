@@ -1,31 +1,21 @@
 import express from "express"
-import * as DBController from "../controllers/articles.js"
+import * as articlesController from "../controllers/articles_controller.js"
+import * as middlewares from "../middlewares.js"
 
 
 const router = express.Router()
 
-router.get('/', async (_, res) => {
-    const data = await DBController.GetAllArticles()
+router.get("/", await articlesController.GetAll)
 
-    if (data.ans)
-    {
-        res.status(200).json(data.msg)
-        return
-    }
+router.get("/:id", await articlesController.Get)
 
-    res.status(500).json(data.msg)
-})
+router.post("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.Create)
 
-router.get('/:id', async (req, res) => {
-    const data = await DBController.GetArticle(req.params.id)
+router.patch("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.Update)
 
-    if (data.ans)
-    {
-        res.status(200).json(...data.msg)
-        return
-    }
+router.delete("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.DeleteAll)
 
-    res.status(500).json(data.msg)
-})
+router.delete("/:id", middlewares.isLogged, middlewares.isAdmin, await articlesController.Delete)
+
 
 export default router

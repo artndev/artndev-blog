@@ -9,18 +9,17 @@ import pool from './pool.js';
 // 	   CONSTRAINT UserIdFK FOREIGN KEY(UserId) REFERENCES Users(Id)
 // );
 
-export async function LikeArticle(req, res) {
+export async function Like(req, res) {
     try {
         const { id } = JSON.parse(req.cookies.user_data)
 
-        // run db query
         await pool.query(
-            'INSERT INTO `Likes` (ArticleId, UserId) VALUES (?, ?);',
-            [req.query.article_id, id]
+            "INSERT INTO Likes (ArticleId, UserId) VALUES (?, ?);",
+            [req.params.id, id]
         )
 
         res.status(200).json({
-            message: "You have successfully liked this article"
+            message: "You have successfully liked the article"
         })
     } catch(err) {
         console.log(err)
@@ -29,24 +28,24 @@ export async function LikeArticle(req, res) {
     }
 }
 
-export async function DislikeArticle(req, res) {
+export async function Dislike(req, res) {
     try {
         const { id } = JSON.parse(req.cookies.user_data)
 
-        // run db query
         const [rows] = await pool.query(
-            'DELETE FROM `Likes` WHERE ArticleId = ? AND UserId = ?;',
-            [req.query.article_id, id]
+            "DELETE FROM Likes WHERE ArticleId = ? AND UserId = ?;",
+            [req.params.id, id]
         )
         
-        // check for dislike
         if (!rows.affectedRows)
-            throw {
-                message: "You have already disliked this article"
-            }
+        {
+            res.status(400).json({
+                message: "You have already disliked the article"
+            })
+        }
 
         res.status(200).json({
-            message: "You have successfully disliked this article"
+            message: "You have successfully disliked the article"
         })
     } catch(err) {
         console.log(err)
@@ -57,15 +56,27 @@ export async function DislikeArticle(req, res) {
 
 export async function GetLikes(req, res) {
     try {
-        // run db query
         const [rows] = await pool.query(
-            'SELECT COUNT(*) AS likes FROM (SELECT * FROM `Likes` WHERE ArticleId = ?) AS alias;',
-            req.query.article_id
+            "SELECT * FROM Articles WHERE Id = ?",
+            req.params.id
         )
-        
+
+        if (!rows.length)
+        {
+            res.status(404).json({
+                message: "The article with such id can not be found"
+            })
+            return
+        }
+
+        const [rows2] = await pool.query(
+            "SELECT * FROM Likes WHERE ArticleId = ?",
+            req.params.id
+        )
+
         res.status(200).json({
             message: "You have successfully got likes of this article",
-            ...rows[0]
+            answer: rows2.length
         })
     } catch(err) {
         console.log(err)
