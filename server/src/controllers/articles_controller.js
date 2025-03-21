@@ -30,9 +30,9 @@ export async function Create(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        }) 
+        })
     }
 }
 
@@ -65,7 +65,7 @@ export async function Update(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
@@ -104,7 +104,7 @@ export async function DeleteAll(_, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
@@ -148,9 +148,9 @@ export async function Delete(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })  
+        }) 
     }
 }
 
@@ -170,9 +170,9 @@ export async function GetAll(_, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })   
+        })  
     }
 }
 
@@ -205,8 +205,8 @@ export async function Get(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })   
+        })
     }
 }
