@@ -5,11 +5,13 @@ import * as middlewares from "../middlewares.js"
 
 const router = express.Router()
 
-router.post('/:id', middlewares.isLogged, await likesController.Like)
+router.post('/l/:article_id', middlewares.isLogged, await likesController.Like)
 
-router.delete('/:id', middlewares.isLogged, await likesController.Dislike) 
+router.put('/l/:article_id', middlewares.isLogged, await likesController.Dislike) 
 
-router.get('/:id', await likesController.GetLikes)
+router.get('/l/:article_id', await likesController.GetLikes)
+
+router.get('/state', middlewares.isLogged, await likesController.GetState) // ?article_id=
 
 
 export default router

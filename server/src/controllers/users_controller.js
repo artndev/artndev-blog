@@ -1,4 +1,3 @@
-import mysql from 'mysql2/promise';
 import jwt from "jsonwebtoken";
 import pool from './pool.js';
 import { v4 as uuidv4 } from "uuid";

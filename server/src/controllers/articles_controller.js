@@ -96,6 +96,7 @@ export async function DeleteAll(_, res) {
     try {
         const [rows] = await pool.query(`
             DELETE FROM Likes; 
+            DELETE FROM Saves;
             DELETE FROM Articles; 
             ALTER TABLE Articles AUTO_INCREMENT = 1;          
         `)
@@ -121,8 +122,11 @@ export async function DeleteAll(_, res) {
 export async function Delete(req, res) {
     try {
         await pool.query(
-            "DELETE FROM Likes WHERE ArticleId = ?",
-            req.params.id
+            `
+                DELETE FROM Likes WHERE ArticleId = ?;
+                DELETE FROM Saves WHERE ArticleId = ?;
+            `,
+            [req.params.id, req.params.id]
         )
 
         const [rows] = await pool.query(

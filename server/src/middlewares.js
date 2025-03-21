@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 
 export const isLogged = (req, res, next) => {
+    console.log("il")
     try {
         if (
             !req.cookies.token ||

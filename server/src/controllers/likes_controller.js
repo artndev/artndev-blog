@@ -12,10 +12,9 @@ import pool from './pool.js';
 export async function Like(req, res) {
     try {
         const { id } = JSON.parse(req.cookies.user_data)
-
         await pool.query(
             "INSERT INTO Likes (ArticleId, UserId) VALUES (?, ?);",
-            [req.params.id, id]
+            [req.params.article_id, id]
         )
 
         res.status(200).json({
@@ -31,10 +30,9 @@ export async function Like(req, res) {
 export async function Dislike(req, res) {
     try {
         const { id } = JSON.parse(req.cookies.user_data)
-
         const [rows] = await pool.query(
             "DELETE FROM Likes WHERE ArticleId = ? AND UserId = ?;",
-            [req.params.id, id]
+            [req.params.article_id, id]
         )
         
         if (!rows.affectedRows)
@@ -57,8 +55,8 @@ export async function Dislike(req, res) {
 export async function GetLikes(req, res) {
     try {
         const [rows] = await pool.query(
-            "SELECT * FROM Articles WHERE Id = ?",
-            req.params.id
+            "SELECT * FROM Articles WHERE Id = ?;",
+            req.params.article_id
         )
 
         if (!rows.length)
@@ -71,12 +69,44 @@ export async function GetLikes(req, res) {
 
         const [rows2] = await pool.query(
             "SELECT * FROM Likes WHERE ArticleId = ?",
-            req.params.id
+            req.params.article_id
         )
 
         res.status(200).json({
             message: "You have successfully got likes of this article",
             answer: rows2.length
+        })
+    } catch(err) {
+        console.log(err)
+
+        res.status(500).json({ ...err })
+    }
+}
+
+export async function GetState(req, res) {
+    try {
+        const [rows] = await pool.query(
+            "SELECT * FROM Articles WHERE Id = ?",
+            req.query.article_id
+        )
+
+        if (!rows.length)
+        {
+            res.status(404).json({
+                message: "The article with such id can not be found"
+            })
+            return
+        }
+
+        const { id } = JSON.parse(req.cookies.user_data)
+        const [rows2] = await pool.query(
+            "SELECT * FROM Likes WHERE ArticleId = ? AND UserId = ?",
+            [req.query.article_id, id]
+        )
+
+        res.status(200).json({
+            message: "You have successfully got likes of this article",
+            answer: rows2.length > 0 ? 1 : 0
         })
     } catch(err) {
         console.log(err)
