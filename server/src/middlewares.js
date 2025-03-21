@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 
 
 export const isLogged = (req, res, next) => {
-    console.log("il")
     try {
         if (
             !req.cookies.token ||
@@ -10,7 +9,8 @@ export const isLogged = (req, res, next) => {
         )
         {
             res.status(401).json({
-                message: "You are not authorized"
+                message: "You are not authorized",
+                answer: null
             })
             return
         }        
@@ -20,7 +20,8 @@ export const isLogged = (req, res, next) => {
         console.log(err)
 
         res.status(403).json({
-            message: "The server has not responded or your authorization credentials has been incorrect"
+            message: "Server has not responded or your authorization credentials are incorrect",
+            answer: null
         })
     }
 }
@@ -30,7 +31,8 @@ export const isNotLogged = (req, res, next) => {
         if (req.cookies.token)
         {
             res.status(403).json({
-                message: "You have already authorized"
+                message: "You have already authorized",
+                answer: null
             })
             return
         }
@@ -41,7 +43,8 @@ export const isNotLogged = (req, res, next) => {
         console.log(err)
 
         res.status(500).json({
-            message: "The server has not responded"
+            message: "Server has not responded",
+            answer: null
         })
     }
 }
@@ -51,7 +54,8 @@ export const isAdmin = (req, res, next) => {
         if (!process.env.ADMIN_TOKENS.split(" ").includes(req.cookies.token))
         {
             res.status(403).json({
-                message: "You have no access to the request"
+                message: "You have no access to request",
+                answer: null
             })
             return
         }
@@ -61,7 +65,8 @@ export const isAdmin = (req, res, next) => {
         console.log(err)
 
         res.status(500).json({
-            message: "The server has not responded"
+            message: "Server has not responded",
+            answer: null
         })        
     }
 }

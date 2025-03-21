@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import pool from './pool.js';
 import { v4 as uuidv4 } from "uuid";
 
-
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
 //     Username VARCHAR(255) NOT NULL UNIQUE,
@@ -10,16 +9,15 @@ import { v4 as uuidv4 } from "uuid";
 //     Date DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );
-// TODO: 
-// 1. create middleware for checking if user logged in or not
-// 2. refactor code in article.js due to turning connection into pool and else
-// 3 integrate likes system
+
+
+// ====== SEND REQUESTS ======
 
 export async function Register(req, res) {
-    // generate token with password
+    // generate jwt
     const token = jwt.sign(
         { 
-            api_key: uuidv4(),
+            api_key: uuidv4(), // for double security
             password: req.body.password 
         }, 
         process.env.SECRET_KEY, 
@@ -31,17 +29,17 @@ export async function Register(req, res) {
     try {
         // run db query
         await pool.query(
-            'INSERT INTO `Users` (Username, Password) VALUES (?, ?);',
+            "INSERT INTO`Users (Username, Password) VALUES (?, ?);",
             [req.body.username, token]
         )
 
-        // get created user 
+        // run db query
         const [rows] = await pool.query(
-            'SELECT * FROM `Users` WHERE Username = ?',
+            "SELECT * FROM Users WHERE Username = ?;",
             req.body.username
         )
 
-        // set cookies with user_data and token
+        // send answer
         res
             .cookie(
                 "user_data",
@@ -63,12 +61,18 @@ export async function Register(req, res) {
             )
             .status(200)
             .json({
-                message: "You have successfully registered"
+                message: "You have successfully registered",
+                answer: true
             })
     } catch(err) {
         console.log(err)
 
-        res.status(500).json({ ...err })
+        // send answer
+        const { message, ...answer } = err
+        res.status(500).json({
+            message: (message || "Message has not been provided"),
+            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
+        })
     }
 }
 
@@ -76,34 +80,41 @@ export async function Login(req, res) {
     try {
         // run db query 
         const [rows] = await pool.query(
-            'SELECT * FROM `Users` WHERE Username = ?',
+            "SELECT * FROM Users WHERE Username = ?;",
             req.body.username
         )
 
+        console.log(rows)
+
+        // check for condition
         if (!rows.length)
         {
             res.status(404).json({
-                message: "There is no user with such username"
+                message: "Username is incorrect",
+                answer: null
             })
             return
         }
 
-        const dbPassword = rows[0].Password
-        const { password } = jwt.decode(dbPassword)
+        // check for condition
+        const [row] = [...rows]
+        const token = row.Password
+        const { password } = jwt.decode(token)
         if (password !== req.body.password)
         {
             res.status(400).json({
-                message: "The password is incorrect"
+                message: "Password is incorrect",
+                answer: null
             })
             return
         }
 
-        // set cookies with user_data and token
+        // send answer
         res
             .cookie(
                 "user_data",
                 JSON.stringify({
-                    id: rows[0].Id,
+                    id: row.Id,
                     username: req.body.username,
                 }),
                 {
@@ -112,7 +123,7 @@ export async function Login(req, res) {
             )
             .cookie(
                 "token", 
-                dbPassword, 
+                token, 
                 { 
                     httpOnly: true,
                     maxAge: process.env.AUTH_COOKIES_MAXAGE
@@ -120,22 +131,29 @@ export async function Login(req, res) {
             )
             .status(200)
             .json({
-                message: "You have successfully logged in"
+                message: "You have successfully logged in",
+                answer: true
             })
     } catch(err) {
         console.log(err)
 
-        res.status(500).json({ ...err })
+        // send answer
+        const { message, ...answer } = err
+        res.status(500).json({
+            message: (message || "Message has not been provided"),
+            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
+        })
     }
 }
 
-export function Logout(req, res) {
-    // clear cookies
+export function Logout(_, res) {
+    // send answer
     res
         .clearCookie("user_data")
         .clearCookie("token")
         .status(200)
         .json({
-            message: "You have successfully logged out"
+            message: "You have successfully logged out",
+            answer: true
         })
 }

@@ -1,6 +1,5 @@
 import pool from './pool.js';
 
-
 // CREATE TABLE Saves (
 //     ArticleId INT NOT NULL,
 //     UserId INT NOT NULL,
@@ -9,6 +8,7 @@ import pool from './pool.js';
 // 	   CONSTRAINT UserIdFK_2 FOREIGN KEY(UserId) REFERENCES Users(Id)
 // );
 
+
 // ====== SEND REQUESTS ======
 
 export async function Save(req, res) {
@@ -16,36 +16,42 @@ export async function Save(req, res) {
         // get id of current user from cookies
         const { id } = JSON.parse(req.cookies.user_data)
 
-        // request rows for condition
+        // run query
         const [rows] = await pool.query(
             "SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;",
             [req.params.article_id, id]
         )
 
-        // check for instances in table
+        // check for condition
         if (rows.length)
         {
             res.status(400).json({
-                message: "You have already saved article"
+                message: "You have already saved article",
+                answer: null
             })
             return
         }
 
-        // request rows for answer
+        // run query
         await pool.query(
             "INSERT INTO Saves (ArticleId, UserId) VALUES (?, ?);",
             [req.params.article_id, id]
         )
 
-        // send positive answer
+        // send answer
         res.status(200).json({
-            message: "You have successfully saved article"
+            message: "You have successfully saved article",
+            answer: true
         })
     } catch(err) {
         console.log(err)
 
-        // send negative answer
-        res.status(500).json({ ...err })
+        // send answer
+        const { message, ...answer } = err
+        res.status(500).json({
+            message: (message || "Message has not been provided"),
+            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
+        })
     }
 }
 
@@ -54,30 +60,36 @@ export async function Unsave(req, res) {
         // get id of current user from cookies
         const { id } = JSON.parse(req.cookies.user_data)
 
-        // request rows for condition
+        // run query
         const [rows] = await pool.query(
             "DELETE FROM Saves WHERE ArticleId = ? AND UserId = ?;",
             [req.params.article_id, id]
         )
         
-        // check for instances in table
+        // check for condition
         if (!rows.affectedRows)
         {
             res.status(400).json({
-                message: "You have already unsaved article"
+                message: "You have already unsaved article",
+                answer: null
             })
             return
         }
 
-        // send positive answer
+        // send answer
         res.status(200).json({
-            message: "You have successfully unsaved article"
+            message: "You have successfully unsaved article",
+            answer: true
         })
     } catch(err) {
         console.log(err)
 
-        // send negative answer
-        res.status(500).json({ ...err })
+        // send answer
+        const { message, ...answer } = err
+        res.status(500).json({
+            message: (message || "Message has not been provided"),
+            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
+        })
     }
 }
 
@@ -89,7 +101,7 @@ export async function GetSaves(req, res) {
         // get id of current user from cookies
         const { id } = JSON.parse(req.cookies.user_data)
 
-        // request rows for answer
+        // run query
         const [rows] = await pool.query(
             `
                 SELECT 
@@ -104,7 +116,7 @@ export async function GetSaves(req, res) {
             id
         )
 
-        // send positive answer
+        // send answer
         res.status(200).json({
             message: "You have successfully got saves of user",
             answer: rows
@@ -112,24 +124,32 @@ export async function GetSaves(req, res) {
     } catch(err) {
         console.log(err)
 
-        // send negative answer
-        res.status(500).json({ ...err })
+        // send answer
+        const { message, ...answer } = err
+        res.status(500).json({
+            message: (message || "Message has not been provided"),
+            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
+        })
     }
 }
 
+
+// ====== STATE REQUEST ======
+
 export async function GetState(req, res) {
     try {
-        // request rows for condition
+        // run query
         const [rows] = await pool.query(
             "SELECT * FROM Articles WHERE Id = ?",
             req.query.article_id
         )
 
-        // check for instances in table
+        // check for condition
         if (!rows.length)
         {
             res.status(404).json({
-                message: "The article with such id can not be found"
+                message: "The article with such id can not be found",
+                answer: null
             })
             return
         }
@@ -137,21 +157,25 @@ export async function GetState(req, res) {
         // get id of current user from cookies
         const { id } = JSON.parse(req.cookies.user_data)
 
-        // request rows for answer
+       // run query
         const [rows2] = await pool.query(
             "SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;",
             [req.query.article_id, id]
         )
 
-        // send positive answer
+        // send answer
         res.status(200).json({
-            message: "You have successfully got save-state of article",
+            message: "You have successfully got saves-state of article",
             answer: rows2.length > 0 ? 1 : 0
         })
     } catch(err) {
         console.log(err)
 
-        // send negative answer
-        res.status(500).json({ ...err })
+        // send answer
+        const { message, ...answer } = err
+        res.status(500).json({
+            message: (message || "Message has not been provided"),
+            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
+        })
     }
 }

@@ -11,7 +11,7 @@ router.get("/:id", await articlesController.Get)
 
 router.post("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.Create)
 
-router.patch("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.Update)
+router.put("/:id", middlewares.isLogged, middlewares.isAdmin, await articlesController.Update)
 
 router.delete("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.DeleteAll)
 
