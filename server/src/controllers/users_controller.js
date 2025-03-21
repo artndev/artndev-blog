@@ -70,7 +70,7 @@ export async function Register(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
@@ -140,7 +140,7 @@ export async function Login(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }

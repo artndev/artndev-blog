@@ -48,7 +48,7 @@ export async function Like(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
@@ -86,7 +86,7 @@ export async function Dislike(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
@@ -134,7 +134,7 @@ export async function CountLikes(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
@@ -184,7 +184,7 @@ export async function GetState(req, res) {
         // send answer
         const { message, ...answer } = err
         res.status(500).json({
-            message: (message || "Message has not been provided"),
+            message: (message || err),
             answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
         })
     }
