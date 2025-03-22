@@ -1,4 +1,5 @@
-import pool from './pool.js';
+import pool from '../pool.js';
+import * as utils from "../utils.js"
 
 // CREATE TABLE Likes (
 //     ArticleId INT NOT NULL,
@@ -14,12 +15,12 @@ import pool from './pool.js';
 export async function Like(req, res) {
     try {
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
         // run query
         const [rows] = await pool.query(
             "SELECT * FROM Likes WHERE ArticleId = ? AND UserId = ?;",
-            [req.params.article_id, id]
+            [req.params.article_id, user_id]
         )
 
         // check for condition
@@ -34,7 +35,7 @@ export async function Like(req, res) {
         // run query
         await pool.query(
             "INSERT INTO Likes (ArticleId, UserId) VALUES (?, ?);",
-            [req.params.article_id, id]
+            [req.params.article_id, user_id]
         )
 
         // send answer
@@ -46,23 +47,19 @@ export async function Like(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
 export async function Dislike(req, res) {
     try {
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
         // run query
         const [rows] = await pool.query(
             "DELETE FROM Likes WHERE ArticleId = ? AND UserId = ?;",
-            [req.params.article_id, id]
+            [req.params.article_id, user_id]
         )
         
         // check for condition
@@ -84,11 +81,7 @@ export async function Dislike(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -132,11 +125,7 @@ export async function CountLikes(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -148,25 +137,26 @@ export async function GetState(req, res) {
         // run query
         const [rows] = await pool.query(
             "SELECT * FROM Articles WHERE Id = ?",
-            req.query.article_id
+            req.params.article_id
         )
 
         // check for condition
         if (!rows.length)
         {
             res.status(404).json({
-                message: "The article with such id can not be found"
+                message: "The article with such id can not be found",
+                answer: null
             })
             return
         }
 
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
         // run query
         const [rows2] = await pool.query(
             "SELECT COUNT(*) as likes FROM Likes WHERE ArticleId = ? AND UserId = ?",
-            [req.query.article_id, id]
+            [req.params.article_id, user_id]
         )
 
         // send answer
@@ -182,10 +172,6 @@ export async function GetState(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }

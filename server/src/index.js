@@ -14,11 +14,7 @@ app.use(cors())
 app.use(express.json())  
 app.use(cookieParser());
 
-// COMPLETE ARTICLES ROUTE!
-// make middlewares for users when theres no token or it is
-// create saves system
-
-app.use("/", articles)
+app.use("/articles", articles)
 app.use("/users", users) 
 app.use("/likes", likes)
 app.use("/saves", middlewares.isLogged, saves) 

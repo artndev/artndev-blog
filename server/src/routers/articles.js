@@ -7,15 +7,13 @@ const router = express.Router()
 
 router.get("/", await articlesController.GetAll)
 
-router.get("/:id", await articlesController.Get)
+router.get("/:article_id", await articlesController.Get)
 
-router.post("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.Create)
+router.post("/create", middlewares.isLogged, middlewares.isAdmin, await articlesController.Create)
 
-router.put("/:id", middlewares.isLogged, middlewares.isAdmin, await articlesController.Update)
+router.put("/:article_id/update", middlewares.isLogged, middlewares.isAdmin, await articlesController.Update)
 
-router.delete("/", middlewares.isLogged, middlewares.isAdmin, await articlesController.DeleteAll)
-
-router.delete("/:id", middlewares.isLogged, middlewares.isAdmin, await articlesController.Delete)
+router.delete("/:article_id/delete", middlewares.isLogged, middlewares.isAdmin, await articlesController.Delete)
 
 
 export default router

@@ -1,12 +1,13 @@
 import jwt from "jsonwebtoken";
-import pool from './pool.js';
+import pool from '../pool.js';
 import { v4 as uuidv4 } from "uuid";
+import * as utils from "../utils.js"
 
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
 //     Username VARCHAR(255) NOT NULL UNIQUE,
 //     Password VARCHAR(255) NOT NULL,
-//     Date DATETIME DEFAULT CURRENT_TIMESTAMP(),
+//     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );
 
@@ -14,22 +15,22 @@ import { v4 as uuidv4 } from "uuid";
 // ====== SEND REQUESTS ======
 
 export async function Register(req, res) {
-    // generate jwt
-    const token = jwt.sign(
-        { 
-            api_key: uuidv4(), // for double security
-            password: req.body.password 
-        }, 
-        process.env.SECRET_KEY, 
-        { 
-            algorithm: "HS256",
-        }
-    )
-
     try {
+        // generate jwt
+        const token = jwt.sign(
+            { 
+                api_key: uuidv4(), // for double security
+                password: req.body.password 
+            }, 
+            process.env.SECRET_KEY, 
+            { 
+                algorithm: "HS256",
+            }
+        )
+
         // run db query
         await pool.query(
-            "INSERT INTO`Users (Username, Password) VALUES (?, ?);",
+            "INSERT INTO Users (Username, Password) VALUES (?, ?);",
             [req.body.username, token]
         )
 
@@ -44,7 +45,7 @@ export async function Register(req, res) {
             .cookie(
                 "user_data",
                 JSON.stringify({
-                    id: rows[0].Id,
+                    user_id: rows[0].Id,
                     username: req.body.username,
                 }),
                 {
@@ -68,11 +69,7 @@ export async function Register(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -83,8 +80,6 @@ export async function Login(req, res) {
             "SELECT * FROM Users WHERE Username = ?;",
             req.body.username
         )
-
-        console.log(rows)
 
         // check for condition
         if (!rows.length)
@@ -97,8 +92,7 @@ export async function Login(req, res) {
         }
 
         // check for condition
-        const [row] = [...rows]
-        const token = row.Password
+        const token = rows[0].Password
         const { password } = jwt.decode(token)
         if (password !== req.body.password)
         {
@@ -114,7 +108,7 @@ export async function Login(req, res) {
             .cookie(
                 "user_data",
                 JSON.stringify({
-                    id: row.Id,
+                    user_id: rows[0].Id,
                     username: req.body.username,
                 }),
                 {
@@ -138,22 +132,25 @@ export async function Login(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
 export function Logout(_, res) {
-    // send answer
-    res
+    try {
+        // send answer
+        res
         .clearCookie("user_data")
         .clearCookie("token")
         .status(200)
         .json({
             message: "You have successfully logged out",
             answer: true
-        })
+        })   
+    } catch (err) {
+        console.log(err)
+
+        // send answer
+        res.status(500).json(utils.errHandler(err))
+    }
 }

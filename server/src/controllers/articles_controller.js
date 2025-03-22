@@ -1,10 +1,11 @@
-import pool from './pool.js';
+import pool from '../pool.js';
+import * as utils from "../utils.js"
 
 // CREATE TABLE Articles (
 //     Id INT AUTO_INCREMENT,
 //     Title VARCHAR(255) NOT NULL,
 //     Text TEXT NOT NULL,
-//     Date DATETIME DEFAULT CURRENT_TIMESTAMP(),
+//     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );
 
@@ -28,11 +29,7 @@ export async function Create(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -40,8 +37,14 @@ export async function Update(req, res) {
     try {
         // run query
         const [rows] = await pool.query(
-            "UPDATE Articles (Title, Text) VALUES (?, ?) WHERE Id = ?;",
-            [req.body.Title, req.body.Text, req.params.Id]
+            `
+                UPDATE Articles SET 
+                    Title = ?, 
+                    Text = ?, 
+                    Updated = CURRENT_TIMESTAMP() 
+                WHERE Id = ?;
+            `,
+            [req.body.Title, req.body.Text, req.params.article_id]
         )
 
         // check for condition
@@ -63,68 +66,64 @@ export async function Update(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
-export async function DeleteAll(_, res) {
-    try {
-        // run query
-        const [rows] = await pool.query(
-            `
-                DELETE FROM Likes; 
-                DELETE FROM Saves;
-                DELETE FROM Articles; 
-                ALTER TABLE Articles AUTO_INCREMENT = 1;          
-            `
-        )
+// export async function DeleteAll(_, res) {
+//     try {
+//         // run query
+//         const [rows] = await pool.query(
+//             `
+//                 DELETE FROM Likes; 
+//                 DELETE FROM Saves;
+//                 DELETE FROM Articles; 
+//                 ALTER TABLE Articles AUTO_INCREMENT = 1;          
+//             `
+//         )
 
-        // check for condition
-        if (!rows.affectedRows)
-        {
-            res.status(400).json({
-                message: "There are no articles to delete",
-                answer: null
-            })
-            return
-        }
+//         // check for condition
+//         if (!rows.affectedRows)
+//         {
+//             res.status(400).json({
+//                 message: "There are no articles to delete",
+//                 answer: null
+//             })
+//             return
+//         }
 
-        // send answer
-        res.status(200).json({
-            message: "You have successfully deleted all articles",
-            answer: true
-        })
-    } catch (err) {
-        console.log(err)
+//         // send answer
+//         res.status(200).json({
+//             message: "You have successfully deleted all articles",
+//             answer: true
+//         })
+//     } catch (err) {
+//         console.log(err)
 
-        // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
-    }
-}
+//         // send answer
+//         res.status(500).json(utils.errHandler(err))
+//     }
+// }
 
 export async function Delete(req, res) {
     try {
         // run query
         await pool.query(
             `
-                DELETE FROM Likes WHERE ArticleId = ?;
-                DELETE FROM Saves WHERE ArticleId = ?;
+                DELETE FROM Likes, Saves
+                USING Likes, Saves
+                WHERE 
+                    Likes.UserId = Likes.UserId AND 
+                    Likes.ArticleId = Saves.ArticleId AND
+                    Likes.ArticleId = ?;
             `,
-            [req.params.id, req.params.id]
+            req.params.article_id
         )
 
         // run query
         const [rows] = await pool.query(
             "DELETE FROM Articles WHERE Id = ?;",
-            req.params.id
+            req.params.article_id
         )
 
         // check for condition
@@ -146,11 +145,7 @@ export async function Delete(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        }) 
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -168,11 +163,7 @@ export async function GetAll(_, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })  
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -181,7 +172,7 @@ export async function Get(req, res) {
         // run query
         const [rows] = await pool.query(
             "SELECT * FROM Articles WHERE Id = ?;",
-            req.params.id
+            req.params.article_id
         )
 
         // check for condition
@@ -203,10 +194,6 @@ export async function Get(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }

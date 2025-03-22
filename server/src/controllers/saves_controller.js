@@ -1,4 +1,5 @@
-import pool from './pool.js';
+import pool from '../pool.js';
+import * as utils from "../utils.js"
 
 // CREATE TABLE Saves (
 //     ArticleId INT NOT NULL,
@@ -14,12 +15,12 @@ import pool from './pool.js';
 export async function Save(req, res) {
     try {
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
         // run query
         const [rows] = await pool.query(
             "SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;",
-            [req.params.article_id, id]
+            [req.params.article_id, user_id]
         )
 
         // check for condition
@@ -35,7 +36,7 @@ export async function Save(req, res) {
         // run query
         await pool.query(
             "INSERT INTO Saves (ArticleId, UserId) VALUES (?, ?);",
-            [req.params.article_id, id]
+            [req.params.article_id, user_id]
         )
 
         // send answer
@@ -47,23 +48,19 @@ export async function Save(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
 export async function Unsave(req, res) {
     try {
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
         // run query
         const [rows] = await pool.query(
             "DELETE FROM Saves WHERE ArticleId = ? AND UserId = ?;",
-            [req.params.article_id, id]
+            [req.params.article_id, user_id]
         )
         
         // check for condition
@@ -85,11 +82,7 @@ export async function Unsave(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -99,7 +92,7 @@ export async function Unsave(req, res) {
 export async function GetSaves(req, res) {
     try {
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
         // run query
         const [rows] = await pool.query(
@@ -113,7 +106,7 @@ export async function GetSaves(req, res) {
                 LEFT JOIN Saves ON Articles.Id = Saves.ArticleId
                 WHERE Saves.UserId = ?;
             `,
-            id
+            user_id
         )
 
         // send answer
@@ -125,11 +118,7 @@ export async function GetSaves(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
 
@@ -141,7 +130,7 @@ export async function GetState(req, res) {
         // run query
         const [rows] = await pool.query(
             "SELECT * FROM Articles WHERE Id = ?",
-            req.query.article_id
+            req.params.article_id
         )
 
         // check for condition
@@ -155,12 +144,12 @@ export async function GetState(req, res) {
         }
 
         // get id of current user from cookies
-        const { id } = JSON.parse(req.cookies.user_data)
+        const { user_id } = JSON.parse(req.cookies.user_data)
 
        // run query
         const [rows2] = await pool.query(
             "SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;",
-            [req.query.article_id, id]
+            [req.params.article_id, user_id]
         )
 
         // send answer
@@ -172,10 +161,6 @@ export async function GetState(req, res) {
         console.log(err)
 
         // send answer
-        const { message, ...answer } = err
-        res.status(500).json({
-            message: (message || err),
-            answer: (!(typeof err === "object" && !Array.isArray(err)) ? null : answer)
-        })
+        res.status(500).json(utils.errHandler(err))
     }
 }
