@@ -9,7 +9,8 @@ function Articles() {
   const [err, setErr] = useState(null)
 
   useEffect(() => {
-    axios.get("/articles")
+    axios
+        .get("/articles")
         .then((response) => {
             setData(response.data.answer)
         })

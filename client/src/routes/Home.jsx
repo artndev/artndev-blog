@@ -1,14 +1,14 @@
 import React from 'react'
 
 
-function NotFound() {
+function Home() {
   return (
     <>
         <h1>
-            There is nothing yet
+            Home
         </h1>
     </>
   )
 }
 
-export default NotFound
+export default Home
