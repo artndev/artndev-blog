@@ -19,5 +19,5 @@ app.use("/users", users)
 app.use("/likes", likes)
 app.use("/saves", middlewares.isLogged, saves) 
 
-const port = process.env.SERVER_PORT || 5000
+const port = process.env.SERVER_PORT || 8000
 app.listen(port, () => console.log(`Server listening on port ${port}`))

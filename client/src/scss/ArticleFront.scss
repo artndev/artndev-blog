@@ -1,0 +1,11 @@
+.article {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .article__info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
