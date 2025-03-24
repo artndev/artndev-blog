@@ -1,4 +1,4 @@
-import "../css/Articles.css";
+import "../styles/css/Articles.css";
 import ArticleBack from "../components/ArticleBack.jsx";
 import React, { useEffect, useState } from 'react'
 import axios from "../axios.js";

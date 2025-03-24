@@ -39,19 +39,9 @@ export async function Register(req, res) {
             "SELECT * FROM Users WHERE Username = ?;",
             req.body.username
         )
-
+        
         // send answer
         res
-            .cookie(
-                "user_data",
-                JSON.stringify({
-                    user_id: rows[0].Id,
-                    username: req.body.username,
-                }),
-                {
-                    maxAge: process.env.AUTH_COOKIES_MAXAGE
-                }
-            )
             .cookie(
                 "token", 
                 token, 
@@ -63,7 +53,10 @@ export async function Register(req, res) {
             .status(200)
             .json({
                 message: "You have successfully registered",
-                answer: true
+                answer: {
+                    user_id: rows[0].Id,
+                    username: req.body.username
+                }
             })
     } catch(err) {
         console.log(err)
@@ -75,10 +68,12 @@ export async function Register(req, res) {
 
 export async function Login(req, res) {
     try {
+        console.log(req.body)
+
         // run db query 
         const [rows] = await pool.query(
             "SELECT * FROM Users WHERE Username = ?;",
-            req.body.username
+            [req.body.username]
         )
 
         // check for condition
@@ -106,16 +101,6 @@ export async function Login(req, res) {
         // send answer
         res
             .cookie(
-                "user_data",
-                JSON.stringify({
-                    user_id: rows[0].Id,
-                    username: req.body.username,
-                }),
-                {
-                    maxAge: process.env.AUTH_COOKIES_MAXAGE
-                }
-            )
-            .cookie(
                 "token", 
                 token, 
                 { 
@@ -126,7 +111,10 @@ export async function Login(req, res) {
             .status(200)
             .json({
                 message: "You have successfully logged in",
-                answer: true
+                answer: {
+                    user_id: rows[0].Id,
+                    username: req.body.username
+                }
             })
     } catch(err) {
         console.log(err)
@@ -140,13 +128,12 @@ export function Logout(_, res) {
     try {
         // send answer
         res
-        .clearCookie("user_data")
-        .clearCookie("token")
-        .status(200)
-        .json({
-            message: "You have successfully logged out",
-            answer: true
-        })   
+            .clearCookie("token")
+            .status(200)
+            .json({
+                message: "You have successfully logged out",
+                answer: true
+            })   
     } catch (err) {
         console.log(err)
 
