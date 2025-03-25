@@ -78,12 +78,10 @@ export async function Register(req, res) {
 
 export async function Login(req, res) {
     try {
-        console.log(req.body)
-
         // run db query 
         const [rows] = await pool.query(
             "SELECT * FROM Users WHERE Username = ?;",
-            [req.body.data.username]
+            [req.body.username]
         )
         console.log(rows)
         // check for condition
@@ -99,7 +97,7 @@ export async function Login(req, res) {
         // check for condition
         const token = rows[0].Password
         const { password } = jwt.decode(token)
-        if (password !== req.body.data.password)
+        if (password !== req.body.password)
         {
             res.status(400).json({
                 message: "Password is incorrect",
@@ -114,7 +112,7 @@ export async function Login(req, res) {
                 "user_data",
                 JSON.stringify({
                     user_id: rows[0].Id,
-                    username: req.body.data.username,
+                    username: req.body.username,
                     is_admin: process.env.ADMIN_TOKENS.split(" ").includes(token)
                 }),
                 { 

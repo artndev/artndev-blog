@@ -101,7 +101,7 @@ export async function GetSaves(req, res) {
                     Articles.Id,
                     Articles.Title,
                     Articles.Text,
-                    Articles.Date 
+                    Articles.Updated 
                 FROM Articles
                 LEFT JOIN Saves ON Articles.Id = Saves.ArticleId
                 WHERE Saves.UserId = ?;

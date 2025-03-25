@@ -5,7 +5,9 @@ import AuthContext from './Auth.jsx';
 const AdminContext = createContext({});
 export const AdminProvider = ({ children }) => {
     const { auth } = useContext(AuthContext);
-    const [admin, setAdmin] = useState(auth.is_admin || null);
+    const [admin, setAdmin] = useState(
+        auth ? auth.is_admin : null
+    );
 
     useEffect(() => {
         console.log(admin)

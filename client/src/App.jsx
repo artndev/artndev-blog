@@ -7,6 +7,9 @@ import Article from "./routes/Article.jsx";
 import Home from "./routes/Home.jsx";
 import IsNotLogged from "./outlets/IsNotLogged.jsx";
 import LoginForm from "./routes/LoginForm.jsx";
+import RegisterForm from "./routes/RegisterForm.jsx";
+import IsLogged from "./outlets/IsLogged.jsx";
+import Profile from "./routes/Profile.jsx";
 
 
 function App() {
@@ -24,7 +27,11 @@ function App() {
 
               <Route element={<IsNotLogged />}>
                 <Route path="/login" element={<LoginForm />} />
-                <Route path="/register" element={<></>} />
+                <Route path="/register" element={<RegisterForm />} />
+              </Route>
+
+              <Route element={<IsLogged />}>
+                <Route path="/profile" element={<Profile />} />
               </Route>
             </Route>
 

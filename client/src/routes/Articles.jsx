@@ -5,7 +5,7 @@ import axios from "../axios.js";
 
 
 function Articles() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   const [err, setErr] = useState(null)
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function Articles() {
                         updated={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                     />
                 })
-                : (err || "Message is not provided")
+                : (err || "There are no articles left")
             }
         </div>
     </>

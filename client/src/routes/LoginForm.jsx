@@ -3,8 +3,10 @@ import AuthForm from '../components/AuthForm.jsx'
 import axios from "../axios.js"
 import { useNavigate } from 'react-router-dom'
 
+
 function LoginForm() {
   const navigator = useNavigate() 
+  const [err, setErr] = React.useState(null)
 
   const submitCredentials = (e) => {
     e.preventDefault()
@@ -17,29 +19,25 @@ function LoginForm() {
 
     axios
         .post("/users/login", {
-            data: {
-                username: data.username,
-                password: data.password
-            },
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            }
+            username: data.username,
+            password: data.password
         })
-        .then((response) => {
-            console.log(response)
-            
-            localStorage.setItem("auth", JSON.stringify(response.data.answer))
-            navigator("/")
-        })
+        .then(() => navigator("/"))
         .catch((err) => {
             console.log(err)
+
+            setErr(err.response.data.message)
         })
   }
 
   return (
     <>
         <div className="auth__form-container">
-            <AuthForm title="Login" onSubmit={submitCredentials} />
+            <AuthForm 
+                title="Login" 
+                err={err}
+                onSubmit={submitCredentials} 
+            />
         </div>
     </>
   )

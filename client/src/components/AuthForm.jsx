@@ -1,14 +1,21 @@
 import "../styles/css/AuthForm.css";
 import React from "react";
 
-function AuthForm({ title, onSubmit }) {
+function AuthForm({ title, err, onSubmit }) {
   return (
     <>
-        <div className="auth__form">
+        <div className="auth__container">
             <h2>
                 {title}
             </h2>
-            <form method="post" onSubmit={onSubmit}>
+            {
+                err
+                ? <span>
+                    {err}
+                </span>
+                : ""
+            }
+            <form className="auth__form" method="post" onSubmit={onSubmit}>
                 <div className="auth__form-group">
                     <label htmlFor="username">
                         Username:
