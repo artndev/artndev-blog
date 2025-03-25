@@ -1,4 +1,4 @@
-import "../css/ArticleBack.css"
+import "../styles/css/ArticleBack.css"
 import React from 'react'
 
 

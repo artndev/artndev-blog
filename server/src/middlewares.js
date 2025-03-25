@@ -8,10 +8,14 @@ export const isLogged = (req, res, next) => {
             !jwt.verify(req.cookies.token, process.env.SECRET_KEY)
         )
         {
-            res.status(401).json({
-                message: "You are not authorized",
-                answer: null
-            })
+            
+            res
+                .clearCookie("user_data")    
+                .status(401)
+                .json({
+                    message: "You are not authorized",
+                    answer: null
+                })
             return
         }        
 

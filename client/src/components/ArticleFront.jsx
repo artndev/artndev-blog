@@ -1,4 +1,4 @@
-import "../css/ArticleFront.css"
+import "../styles/css/ArticleFront.css"
 import React from 'react'
 
 

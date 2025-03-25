@@ -6,7 +6,6 @@ import AuthContext from '../contexts/Auth.jsx'
 function IsNotLogged() {
   const { auth } = useContext(AuthContext)
 
-  console.log(auth)
   return (
     <>
       {

@@ -1,0 +1,5 @@
+{
+    "_comment": "3600000 = 1 hour, 30000 = 30s",
+    "COOKIES_MAXAGE": 3600000,
+    "SERVER_PORT": 5000
+}

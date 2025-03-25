@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import pool from '../pool.js';
 import { v4 as uuidv4 } from "uuid";
 import * as utils from "../utils.js"
+import config from "../../config.json" with { type: "json" }
+
 
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
@@ -43,20 +45,28 @@ export async function Register(req, res) {
         // send answer
         res
             .cookie(
+                "user_data",
+                JSON.stringify({
+                    user_id: rows[0].Id,
+                    username: req.body.username,
+                    is_admin: process.env.ADMIN_TOKENS.split(" ").includes(token)
+                }),
+                { 
+                    maxAge: config.COOKIES_MAXAGE
+                }
+            )
+            .cookie(
                 "token", 
                 token, 
                 { 
                     httpOnly: true,
-                    maxAge: process.env.AUTH_COOKIES_MAXAGE
+                    maxAge: config.COOKIES_MAXAGE
                 }
             )
             .status(200)
             .json({
                 message: "You have successfully registered",
-                answer: {
-                    user_id: rows[0].Id,
-                    username: req.body.username
-                }
+                answer: true
             })
     } catch(err) {
         console.log(err)
@@ -73,9 +83,9 @@ export async function Login(req, res) {
         // run db query 
         const [rows] = await pool.query(
             "SELECT * FROM Users WHERE Username = ?;",
-            [req.body.username]
+            [req.body.data.username]
         )
-
+        console.log(rows)
         // check for condition
         if (!rows.length)
         {
@@ -89,7 +99,7 @@ export async function Login(req, res) {
         // check for condition
         const token = rows[0].Password
         const { password } = jwt.decode(token)
-        if (password !== req.body.password)
+        if (password !== req.body.data.password)
         {
             res.status(400).json({
                 message: "Password is incorrect",
@@ -101,20 +111,28 @@ export async function Login(req, res) {
         // send answer
         res
             .cookie(
+                "user_data",
+                JSON.stringify({
+                    user_id: rows[0].Id,
+                    username: req.body.data.username,
+                    is_admin: process.env.ADMIN_TOKENS.split(" ").includes(token)
+                }),
+                { 
+                    maxAge: config.COOKIES_MAXAGE
+                }
+            )
+            .cookie(
                 "token", 
                 token, 
                 { 
                     httpOnly: true,
-                    maxAge: process.env.AUTH_COOKIES_MAXAGE
+                    maxAge: config.COOKIES_MAXAGE
                 }
             )
             .status(200)
             .json({
                 message: "You have successfully logged in",
-                answer: {
-                    user_id: rows[0].Id,
-                    username: req.body.username
-                }
+                answer: true
             })
     } catch(err) {
         console.log(err)
@@ -128,6 +146,7 @@ export function Logout(_, res) {
     try {
         // send answer
         res
+            .clearCookie("user_data")
             .clearCookie("token")
             .status(200)
             .json({

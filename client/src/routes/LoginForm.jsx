@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import AuthForm from '../components/AuthForm.jsx'
-import AuthContext from '../contexts/Auth.jsx'
 import axios from "../axios.js"
 import { useNavigate } from 'react-router-dom'
 
@@ -11,15 +10,24 @@ function LoginForm() {
     e.preventDefault()
 
     const formData = new FormData(e.target)
+    console.log(formData)
+
     let data = {}
     formData.forEach((val, key) => data[key] = val)
 
     axios
         .post("/users/login", {
-            username: data.username,
-            password: data.password
+            data: {
+                username: data.username,
+                password: data.password
+            },
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            }
         })
         .then((response) => {
+            console.log(response)
+            
             localStorage.setItem("auth", JSON.stringify(response.data.answer))
             navigator("/")
         })
