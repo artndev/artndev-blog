@@ -34,7 +34,7 @@ function LoginForm() {
     <>
         <div className="auth__form-container">
             <AuthForm 
-                title="Login" 
+                formTitle="Login" 
                 err={err}
                 onSubmit={submitCredentials} 
             />

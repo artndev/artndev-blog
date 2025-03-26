@@ -41,7 +41,7 @@ function UpdateForm() {
       .catch((err) => {
           console.log(err)
 
-          setErr(err.response.data.message)
+          alert(err.response.data.message)
       })
   }, [article_id])
 
@@ -52,13 +52,13 @@ function UpdateForm() {
         ? <div className="article__form-container">
           <ArticleForm 
             formTitle={"Update"}
-            defaultTitle={data?.Title}
-            defaultText={data?.Text}
+            defaultTitle={data.Title}
+            defaultText={data.Text}
             err={err}
             onSubmit={updateArticle}
           />
         </div>
-        : (err || "Message is not provided")
+        : "Loading..."
       }
     </>
   )

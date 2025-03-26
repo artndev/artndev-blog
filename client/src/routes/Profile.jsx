@@ -10,7 +10,6 @@ function Profile() {
     const navigator = useNavigate() 
     const { auth } = useContext(AuthContext)
     const [data, setData] = useState([])
-    const [err, setErr] = useState(null)
 
     const logout = (e) => {
         e.preventDefault()
@@ -21,7 +20,7 @@ function Profile() {
             .catch((err) => {
                 console.log(err)
     
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }
 
@@ -34,7 +33,7 @@ function Profile() {
             .catch((err) => {
                 console.log(err)
 
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }, [])
 
@@ -53,7 +52,11 @@ function Profile() {
                             : "Unknown"
                         }
                     </span>
-                    <form className="profile__form" method="post" onSubmit={logout}>
+                    <form 
+                        className="profile__form" 
+                        method="post" 
+                        onSubmit={logout}
+                    >
                         <button type="submit" className="profile__form-btn">
                             Logout
                         </button>
@@ -61,7 +64,7 @@ function Profile() {
                 </div>
                 <div className="articles__container">
                     {
-                        data.length > 0
+                        data && data.length > 0
                         ? data.map((val, i) => {
                             return <ArticleBack
                                 key={i} 
@@ -70,7 +73,7 @@ function Profile() {
                                 updated={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                             />
                         })
-                        : (err || "There are no articles left")
+                        : "You have not saved any articles yet..."
                     }
                 </div>
             </div>

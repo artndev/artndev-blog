@@ -8,7 +8,7 @@ function RegisterForm() {
     const navigator = useNavigate() 
     const [err, setErr] = React.useState(null)
   
-    const submitCredentials = (e) => {
+    const registerUser = (e) => {
       e.preventDefault()
   
       const formData = new FormData(e.target)
@@ -36,7 +36,7 @@ function RegisterForm() {
                 <AuthForm 
                     formTitle="Register" 
                     err={err}
-                    onSubmit={submitCredentials} 
+                    onSubmit={registerUser} 
                 />
             </div>
         </>

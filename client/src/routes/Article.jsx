@@ -12,7 +12,6 @@ function Article() {
     const { admin } = useContext(AdminContext)
     const { article_id } = useParams()
     const [data, setData] = useState(null)
-    const [err, setErr] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
     const [isSaved, setIsSaved] = useState(false)
 
@@ -25,7 +24,7 @@ function Article() {
           .catch((err) => {
               console.log(err)
 
-              setErr(err.response.data.message)
+              alert(err.response.data.message)
           })
     }, [article_id])
 
@@ -38,7 +37,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }, [article_id])
 
@@ -51,7 +50,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }, [article_id])
 
@@ -67,7 +66,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
   
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }
 
@@ -83,7 +82,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
   
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })       
     }
 
@@ -99,7 +98,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }
 
@@ -115,7 +114,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }
 
@@ -126,7 +125,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                setErr(err.response.data.message)
+                alert(err.response.data.message)
             })
     }
   
@@ -183,7 +182,7 @@ function Article() {
                     }
                 </div>
             </div>
-            : (err || "Message is not provided")
+            : "Loading..."
         }
       </>
     )
