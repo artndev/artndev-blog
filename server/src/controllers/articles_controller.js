@@ -17,7 +17,7 @@ export async function Create(req, res) {
         // run query
         await pool.query(
             "INSERT INTO Articles (Title, Text) VALUES (?, ?);",
-            [req.body.Title, req.body.Text]
+            [req.body.title, req.body.text]
         )
 
         // send answer
@@ -44,7 +44,7 @@ export async function Update(req, res) {
                     Updated = CURRENT_TIMESTAMP() 
                 WHERE Id = ?;
             `,
-            [req.body.Title, req.body.Text, req.params.article_id]
+            [req.body.title, req.body.text, req.params.article_id]
         )
 
         // check for condition

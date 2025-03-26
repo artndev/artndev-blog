@@ -165,7 +165,7 @@ export async function GetState(req, res) {
             answer: (() => {
                 const [{ likes }] = rows2
 
-                return likes > 0 ? 1 : 0
+                return likes > 0 ? true : false
             })()
         })
     } catch(err) {

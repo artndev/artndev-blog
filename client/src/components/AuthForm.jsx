@@ -1,12 +1,16 @@
 import "../styles/css/AuthForm.css";
 import React from "react";
 
-function AuthForm({ title, err, onSubmit }) {
+function AuthForm({ 
+    formTitle, 
+    err, 
+    onSubmit 
+}) {
   return (
     <>
-        <div className="auth__container">
+        <div className="auth__from-subcontainer">
             <h2>
-                {title}
+                {formTitle}
             </h2>
             {
                 err
@@ -15,7 +19,11 @@ function AuthForm({ title, err, onSubmit }) {
                 </span>
                 : ""
             }
-            <form className="auth__form" method="post" onSubmit={onSubmit}>
+            <form 
+                className="auth__form" 
+                method="post" 
+                onSubmit={onSubmit}
+            >
                 <div className="auth__form-group">
                     <label htmlFor="username">
                         Username:

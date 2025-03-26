@@ -13,7 +13,7 @@ import config from "../config.json" with { type: "json" }
 const app = express()
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }))
 app.use(express.json())  

@@ -10,6 +10,9 @@ import LoginForm from "./routes/LoginForm.jsx";
 import RegisterForm from "./routes/RegisterForm.jsx";
 import IsLogged from "./outlets/IsLogged.jsx";
 import Profile from "./routes/Profile.jsx";
+import IsAdmin from "./outlets/IsAdmin.jsx";
+import UpdateForm from "./routes/UpdateForm.jsx";
+import CreateForm from "./routes/CreateForm.jsx";
 
 
 function App() {
@@ -23,6 +26,13 @@ function App() {
               <Route path="/articles">
                 <Route index element={<Articles />} />
                 <Route path=":article_id" element={<Article />} />
+
+                <Route element={<IsLogged />}>
+                  <Route element={<IsAdmin />}>
+                    <Route path=":article_id/update" element={<UpdateForm />} />
+                    <Route path="create" element={<CreateForm />} />
+                  </Route>
+                </Route>
               </Route>
 
               <Route element={<IsNotLogged />}>

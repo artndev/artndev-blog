@@ -20,4 +20,4 @@ export const AdminProvider = ({ children }) => {
     );
 };
 
-export default AuthContext;
+export default AdminContext;

@@ -34,7 +34,7 @@ function RegisterForm() {
         <>
             <div className="auth__form-container">
                 <AuthForm 
-                    title="Register" 
+                    formTitle="Register" 
                     err={err}
                     onSubmit={submitCredentials} 
                 />
