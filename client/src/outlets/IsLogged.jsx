@@ -11,7 +11,7 @@ function IsLogged() {
       {
         auth
         ? <Outlet />
-        : <Navigate to="/" />
+        : <Navigate to="/login" />
       }
     </>
   )
