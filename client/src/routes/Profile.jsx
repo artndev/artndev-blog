@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import ArticleBack from '../components/ArticleBack.jsx'
 import axios from "../axios.js"
 import AuthContext from '../contexts/Auth.jsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 function Profile() {
@@ -66,12 +66,17 @@ function Profile() {
                     {
                         data && data.length > 0
                         ? data.map((val, i) => {
-                            return <ArticleBack
-                                key={i} 
-                                title={val.Title}
-                                text={val.Text}
-                                updated={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
-                            />
+                            return <Link
+                                key={i}
+                                to={`/articles/${val.Id}`}
+                                className="a-reset"
+                            >
+                                <ArticleBack
+                                    title={val.Title}
+                                    text={val.Text}
+                                    updated={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
+                                />
+                            </Link>
                         })
                         : "You have not saved any articles yet..."
                     }
