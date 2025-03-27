@@ -1,3 +1,5 @@
+@import "./vars.scss";
+
 .header__container {
     display: flex;
     justify-content: center;
@@ -12,6 +14,8 @@
     align-items: center;
     width: 80%;
     height: 100%;
+    color: $black;
+    user-select: none;
     //background-color: red;
 }
 
@@ -25,9 +29,14 @@
 }
 
 .nav__item-link {
+    height: 100%;
     text-decoration: none;
     color: inherit;
-    height: 100%;
+    transition: color .1s ease-in-out;
+
+    &:hover {
+        color: $grey;
+    }
 }
 
 .nav__item {

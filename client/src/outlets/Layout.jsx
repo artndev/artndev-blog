@@ -8,21 +8,21 @@ function Layout() {
     <>
         <header className="header__container">
             <div className="header__subcontainer">
-              <div className="header__logo">
-                Blog
-              </div>
+              <h3 className="header__logo">
+                Blog.
+              </h3>
               <nav className="nav__container">
-                <Link className="nav__item-link">
+                <Link className="nav__item-link" to={"/articles/create"}>
                   <div className="nav__item">
                     CREATE
                   </div>
                 </Link>
-                <Link className="nav__item-link">
+                <Link className="nav__item-link" to={"/articles"}>
                   <div className="nav__item">
                     ARTICLES
                   </div>
                 </Link>
-                <Link className="nav__item-link">
+                <Link className="nav__item-link" to={"/profile"}>
                   <div className="nav__item">
                     PROFILE
                   </div>

@@ -1,16 +1,27 @@
 import "../styles/css/AuthForm.css";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function AuthForm({ 
     formTitle, 
     err, 
     onSubmit 
 }) {
+  const inputRef = useRef(null)
+  const btnRef = useRef(null)
+  const [inputType, setInputType] = useState(false)
+
+  useEffect(() => {
+    inputRef.current.type = inputType ? "text" : "password"
+    btnRef.current.classList.remove(inputType ? "closed" : "opened")
+    btnRef.current.classList.add(inputType ? "opened" : "closed")
+  }, [inputType])
+
   return (
     <>
+    <div className="auth__form-container">
         <div className="auth__from-subcontainer">
             <h2>
-                {formTitle}
+                # {formTitle}
             </h2>
             {
                 err
@@ -29,9 +40,11 @@ function AuthForm({
                         Username:
                     </label>
                     <input 
+                        className="auth__form-input"
                         type="text" 
                         id="username" 
                         name="username" 
+                        placeholder="Enter your username..."
                         required 
                     />
                 </div>
@@ -39,18 +52,37 @@ function AuthForm({
                     <label htmlFor="password">
                         Password:
                     </label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        required 
-                    />
+                    <div className="input__group">
+                        <input 
+                            ref={inputRef}
+                            className="auth__form-input"
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            placeholder="Enter you password..." 
+                            required 
+                            onPaste={(e) => {
+                                e.preventDefault()
+                                const text = e.clipboardData.getData("text/plain")
+                                console.log(text)
+                            }}
+                        />
+                        <button
+                            ref={btnRef}
+                            className="input__group-btn closed" 
+                            type="button" 
+                            onClick={() => {
+                                setInputType(!inputType)
+                            }}
+                        />
+                    </div>
                 </div>
                 <button type="submit" className="auth__form-btn">
                     Submit
                 </button>
             </form>
         </div>
+    </div>
     </>
   );
 }

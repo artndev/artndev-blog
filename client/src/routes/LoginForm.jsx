@@ -32,13 +32,11 @@ function LoginForm() {
 
   return (
     <>
-        <div className="auth__form-container">
             <AuthForm 
                 formTitle="Login" 
                 err={err}
                 onSubmit={submitCredentials} 
             />
-        </div>
     </>
   )
 }
