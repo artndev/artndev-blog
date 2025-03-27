@@ -32,13 +32,13 @@ function RegisterForm() {
 
     return (
         <>
-            <div className="auth__form-container">
-                <AuthForm 
-                    formTitle="Register" 
-                    err={err}
-                    onSubmit={registerUser} 
-                />
-            </div>
+            <AuthForm 
+                formTitle="Register" 
+                err={err}
+                onSubmit={registerUser} 
+                btnLink={"/login"}
+                btnText={"I want to login"}
+            />
         </>
     );
 }

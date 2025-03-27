@@ -36,6 +36,8 @@ function LoginForm() {
                 formTitle="Login" 
                 err={err}
                 onSubmit={submitCredentials} 
+                btnLink={"/register"}
+                btnText={"I want to register"}
             />
     </>
   )
