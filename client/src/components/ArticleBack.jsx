@@ -2,21 +2,21 @@ import "../styles/css/ArticleBack.css"
 import React from 'react'
 
 
-function ArticleBack({ title, text, updated }) {
+function ArticleBack({ title, subtitle, text }) {
   return (
     <>
         <div className="article">
             <div className="article__info">
-                <span className="article__title">
+                <h3 className="article__title">
                     { title }
-                </span>
-                <span className="article__updated">
-                    { updated }
-                </span>
+                </h3>
+                <div className="article__subtitle">
+                    { subtitle }
+                </div>
             </div>
-            <span className="article__text">
+            <div className="article__text">
                 { text }
-            </span>
+            </div>
         </div>
     </>
   )

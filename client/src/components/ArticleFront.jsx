@@ -2,21 +2,21 @@ import "../styles/css/ArticleFront.css"
 import React from 'react'
 
 
-function ArticleFront({ title, text, updated }) {
+function ArticleFront({ title, subtitle, text,  }) {
     return (
         <>
-            <div className="article">
-                <div className="article__info">
-                    <span className="article__title">
+            <div className="article__front">
+                <div className="article__front-info">
+                    <h3 className="article__front-title">
                         { title }
-                    </span>
-                    <span className="article__updated">
-                        { updated }
-                    </span>
+                    </h3>
+                    <div className="article__front-subtitle">
+                        { subtitle }
+                    </div>
                 </div>
-                <span className="article__text">
+                <div className="article__front-text">
                     { text }
-                </span>
+                </div>
             </div>
         </>
     )

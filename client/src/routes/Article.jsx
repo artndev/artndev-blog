@@ -1,9 +1,15 @@
+import "../styles/css/Article.css";
 import React, { useContext, useEffect, useState } from 'react'
 import ArticleFront from '../components/ArticleFront.jsx'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from "../axios.js";
 import AdminContext from "../contexts/Admin.jsx";
 import AuthContext from '../contexts/Auth.jsx';
+import config from "../config.json"
+import heart from "../imgs/heart.png"
+import bookmark from "../imgs/bookmark.png"
+import pen from "../imgs/pen.png"
+import bin from "../imgs/bin.png"
 
 
 function Article() {
@@ -24,7 +30,7 @@ function Article() {
           .catch((err) => {
               console.log(err)
 
-              alert(err.response.data.message)
+              //alert(err.response.data.message)
           })
     }, [article_id])
 
@@ -37,7 +43,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }, [article_id])
 
@@ -50,7 +56,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }, [article_id])
 
@@ -66,7 +72,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
   
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }
 
@@ -82,7 +88,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
   
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })       
     }
 
@@ -98,7 +104,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }
 
@@ -114,7 +120,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }
 
@@ -125,8 +131,15 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
+    }
+
+    const readingTime = (text) => {
+        const words = text.trim().split(/\s+/).length;
+        const time = Math.ceil(words / config.WPS);
+        
+        return time.toString()
     }
   
     // useEffect(() => {
@@ -137,49 +150,49 @@ function Article() {
       <>
         {
             data
-            ? <div className="article-front__container">
-                <div className="article__container">
+            ? <div className="article__container">
+                <div className="article__subcontainer">
                     <ArticleFront
                         title={data.Title}
+                        subtitle={`${readingTime(data.Text)}m • Updated at ${(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")}`} 
                         text={data.Text}
-                        updated={(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                     />
-                </div>
-                <div className="btns__container">
-                    <button type="button" onClick={() => {
-                        if (!auth)
-                        {
-                            navigator("/login")
-                            return
-                        }
+                    <div className="btns__container">
+                        <button className="pressed" type="button" onClick={(e) => {
+                            if (!auth)
+                            {
+                                navigator("/login")
+                                return
+                            }
 
-                        return !isLiked ? likeArticle() : dislikeArticle()
-                    }}>
-                        { !isLiked ? "Like" : "Dislike" }
-                    </button>
-                    <button type="button" onClick={() => {
-                        if (!auth)
-                        {
-                            navigator("/login")
-                            return
-                        }
+                            return !isLiked ? likeArticle() : dislikeArticle()
+                        }}>
+                            <img src={heart} alt="Like" />
+                        </button>
+                        <button type="button" onClick={() => {
+                            if (!auth)
+                            {
+                                navigator("/login")
+                                return
+                            }
 
-                        return !isSaved ? saveArticle() : unsaveArticle()
-                    }}>
-                        { !isSaved ? "Save" : "Unsave" }
-                    </button>
-                    {
-                        admin
-                        ? <>
-                            <button type="button" onClick={() => navigator(`/articles/${article_id}/update`)}>
-                                Update
-                            </button>
-                            <button type="button" onClick={() => deleteArticle()}>
-                                Delete
-                            </button>
-                        </>
-                        : ""
-                    }
+                            return !isSaved ? saveArticle() : unsaveArticle()
+                        }}>
+                            <img src={bookmark} alt="Save" />
+                        </button>
+                        {
+                            admin
+                            ? <>
+                                <button type="button" onClick={() => navigator(`/articles/${article_id}/update`)}>
+                                    <img src={pen} alt="Update" />
+                                </button>
+                                <button type="button" onClick={() => deleteArticle()}>
+                                    <img src={bin} alt="Delete" />
+                                </button>
+                            </>
+                            : ""
+                        }
+                    </div>
                 </div>
             </div>
             : "Loading..."

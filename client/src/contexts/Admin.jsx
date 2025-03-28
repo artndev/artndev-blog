@@ -9,9 +9,9 @@ export const AdminProvider = ({ children }) => {
         auth ? auth.is_admin : null
     );
 
-    useEffect(() => {
-        console.log(admin)
-    }, [admin]);
+    // useEffect(() => {
+    //     console.log(admin)
+    // }, [admin]);
 
     return (
         <AdminContext.Provider value={{ admin, setAdmin }}>

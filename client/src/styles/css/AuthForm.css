@@ -105,3 +105,10 @@
 .input__group-btn.closed {
   background-image: url("../../imgs/eye_closed.png");
 }
+.input__group-btn:focus {
+  outline: none;
+}
+
+.auth__form-err {
+  color: #ff4444;
+}

@@ -1,5 +1,20 @@
 .articles__container {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.articles__subcontainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 500px));
+  grid-template-rows: repeat(3, max-content);
+  gap: 20px 15px;
+  padding: 0 20px 50px 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .articles__subcontainer {
+    grid-template-columns: 100%;
+  }
 }

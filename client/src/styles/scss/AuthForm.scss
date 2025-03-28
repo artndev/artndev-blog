@@ -111,4 +111,12 @@
     &.closed {
         background-image: url("../../imgs/eye_closed.png");
     }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.auth__form-err {
+    color: $red;
 }

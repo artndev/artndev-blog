@@ -1,0 +1,41 @@
+.article__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.article__subcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(1000px, 100%);
+  padding: 0 20px 0 20px;
+}
+
+.btns__container {
+  display: flex;
+  gap: 10px;
+}
+.btns__container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #343A40;
+  border-radius: 5px;
+  transition: all 0.1s ease-in-out;
+}
+.btns__container button img {
+  width: 18px;
+  height: 18px;
+}
+.btns__container button:hover {
+  background-color: #343A40;
+  color: #E9ECEF;
+}
+.btns__container button.pressed {
+  background-color: #343A40;
+  color: #E9ECEF;
+}

@@ -26,19 +26,19 @@ function AuthForm({
             <h2>
                 # {formTitle}
             </h2>
-            {
-                err
-                ? <span>
-                    {err}
-                </span>
-                : ""
-            }
             <form 
                 className="auth__form" 
                 method="post" 
                 onSubmit={onSubmit}
             >
                 <div className="auth__form-groups">
+                    {
+                        err
+                        ? <span className="auth__form-err">
+                            {err}
+                        </span>
+                        : ""
+                    }
                     <div className="auth__form-group">
                         <label htmlFor="username">
                             Username:
