@@ -5,11 +5,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from "../axios.js";
 import AdminContext from "../contexts/Admin.jsx";
 import AuthContext from '../contexts/Auth.jsx';
-import config from "../config.json"
 import heart from "../imgs/heart.svg"
 import bookmark from "../imgs/bookmark.svg"
 import pen from "../imgs/pen.svg"
 import bin from "../imgs/bin.svg"
+
 
 function Article() {
     const navigator = useNavigate()
@@ -152,13 +152,6 @@ function Article() {
     }
 
     // utils
-    const readingTime = (text) => {
-        const words = text.trim().split(/\s+/).length;
-        const time = Math.ceil(words / config.WPS);
-        
-        return time.toString()
-    }
-
     const formatNumber = (number) => {
         return Intl.NumberFormat('en', { notation: 'compact' }).format(number)
     }
@@ -175,7 +168,7 @@ function Article() {
                 <div className="article__subcontainer">
                     <ArticleFront
                         title={data.Title}
-                        subtitle={`${readingTime(data.Text)}m • Updated at ${(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")}`} 
+                        subtitle={(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                         text={data.Text}
                     />
                     <div className="btns__container">

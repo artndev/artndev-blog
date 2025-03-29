@@ -27,13 +27,6 @@ function Articles() {
 //     console.log(data)
 //   }, [data])
 
-  const readingTime = (text) => {
-    const words = text.trim().split(/\s+/).length;
-    const time = Math.ceil(words / config.WPS);
-    
-    return time.toString()
-  }
-
   return (
     <>
         <div className="articles__container">
@@ -48,7 +41,7 @@ function Articles() {
                         >
                             <ArticleBack
                                 title={`${val.Title.substring(0, config.TITLE_MAXSYMBOLS).trim()}...`}
-                                subtitle={`${readingTime(val.Text)}m • Updated at ${(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")}`} 
+                                subtitle={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                                 text={`${val.Text.substring(0, config.TEXT_MAXSYMBOLS).trim()}...`}
                             />
                         </Link>

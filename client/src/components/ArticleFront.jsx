@@ -1,8 +1,16 @@
 import "../styles/css/ArticleFront.css"
 import React from 'react'
+import config from "../config.json"
 
 
 function ArticleFront({ title, subtitle, text,  }) {
+    const readingTime = (text) => {
+        const words = text.trim().split(/\s+/).length;
+        const time = Math.ceil(words / config.WPS);
+
+        return time.toString()
+    }
+
     return (
         <>
             <div className="article__front">
@@ -11,7 +19,7 @@ function ArticleFront({ title, subtitle, text,  }) {
                         { title }
                     </h3>
                     <div className="article__front-subtitle">
-                        { subtitle }
+                        { `${readingTime(text)}m • ${subtitle}` }
                     </div>
                 </div>
                 <div className="article__front-text">

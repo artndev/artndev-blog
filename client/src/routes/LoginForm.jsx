@@ -3,10 +3,12 @@ import AuthForm from '../components/AuthForm.jsx'
 import axios from "../axios.js"
 import { useNavigate } from 'react-router-dom'
 import AuthContext from '../contexts/Auth.jsx'
+import AdminContext from "../contexts/Admin.jsx";
 
 
 function LoginForm() {
   const { setAuth } = useContext(AuthContext)
+  const { setAdmin } = useContext(AdminContext)
   const navigator = useNavigate()
   const [err, setErr] = useState(null)
 
@@ -31,8 +33,8 @@ function LoginForm() {
         })
         .then((response) => {
           setTimeout(() => {
-              console.log(response.data.answer)
-              setAuth(response.data.answer)
+             setAuth(response.data.answer)
+             setAdmin(response.data.answer.is_admin)
           }, 4)
         })
         .catch((err) => {
