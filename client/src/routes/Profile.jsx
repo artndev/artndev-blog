@@ -7,20 +7,25 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 function Profile() {
-    const navigator = useNavigate() 
-    const { auth } = useContext(AuthContext)
-    const [data, setData] = useState([])
+    const navigator = useNavigate()  
+    const { auth, setAuth } = useContext(AuthContext)
+    const [data, setData] = useState(null)
 
     const logout = (e) => {
         e.preventDefault()
     
         axios
             .post("/users/logout")
-            .then(() => navigator("/"))
+            .then(() => navigator("/articles"))
+            .then(() => {
+                setTimeout(() => {
+                    setAuth(null)
+                }, 4)
+            })
             .catch((err) => {
                 console.log(err)
     
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }
 
@@ -33,7 +38,7 @@ function Profile() {
             .catch((err) => {
                 console.log(err)
 
-                alert(err.response.data.message)
+                //alert(err.response.data.message)
             })
     }, [])
 

@@ -22,7 +22,7 @@ function CreateForm() {
         title: data.title,
         text: data.text
       })
-      .then(() => navigator("/"))
+      .then(() => navigator("/articles"))
       .catch((err) => {
         console.log(err)
 

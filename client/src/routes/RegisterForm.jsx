@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import AuthForm from '../components/AuthForm.jsx'
 import axios from "../axios.js"
 import { useNavigate } from 'react-router-dom'
+import AuthContext from "../contexts/Auth.jsx";
 
 
 function RegisterForm() {
+    const { setAuth } = useContext(AuthContext)
     const navigator = useNavigate() 
     const [err, setErr] = React.useState(null)
   
@@ -22,7 +24,17 @@ function RegisterForm() {
               username: data.username,
               password: data.password
           })
-          .then(() => navigator("/"))
+          .then((response) => {
+            navigator("/articles")
+
+            return response
+          })
+          .then((response) => {
+            setTimeout(() => {
+                console.log(response.data.answer)
+                setAuth(response.data.answer)
+            }, 4)
+          })
           .catch((err) => {
               console.log(err)
   
