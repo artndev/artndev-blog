@@ -32,10 +32,6 @@ function Layout() {
         </header>
 
         <Outlet />
-        
-        <footer>
-            Some pagination
-        </footer>
     </>
   )
 }

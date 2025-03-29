@@ -185,10 +185,15 @@ export async function Get(req, res) {
             return
         }
 
+        const [rows2] = await pool.query(
+            "SELECT * FROM Likes WHERE ArticleId = ?;",
+            req.params.article_id
+        )
+
         // send answer
         res.status(200).json({
             message: "You have successfully got the article",
-            answer: rows[0]
+            answer: {...rows[0], Likes: rows2.length}
         })
     } catch (err) {
         console.log(err)

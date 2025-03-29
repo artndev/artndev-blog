@@ -11,7 +11,7 @@ function AuthForm({
 }) {
   const inputRef = useRef(null)
   const btnRef = useRef(null)
-  const [inputType, setInputType] = useState(true)
+  const [inputType, setInputType] = useState(false)
 
   useEffect(() => {
     inputRef.current.type = inputType ? "text" : "password"
@@ -77,11 +77,11 @@ function AuthForm({
                         </div>
                     </div>
                 </div>
-                <div className="btn__group">
+                <div className="auth__form-btn__group">
                     <button type="submit" className="auth__form-btn">
                         Submit
                     </button>
-                    <Link className="btn__group-link a-reset" to={btnLink}>
+                    <Link className="auth__form-btn__group-link a-reset" to={btnLink}>
                         {btnText}
                     </Link>
                 </div>

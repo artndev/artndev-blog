@@ -1,16 +1,15 @@
 import "../styles/css/Article.css";
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArticleFront from '../components/ArticleFront.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from "../axios.js";
 import AdminContext from "../contexts/Admin.jsx";
 import AuthContext from '../contexts/Auth.jsx';
 import config from "../config.json"
-import heart from "../imgs/heart.png"
-import bookmark from "../imgs/bookmark.png"
-import pen from "../imgs/pen.png"
-import bin from "../imgs/bin.png"
-
+import heart from "../imgs/heart.svg"
+import bookmark from "../imgs/bookmark.svg"
+import pen from "../imgs/pen.svg"
+import bin from "../imgs/bin.svg"
 
 function Article() {
     const navigator = useNavigate()
@@ -21,6 +20,7 @@ function Article() {
     const [isLiked, setIsLiked] = useState(false)
     const [isSaved, setIsSaved] = useState(false)
 
+    // article data
     useEffect(() => {
       axios
           .get(`/articles/${article_id}`)
@@ -32,8 +32,20 @@ function Article() {
 
               //alert(err.response.data.message)
           })
-    }, [article_id])
+    }, [article_id, isLiked])
 
+    const deleteArticle = () => {
+        axios
+            .delete(`/articles/${article_id}/delete`)
+            .then(() => navigator("/"))
+            .catch((err) => {
+                console.log(err)
+
+                //alert(err.response.data.message)
+            })
+    }
+
+    // likes or dislikes
     useEffect(() => {
         axios
             .get(`/likes/${article_id}/state`)
@@ -47,18 +59,19 @@ function Article() {
             })
     }, [article_id])
 
-    useEffect(() => {
-        axios
-            .get(`/saves/${article_id}/state`)
-            .then((response) => {
-                setIsSaved(response.data.answer)
-            })
-            .catch((err) => {
-                console.log(err)
+    // useEffect(() => {
+    //     if (!likeBtn)
+    //         return
 
-                //alert(err.response.data.message)
-            })
-    }, [article_id])
+    //     setTimeout(() => {
+
+    //     }, 1000)
+    //     console.log(likeBtn, isLiked)
+    //     if (isLiked)
+    //         likeBtn.current.classList.add("pressed")
+    //     else
+    //         likeBtn.current.classList.remove("pressed")
+    // }, [isLiked])
 
     const likeArticle = () => {
         if (isLiked)
@@ -92,6 +105,20 @@ function Article() {
             })       
     }
 
+    // saves
+    useEffect(() => {
+        axios
+            .get(`/saves/${article_id}/state`)
+            .then((response) => {
+                setIsSaved(response.data.answer)
+            })
+            .catch((err) => {
+                console.log(err)
+
+                //alert(err.response.data.message)
+            })
+    }, [article_id])
+
     const saveArticle = () => {
         if (isSaved)
             return
@@ -124,22 +151,16 @@ function Article() {
             })
     }
 
-    const deleteArticle = () => {
-        axios
-            .delete(`/articles/${article_id}/delete`)
-            .then(() => navigator("/"))
-            .catch((err) => {
-                console.log(err)
-
-                //alert(err.response.data.message)
-            })
-    }
-
+    // utils
     const readingTime = (text) => {
         const words = text.trim().split(/\s+/).length;
         const time = Math.ceil(words / config.WPS);
         
         return time.toString()
+    }
+
+    const formatNumber = (number) => {
+        return Intl.NumberFormat('en', { notation: 'compact' }).format(number)
     }
   
     // useEffect(() => {
@@ -158,26 +179,39 @@ function Article() {
                         text={data.Text}
                     />
                     <div className="btns__container">
-                        <button className="pressed" type="button" onClick={(e) => {
-                            if (!auth)
-                            {
-                                navigator("/login")
-                                return
-                            }
+                        <div className="btn__groupss">
+                            <button 
+                                className={isLiked ? "pressed" : ""}
+                                type="button" 
+                                onClick={(e) => {
+                                    if (!auth)
+                                    {
+                                        navigator("/login")
+                                        return
+                                    }
 
-                            return !isLiked ? likeArticle() : dislikeArticle()
-                        }}>
-                            <img src={heart} alt="Like" />
-                        </button>
-                        <button type="button" onClick={() => {
-                            if (!auth)
-                            {
-                                navigator("/login")
-                                return
-                            }
+                                    return !isLiked ? likeArticle() : dislikeArticle()
+                                }}
+                            >
+                                <img src={heart} alt="Like" />
+                            </button>
+                            <div className="likes">
+                                { formatNumber(data.Likes) }
+                            </div>
+                        </div>
+                        <button 
+                            className={isSaved ? "pressed" : ""}
+                            type="button" 
+                            onClick={() => {
+                                if (!auth)
+                                {
+                                    navigator("/login")
+                                    return
+                                }
 
-                            return !isSaved ? saveArticle() : unsaveArticle()
-                        }}>
+                                return !isSaved ? saveArticle() : unsaveArticle()
+                            }}
+                        >
                             <img src={bookmark} alt="Save" />
                         </button>
                         {

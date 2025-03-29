@@ -1,5 +1,9 @@
 @import "./vars.scss";
 
+.auth__form-err {
+    color: $red;
+}
+
 .auth__form-container {
     display: flex;
     justify-content: center;
@@ -40,7 +44,7 @@
     width: inherit;
 }
 
-.btn__group {
+.auth__form-btn__group {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,7 +53,7 @@
     width: 100%;
 }
 
-.btn__group-link {
+.auth__form-btn__group-link {
     font-size: 15px;
     color: $grey;
 
@@ -115,8 +119,4 @@
     &:focus {
         outline: none;
     }
-}
-
-.auth__form-err {
-    color: $red;
 }
