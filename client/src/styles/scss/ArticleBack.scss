@@ -1,6 +1,6 @@
 @import "./vars.scss";
 
-.article {
+.article__back {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -17,13 +17,13 @@
     }
 }
 
-.article__info {
+.article__back-info {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.article__subtitle {
+.article__back-subtitle {
     color: $grey;
     font-size: 14px;
 }

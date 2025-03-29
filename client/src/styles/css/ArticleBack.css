@@ -1,4 +1,4 @@
-.article {
+.article__back {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -9,18 +9,18 @@
   padding: 15px;
   transition: transform 0.15s ease-in-out;
 }
-.article:hover {
+.article__back:hover {
   border: 1px solid #343A40;
   transform: translateY(-2.5px);
 }
 
-.article__info {
+.article__back-info {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.article__subtitle {
+.article__back-subtitle {
   color: #68727B;
   font-size: 14px;
 }

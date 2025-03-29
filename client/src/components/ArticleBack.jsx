@@ -5,16 +5,16 @@ import React from 'react'
 function ArticleBack({ title, subtitle, text }) {
   return (
     <>
-        <div className="article">
-            <div className="article__info">
-                <h3 className="article__title">
+        <div className="article__back">
+            <div className="article__back-info">
+                <h3 className="article__back-title">
                     { title }
                 </h3>
-                <div className="article__subtitle">
+                <div className="article__back-subtitle">
                     { subtitle }
                 </div>
             </div>
-            <div className="article__text">
+            <div className="article__back-text">
                 { text }
             </div>
         </div>
