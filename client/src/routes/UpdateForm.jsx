@@ -51,16 +51,14 @@ function UpdateForm() {
     <>
       {
         data
-        ? <div className="article__form-container">
-          <ArticleForm 
-            formTitle={"Update"}
-            defaultTitle={data.Title}
-            defaultText={data.Text}
-            defaultSubtitle={data.Subtitle}
-            err={err}
-            onSubmit={updateArticle}
-          />
-        </div>
+        ? <ArticleForm 
+          formTitle={"Update"}
+          defaultTitle={data.Title}
+          defaultText={data.Text}
+          defaultSubtitle={data.Subtitle}
+          err={err}
+          onSubmit={updateArticle}
+        />
         : "Loading..."
       }
     </>

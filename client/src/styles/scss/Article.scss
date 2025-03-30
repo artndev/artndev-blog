@@ -13,14 +13,13 @@
     flex-direction: column;
     gap: 20px;
     width: min(1000px, 100%);
-    padding: 0 20px 0 20px;
+    padding: 0 20px 20px 20px;
     //background-color: red;
 }
 
 .btns__container {
     display: flex;
     gap: 15px;
-    
 
     button {
         display: flex;

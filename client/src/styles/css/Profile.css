@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 50px;
+  padding: 50px 20px 0 20px;
 }
 
 .profile__subcontainer {
@@ -18,7 +18,6 @@
   flex-direction: column;
   gap: 20px;
   width: min(1000px, 100%);
-  padding: 0 20px 50px 20px;
 }
 
 .profile__articles-container {
@@ -26,12 +25,14 @@
   grid-template-columns: repeat(2, minmax(250px, 500px));
   grid-template-rows: repeat(3, max-content);
   gap: 20px 15px;
+  width: inherit;
 }
 
 .profile__group {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: inherit;
 }
 
 .profile__form-btn {

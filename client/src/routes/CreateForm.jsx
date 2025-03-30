@@ -33,13 +33,11 @@ function CreateForm() {
 
   return (
     <>
-        <div className="article__form-container">
           <ArticleForm 
             formTitle={"Create"}
             err={err}
             onSubmit={createArticle}
           />
-        </div>
     </>
   )
 }

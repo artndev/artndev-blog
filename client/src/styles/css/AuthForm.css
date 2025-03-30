@@ -7,8 +7,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50vh;
-  padding: 20px;
+  height: max(50vh, -moz-max-content);
+  height: max(50vh, max-content);
+  padding: 50px 20px 0 20px;
 }
 
 .auth__from-subcontainer {
@@ -60,7 +61,7 @@
 }
 
 .auth__form-btn {
-  width: 50%;
+  width: min(200px, 50%);
   height: 45px;
   color: #E9ECEF;
   background-color: #343A40;

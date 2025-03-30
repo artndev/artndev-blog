@@ -10,10 +10,11 @@ function MarkdownEditor({ value, onChange }) {
             value={value}
             onChange={onChange}
             preview="edit"
-            maxHeight={500}
             textareaProps={{
                 placeholder: "Write your thoughts..."
             }}
+            minHeight={500}
+            maxHeight={500}
             commands={[
                 commands.group([commands.title1, commands.title2, commands.title3], {
                     name: 'title',

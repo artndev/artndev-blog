@@ -1,8 +1,7 @@
 .article__front {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  word-break: break-all;
+  gap: 20px;
 }
 
 .article__front-info {

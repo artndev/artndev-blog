@@ -8,7 +8,9 @@ function MarkdownPreview({ source, className }) {
         <MDPreview
             source={source}
             className={className}
-            style={{ backgroundColor: "transparent" }}
+            style={{ 
+              backgroundColor: "transparent", 
+            }}
         />
     </div>   
   )
