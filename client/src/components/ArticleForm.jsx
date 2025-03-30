@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import MarkdownEditor from './MarkdownEditor'
 
 
 function ArticleForm({ 
     formTitle, 
     defaultTitle, 
+    defaultSubtitle,
     defaultText,
     err, 
     onSubmit 
 }) {
+  const [title, setTitle] = useState(defaultTitle)
+  const [text, setText] = useState(defaultText)
+
   return (
     <div className="article__form-subcontainer">
         <h2>
@@ -34,18 +39,38 @@ function ArticleForm({
                     id="title" 
                     name="title" 
                     defaultValue={defaultTitle}
+                    placeholder={"Enter title..."}
                     required 
                 />
             </div>
             <div className="article__form-group">
-                <label htmlFor="text">
-                    Text:
+                <label htmlFor="subtitle">
+                    Subtitle:
                 </label>
                 <input 
                     type="text" 
+                    id="subtitle" 
+                    name="subtitle" 
+                    defaultValue={defaultSubtitle}
+                    placeholder={"Enter subtitle..."}
+                    required 
+                />
+            </div>
+            <div className="article__form-group">
+                <div className="article__form-group__title">
+                    Text:
+                </div>
+                <MarkdownEditor value={text} onChange={setText} />
+                <input 
+                    style={{ 
+                        position: "absolute",
+                        visibility: "hidden" 
+                    }}
+                    type="text" 
                     id="text" 
-                    name="text"
-                    defaultValue={defaultText} 
+                    name="text" 
+                    value={text}
+                    defaultValue={defaultText}
                     required 
                 />
             </div>

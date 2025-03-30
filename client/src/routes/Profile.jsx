@@ -86,11 +86,7 @@ function Profile() {
                                     to={`/articles/${val.Id}`}
                                     className="a-reset"
                                 >
-                                    <ArticleBack
-                                        title={`${val.Title.substring(0, config.TITLE_MAXSYMBOLS).trim()}...`}
-                                        subtitle={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
-                                        text={`${val.Text.substring(0, config.TEXT_MAXSYMBOLS).trim()}...`}
-                                    />
+                                    <ArticleBack data={val} />
                                 </Link>
                             })
                             : "You have not saved any articles yet..."

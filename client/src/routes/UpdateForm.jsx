@@ -19,9 +19,11 @@ function UpdateForm() {
     let data = {}
     formData.forEach((val, key) => data[key] = val)
 
+    console.log(data)
     axios
       .put(`/articles/${article_id}/update`, {
         title: data.title,
+        subtitle: data.subtitle,
         text: data.text
       })
       .then(() => navigator("/"))
@@ -41,7 +43,7 @@ function UpdateForm() {
       .catch((err) => {
           console.log(err)
 
-          alert(err.response.data.message)
+          //alert(err.response.data.message)
       })
   }, [article_id])
 
@@ -54,6 +56,7 @@ function UpdateForm() {
             formTitle={"Update"}
             defaultTitle={data.Title}
             defaultText={data.Text}
+            defaultSubtitle={data.Subtitle}
             err={err}
             onSubmit={updateArticle}
           />

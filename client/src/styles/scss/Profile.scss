@@ -13,13 +13,13 @@
     justify-content: center;
     width: 100%;
     padding-top: 50px;
-    //background-color: blue;
 }
 
 .profile__subcontainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: min(1000px, 100%);
     padding: 0 20px 50px 20px;
 }
 
@@ -28,13 +28,12 @@
     grid-template-columns: repeat(2, minmax(250px, 500px));
     grid-template-rows: repeat(3, max-content);
     gap: 20px 15px;
-    //background-color: red;
 }
 
 .profile__group {
     display: flex;
     align-items: center;
-    gap: 10px
+    gap: 10px;
 }
 
 .profile__form-btn {

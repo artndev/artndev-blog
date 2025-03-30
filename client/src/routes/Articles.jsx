@@ -39,11 +39,7 @@ function Articles() {
                             className="a-reset"
                             to={`/articles/${val.Id}`}
                         >
-                            <ArticleBack
-                                title={`${val.Title.substring(0, config.TITLE_MAXSYMBOLS).trim()}...`}
-                                subtitle={(new Date(val.Updated)).toLocaleDateString().replaceAll(".", "/")} 
-                                text={`${val.Text.substring(0, config.TEXT_MAXSYMBOLS).trim()}...`}
-                            />
+                            <ArticleBack data={val} />
                         </Link>
                     })
                     : "Loading..."

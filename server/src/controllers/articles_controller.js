@@ -4,6 +4,7 @@ import * as utils from "../utils.js"
 // CREATE TABLE Articles (
 //     Id INT AUTO_INCREMENT,
 //     Title VARCHAR(255) NOT NULL,
+//     Subtitle VARCHAR(255) NOT NULL,
 //     Text TEXT NOT NULL,
 //     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
@@ -16,8 +17,8 @@ export async function Create(req, res) {
     try {
         // run query
         await pool.query(
-            "INSERT INTO Articles (Title, Text) VALUES (?, ?);",
-            [req.body.title, req.body.text]
+            "INSERT INTO Articles (Title, Subtitle, Text) VALUES (?, ?, ?);",
+            [req.body.title, req.body.subtitle, req.body.text]
         )
 
         // send answer
@@ -40,11 +41,12 @@ export async function Update(req, res) {
             `
                 UPDATE Articles SET 
                     Title = ?, 
+                    Subtitle = ?,
                     Text = ?, 
                     Updated = CURRENT_TIMESTAMP() 
                 WHERE Id = ?;
             `,
-            [req.body.title, req.body.text, req.params.article_id]
+            [req.body.title, req.body.subtitle, req.body.text, req.params.article_id]
         )
 
         // check for condition

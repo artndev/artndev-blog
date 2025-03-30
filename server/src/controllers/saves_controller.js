@@ -100,6 +100,7 @@ export async function GetSaves(req, res) {
                 SELECT 
                     Articles.Id,
                     Articles.Title,
+                    Articles.Subtitle,
                     Articles.Text,
                     Articles.Updated 
                 FROM Articles

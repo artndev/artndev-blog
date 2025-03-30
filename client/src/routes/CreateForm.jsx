@@ -20,6 +20,7 @@ function CreateForm() {
     axios
       .post("/articles/create", {
         title: data.title,
+        subtitle: data.subtitle,
         text: data.text
       })
       .then(() => navigator("/articles"))

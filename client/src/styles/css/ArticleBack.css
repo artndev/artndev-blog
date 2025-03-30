@@ -8,6 +8,7 @@
   border-radius: 5px;
   padding: 15px;
   transition: transform 0.15s ease-in-out;
+  word-break: break-all;
 }
 .article__back:hover {
   border: 1px solid #343A40;

@@ -1,6 +1,7 @@
 import "../styles/css/ArticleFront.css"
 import React from 'react'
 import config from "../config.json"
+import MarkdownPreview from "./MarkdownPreview.jsx"
 
 
 function ArticleFront({ title, subtitle, text,  }) {
@@ -22,9 +23,10 @@ function ArticleFront({ title, subtitle, text,  }) {
                         { `${readingTime(text)}m • ${subtitle}` }
                     </div>
                 </div>
-                <div className="article__front-text">
+                <MarkdownPreview source={text} className={"article__front-text"} />
+                {/* <div className="article__front-text">
                     { text }
-                </div>
+                </div> */}
             </div>
         </>
     )

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import config from "../config.json"
 
 
-function ArticleBack({ title, subtitle, text }) {
+function ArticleBack({ data }) {
     const readingTime = (text) => {
         const words = text.trim().split(/\s+/).length;
         const time = Math.ceil(words / config.WPS);
@@ -11,19 +11,23 @@ function ArticleBack({ title, subtitle, text }) {
         return time.toString()
     }
 
+    useEffect(() => {
+        console.log(data)
+    }, [])
+
     return (
         <>
             <div className="article__back">
                 <div className="article__back-info">
                     <h3 className="article__back-title">
-                        { title }
+                        { data.Title }
                     </h3>
                     <div className="article__back-subtitle">
-                        { `${readingTime(text)}m • ${subtitle}` }
+                        { `${readingTime(data.Text)}m • ${(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")}` }
                     </div>
                 </div>
                 <div className="article__back-text">
-                    { text }
+                    { data.Subtitle }
                 </div>
             </div>
         </>
