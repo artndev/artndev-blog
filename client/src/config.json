@@ -1,5 +1,10 @@
 {
     "TITLE_MAXSYMBOLS": 100,
     "TEXT_MAXSYMBOLS": 200,
-    "WPS": 255
+    "WPS": 255,
+    "TYPEWRITER_STRINGS": [
+        "Hello, I'm Artyom Luzhkov.",
+        "Hey, I'm mad about coding!",
+        "Hi, I'm Backend Web Developer."
+    ]
 }

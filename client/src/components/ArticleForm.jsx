@@ -1,6 +1,8 @@
 import "../styles/css/ArticleForm.css"
 import React, { useState } from 'react'
 import MarkdownEditor from './MarkdownEditor'
+import Button from "./Button.jsx"
+import Input from "./Input.jsx"
 
 
 function ArticleForm({ 
@@ -11,7 +13,6 @@ function ArticleForm({
     err, 
     onSubmit 
 }) {
-  const [title, setTitle] = useState(defaultTitle)
   const [text, setText] = useState(defaultText)
 
   return (
@@ -30,28 +31,22 @@ function ArticleForm({
                         <label htmlFor="title">
                             Title:
                         </label>
-                        <input 
-                            className="article__form-input"
-                            type="text" 
-                            id="title" 
-                            name="title" 
+                        <Input 
+                            name={"title"}
                             defaultValue={defaultTitle}
-                            placeholder={"Enter title..."}
-                            required 
+                            width={"min(500px, 100%)"}
+                            height={45}
                         />
                     </div>
                     <div className="article__form-group">
                         <label htmlFor="subtitle">
                             Subtitle:
                         </label>
-                        <input 
-                            className="article__form-input"
-                            type="text" 
-                            id="subtitle" 
-                            name="subtitle" 
+                        <Input 
+                            name={"subtitle"}
                             defaultValue={defaultSubtitle}
-                            placeholder={"Enter subtitle..."}
-                            required 
+                            width={"min(500px, 100%)"}
+                            height={45}
                         />
                     </div>
                     <div className="article__form-group">
@@ -59,23 +54,23 @@ function ArticleForm({
                             Text:
                         </div>
                         <MarkdownEditor value={text} onChange={setText} />
-                        <input 
-                            style={{ 
+                        <Input 
+                            name={"text"}
+                            value={text}
+                            defaultValue={defaultText}
+                            style={{
                                 position: "absolute",
                                 visibility: "hidden" 
                             }}
-                            type="text" 
-                            id="text" 
-                            name="text" 
-                            value={text}
-                            defaultValue={defaultText}
-                            required 
                         />
                     </div>
                 </div>
-                <button type="submit" className="article__form-btn">
-                    Submit
-                </button>
+                <Button 
+                    content={"Submit"}
+                    type={"submit"}
+                    width={"min(200px, 50%)"}
+                    height={45}
+                />
             </form>
         </div>
     </div>

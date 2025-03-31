@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import "../styles/css/AuthForm.css";
 import React, { useEffect, useRef, useState } from "react";
+import Input from "./Input.jsx";
+import Button from "./Button.jsx";
+
 
 function AuthForm({ 
     formTitle, 
@@ -24,7 +27,7 @@ function AuthForm({
     <div className="auth__form-container">
         <div className="auth__from-subcontainer">
             <h2>
-                # {formTitle}
+                {formTitle}
             </h2>
             <form 
                 className="auth__form" 
@@ -43,44 +46,48 @@ function AuthForm({
                         <label htmlFor="username">
                             Username:
                         </label>
-                        <input 
+                        <Input 
+                            name={"username"}
+                            width={"inherit"}
+                            height={45}
+                        />
+                        {/* <input 
                             className="auth__form-input"
                             type="text" 
                             id="username" 
                             name="username" 
                             placeholder="Enter your username..."
                             required 
-                        />
+                        /> */}
                     </div>
                     <div className="auth__form-group">
                         <label htmlFor="password">
                             Password:
                         </label>
                         <div className="input__group">
-                            <input 
+                            <Input 
                                 ref={inputRef}
-                                className="auth__form-input"
-                                type={inputType ? "text" : "password"} 
-                                id="password" 
-                                name="password"
-                                placeholder="Enter you password..." 
-                                required
+                                type={inputType ? "text" : "password"}
+                                name={"password"}
+                                width={"inherit"}
+                                height={45}
                             />
                             <button
                                 ref={btnRef}
-                                className="input__group-btn closed" 
                                 type="button" 
-                                onClick={() => {
-                                    setInputType(!inputType)
-                                }}
+                                className="input__group-btn closed" 
+                                onClick={() => setInputType(!inputType)}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="auth__form-btn__group">
-                    <button type="submit" className="auth__form-btn">
-                        Submit
-                    </button>
+                    <Button 
+                        content={"Submit"}
+                        type={"submit"}
+                        width={"min(200px, 50%)"}
+                        height={45}
+                    />
                     <Link className="auth__form-btn__group-link a-reset" to={btnLink}>
                         {btnText}
                     </Link>

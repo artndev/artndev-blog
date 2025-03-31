@@ -20,9 +20,9 @@ function App() {
     <>
         <BrowserRouter>
           <Routes>
+            <Route index element={<Home />} />
+            
             <Route element={<Layout />}>
-              <Route index element={<Home />} />
-              
               <Route path="/articles">
                 <Route index element={<Articles />} />
                 <Route path=":article_id" element={<Article />} />
