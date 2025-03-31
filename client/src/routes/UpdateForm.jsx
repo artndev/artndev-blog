@@ -26,7 +26,7 @@ function UpdateForm() {
         subtitle: data.subtitle,
         text: data.text
       })
-      .then(() => navigator("/"))
+      .then(() => navigator("/articles"))
       .catch((err) => {
         console.log(err)
 
