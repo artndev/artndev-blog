@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import "../styles/css/AuthForm.css";
+import { Link } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
@@ -37,30 +37,30 @@ function AuthForm({
                 <div className="auth__form-groups">
                     {
                         err && <span id="err">
-                            {err}
+                            Username or password is incorrect
                         </span>
                     }
                     <div className="auth__form-group">
                         <label className="form__label" htmlFor="username">
-                            Username:
+                            Username<span id="err">*</span>:
                         </label>
                         <Input 
-                            name={"username"}
                             width={"inherit"}
                             height={45}
+                            name={"username"}
                         />
                     </div>
                     <div className="auth__form-group">
                         <label className="form__label" htmlFor="password">
-                            Password:
+                            Password<span id="err">*</span>:
                         </label>
                         <div className="auth__form-ipt__group">
                             <Input 
+                                width={"inherit"}
+                                height={45}
                                 ref={inputRef}
                                 type={inputType ? "text" : "password"}
                                 name={"password"}
-                                width={"inherit"}
-                                height={45}
                             />
                             <button
                                 ref={btnRef}
@@ -73,10 +73,10 @@ function AuthForm({
                 </div>
                 <div className="auth__form-btn__group">
                     <Button 
-                        content={"Submit"}
-                        type={"submit"}
                         width={"min(200px, 50%)"}
                         height={45}
+                        type={"submit"}
+                        content={"Submit"}
                     />
                     <Link className="lnk" to={btnLink}>
                         {btnText}

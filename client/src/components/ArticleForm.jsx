@@ -27,9 +27,14 @@ function ArticleForm({
                 onSubmit={onSubmit}
             >
                 <div className="article__form-groups">
+                    {
+                        err && <span id="err">
+                            Unknown error has occurred
+                        </span>
+                    }
                     <div className="article__form-group">
                         <label className="form__label" htmlFor="title">
-                            Title:
+                            Title<span id="err">*</span>:
                         </label>
                         <Input 
                             width={"min(500px, 100%)"}
@@ -40,7 +45,7 @@ function ArticleForm({
                     </div>
                     <div className="article__form-group">
                         <label className="form__label" htmlFor="subtitle">
-                            Subtitle:
+                            Subtitle<span id="err">*</span>:
                         </label>
                         <Input 
                             width={"min(500px, 100%)"}
@@ -51,7 +56,7 @@ function ArticleForm({
                     </div>
                     <div className="article__form-group">
                         <div className="article__form-group__title form__label">
-                            Text:
+                            Text<span id="err">*</span>:
                         </div>
                         <MarkdownEditor value={text} onChange={setText} />
                         <Input 
