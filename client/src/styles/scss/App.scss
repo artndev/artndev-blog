@@ -14,9 +14,35 @@ body, html {
     height: 100%;
 }
 
-.a-reset {
+button:focus {
+    outline: none;
+}
+
+a {
     text-decoration: none;
     color: inherit;
+
+    &.lnk {
+        font-size: $f-smx;
+        color: $grey;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+#err {
+    font-size: $f-smx;
+    color: $red;
+}
+
+.form__title {
+    font-size: $s-bg;
+}
+
+.form__label {
+    font-size: $s-md;
 }
 
 .btn {

@@ -1,21 +1,20 @@
 @import "./vars.scss";
 
+
 .article__form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: max-content;
-    padding: 50px 20px 0 20px;
-    //background-color: red;
+    padding: $s-hg $s-mdx 0 $s-mdx;
 }
 
 .article__form-subcontainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    width: 1000px;
+    gap: $s-mdx;
+    width: min(1000px, 100%);
 }
 
 .article__form {
@@ -23,48 +22,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: $s-bgx;
     width: 100%;
 }
 
 .article__form-groups {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
+    gap: $s-smx;
+    width: inherit;
 }
 
 .article__form-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: $s-sm;
     width: inherit;
-}
-
-.article__form-btn {
-    width: min(200px, 50%);
-    height: 45px;
-    color: $white;
-    background-color: $black;
-    border: 2px solid $black;
-    border-radius: 5px;
-    transition: all .1s ease-in-out;
-
-    &:hover {
-        color: $black;
-        background: none;
-    }
-}
-
-.article__form-input {
-    width: min(500px, 100%); // inherit / 2
-    height: 45px;
-    padding: 10px;
-    border: 1px solid $grey;
-    border-radius: 5px;
-
-    &:focus {
-        border: 2px solid $black;
-        outline: none;
-    }
 }

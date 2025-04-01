@@ -25,8 +25,8 @@ function AuthForm({
   return (
     <>
     <div className="auth__form-container">
-        <div className="auth__from-subcontainer">
-            <h2>
+        <div className="auth__form-subcontainer">
+            <h2 className="form__title">
                 {formTitle}
             </h2>
             <form 
@@ -36,14 +36,12 @@ function AuthForm({
             >
                 <div className="auth__form-groups">
                     {
-                        err
-                        ? <span className="auth__form-err">
+                        err && <span id="err">
                             {err}
                         </span>
-                        : ""
                     }
                     <div className="auth__form-group">
-                        <label htmlFor="username">
+                        <label className="form__label" htmlFor="username">
                             Username:
                         </label>
                         <Input 
@@ -51,20 +49,12 @@ function AuthForm({
                             width={"inherit"}
                             height={45}
                         />
-                        {/* <input 
-                            className="auth__form-input"
-                            type="text" 
-                            id="username" 
-                            name="username" 
-                            placeholder="Enter your username..."
-                            required 
-                        /> */}
                     </div>
                     <div className="auth__form-group">
-                        <label htmlFor="password">
+                        <label className="form__label" htmlFor="password">
                             Password:
                         </label>
-                        <div className="input__group">
+                        <div className="auth__form-ipt__group">
                             <Input 
                                 ref={inputRef}
                                 type={inputType ? "text" : "password"}
@@ -75,7 +65,7 @@ function AuthForm({
                             <button
                                 ref={btnRef}
                                 type="button" 
-                                className="input__group-btn closed" 
+                                className="auth__form-ipt__group-btn closed" 
                                 onClick={() => setInputType(!inputType)}
                             />
                         </div>
@@ -83,13 +73,12 @@ function AuthForm({
                 </div>
                 <div className="auth__form-btn__group">
                     <Button 
-                        className={"reset"}
                         content={"Submit"}
                         type={"submit"}
                         width={"min(200px, 50%)"}
                         height={45}
                     />
-                    <Link className="auth__form-btn__group-link a-reset" to={btnLink}>
+                    <Link className="lnk" to={btnLink}>
                         {btnText}
                     </Link>
                 </div>

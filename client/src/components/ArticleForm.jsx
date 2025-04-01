@@ -18,7 +18,7 @@ function ArticleForm({
   return (
     <div className="article__form-container">
         <div className="article__form-subcontainer">
-            <h2>
+            <h2 className="form__title">
                 {formTitle}
             </h2>
             <form 
@@ -28,7 +28,7 @@ function ArticleForm({
             >
                 <div className="article__form-groups">
                     <div className="article__form-group">
-                        <label htmlFor="title">
+                        <label className="form__label" htmlFor="title">
                             Title:
                         </label>
                         <Input 
@@ -39,7 +39,7 @@ function ArticleForm({
                         />
                     </div>
                     <div className="article__form-group">
-                        <label htmlFor="subtitle">
+                        <label className="form__label" htmlFor="subtitle">
                             Subtitle:
                         </label>
                         <Input 
@@ -50,7 +50,7 @@ function ArticleForm({
                         />
                     </div>
                     <div className="article__form-group">
-                        <div className="article__form-group__title">
+                        <div className="article__form-group__title form__label">
                             Text:
                         </div>
                         <MarkdownEditor value={text} onChange={setText} />

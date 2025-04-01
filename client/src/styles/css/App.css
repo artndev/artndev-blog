@@ -11,9 +11,33 @@ body, html {
   height: 100%;
 }
 
-.a-reset {
+button:focus {
+  outline: none;
+}
+
+a {
   text-decoration: none;
   color: inherit;
+}
+a.lnk {
+  font-size: 13px;
+  color: #68727B;
+}
+a.lnk:hover {
+  text-decoration: underline;
+}
+
+#err {
+  font-size: 13px;
+  color: #ff4444;
+}
+
+.form__title {
+  font-size: 25px;
+}
+
+.form__label {
+  font-size: 15px;
 }
 
 .btn {

@@ -1,24 +1,20 @@
 @import "./vars.scss";
 
-.auth__form-err {
-    color: $red;
-}
 
 .auth__form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: max-content;
-    padding: 50px 20px 0 20px; // eye is going wild on 200px bc its compressed lol
+    padding: $s-hg $s-mdx 0 $s-mdx;
 }
 
-.auth__from-subcontainer {
+.auth__form-subcontainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    width: 350px;
+    gap: $s-mdx;
+    width: min(350px, 100%);
 }
 
 .auth__form {
@@ -26,21 +22,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: $s-bgx;
     width: 100%;
 }
 
 .auth__form-groups {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
+    gap: $s-smx;
+    width: inherit;
 }
 
 .auth__form-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: $s-sm;
     width: inherit;
 }
 
@@ -49,53 +45,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-
-.auth__form-btn__group-link {
-    font-size: 15px;
-    color: $grey;
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-.auth__form-btn {
-    width: min(200px, 50%);
-    height: 45px;
-    color: $white;
-    background-color: $black;
-    border: 2px solid $black;
-    border-radius: 5px;
-    transition: all .1s ease-in-out;
-
-    &:hover {
-        color: $black;
-        background: none;
-    }
-}
-
-.auth__form-input {
+    gap: $s-smx;
     width: inherit;
-    height: 45px;
-    padding: 10px;
-    border: 1px solid $grey;
-    border-radius: 5px;
-
-    &:focus {
-        border: 2px solid $black;
-        outline: none;
-    }
 }
 
-.input__group {
+.auth__form-ipt__group {
     position: relative;
     width: inherit;
 }
 
-.input__group-btn {
+.auth__form-ipt__group-btn {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -114,9 +73,5 @@
 
     &.closed {
         background-image: url("../../imgs/eye_closed.png");
-    }
-
-    &:focus {
-        outline: none;
     }
 }
