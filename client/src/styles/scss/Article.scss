@@ -20,38 +20,38 @@
     display: flex;
     gap: 15px;
 
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 35px;
-        height: 35px;
-        border: 1px solid $black;
-        border-radius: 5px;
-        transition: all .1s ease-in-out;
+    // button {
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     width: 35px;
+    //     height: 35px;
+    //     border: 1px solid $black;
+    //     border-radius: 5px;
+    //     transition: all .1s ease-in-out;
 
-        img {
-            width: 15px;
-            height: 15px;
-            filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
-        }
+    //     img {
+    //         width: 15px;
+    //         height: 15px;
+    //         filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+    //     }
         
-        &:hover:not(.pressed) {
-            background-color: $black;
+    //     &:hover:not(.pressed) {
+    //         background-color: $black;
             
-            img {
-                filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
-            }
-        }
+    //         img {
+    //             filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+    //         }
+    //     }
 
-        &.pressed {
-            background-color: $black;
+    //     &.pressed {
+    //         background-color: $black;
 
-            img {
-                filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
-            }
-        }
-    }
+    //         img {
+    //             filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+    //         }
+    //     }
+    // }
 }
 
 .article__btns-container__group {

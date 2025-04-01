@@ -20,13 +20,27 @@ body, html {
 }
 
 .btn {
+    img {
+        width: 15px;
+        height: 15px;
+        background-color: transparent;
+    }
+
     &.invert {
         color: $black;
         background-color: transparent;
 
+        img {
+            filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+        }
+
         &.pressed {
             color: $white;
             background-color: $black;
+            
+            img {
+                filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+            }
         }
     }
 
@@ -34,13 +48,26 @@ body, html {
         color: $white;
         background-color: $black;
 
+        img {
+            filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+        }
+
         &.pressed {
             color: $black;
             background-color: transparent;
+
+            img {
+                filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+            }
         }
     }
 
-    border: 2px solid $black;
+    border: 1px solid $black;
+
+    &.bold {
+        border: 2px solid $black;
+    }
+
     border-radius: 5px;
     font-size: $f-smx;
     transition: all .1s ease-in-out;
@@ -49,10 +76,18 @@ body, html {
     &:hover:not(.pressed) {
         color: $black;
         background-color: transparent;
+        
+        img {
+            filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+        }
 
         &.invert {
             color: $white;
             background-color: $black;
+            
+            img {
+                filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+            }
         }
 
         &:not(.static) {
@@ -63,7 +98,7 @@ body, html {
 
 .ipt {
     border: 1px solid $grey;
-    border-radius: $s-sm;
+    border-radius: 5px;
     font-size: $f-smx;
     padding: $s-md;
 

@@ -175,30 +175,36 @@ function Article() {
                     <div className="article__btns-container">
                         <div className="article__btns-container__group">
                             <Button 
-                                
-                            />
-                            <button 
-                                className={isLiked ? "pressed" : ""}
-                                type="button" 
-                                onClick={(e) => {
+                                width={35}
+                                height={35}
+                                className={`static invert ${isLiked ? " pressed" : ""}`}
+                                onClick={() => {
                                     if (!auth)
                                     {
                                         navigator("/login")
                                         return
                                     }
 
-                                    return !isLiked ? likeArticle() : dislikeArticle()
+                                    if (isLiked)
+                                    {
+                                        dislikeArticle()
+                                        return
+                                    }
+    
+                                    likeArticle()
                                 }}
-                            >
-                                <img src={heart} alt="Like" />
-                            </button>
+                                content={
+                                    <img src={heart} alt="Like" />
+                                }
+                            />
                             <div className="likes">
                                 { formatNumber(data.Likes) }
                             </div>
                         </div>
-                        <button 
-                            className={isSaved ? "pressed" : ""}
-                            type="button" 
+                        <Button 
+                            width={35}
+                            height={35}
+                            className={`static invert ${isSaved ? " pressed" : ""}`}
                             onClick={() => {
                                 if (!auth)
                                 {
@@ -206,20 +212,39 @@ function Article() {
                                     return
                                 }
 
-                                return !isSaved ? saveArticle() : unsaveArticle()
+                                if (isSaved)
+                                {
+                                    unsaveArticle()
+                                    return
+                                }
+    
+                                saveArticle()
                             }}
-                        >
-                            <img src={bookmark} alt="Save" />
-                        </button>
+                            content={
+                                <img src={bookmark} alt="Like" />
+                            }
+                        />
                         {
                             admin
                             ? <>
-                                <button type="button" onClick={() => navigator(`/articles/${article_id}/update`)}>
-                                    <img src={pen} alt="Update" />
-                                </button>
-                                <button type="button" onClick={() => deleteArticle()}>
-                                    <img src={bin} alt="Delete" />
-                                </button>
+                                <Button 
+                                    width={35}
+                                    height={35}
+                                    className={"static invert"}
+                                    onClick={() => navigator(`/articles/${article_id}/update`)}
+                                    content={
+                                        <img src={pen} alt="Update" />
+                                    }
+                                />
+                                <Button 
+                                    width={35}
+                                    height={35}
+                                    className={"static invert"}
+                                    onClick={() => deleteArticle()}
+                                    content={
+                                        <img src={bin} alt="Delete" />
+                                    }
+                                />
                             </>
                             : ""
                         }

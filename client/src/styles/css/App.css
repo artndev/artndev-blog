@@ -17,7 +17,7 @@ body, html {
 }
 
 .btn {
-  border: 2px solid #343A40;
+  border: 1px solid #343A40;
   border-radius: 5px;
   font-size: 13px;
   transition: all 0.1s ease-in-out;
@@ -25,29 +25,55 @@ body, html {
      -moz-user-select: none;
           user-select: none;
 }
+.btn img {
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+}
 .btn.invert {
   color: #343A40;
   background-color: transparent;
+}
+.btn.invert img {
+  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
 }
 .btn.invert.pressed {
   color: #E9ECEF;
   background-color: #343A40;
 }
+.btn.invert.pressed img {
+  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+}
 .btn:not(.invert) {
   color: #E9ECEF;
   background-color: #343A40;
+}
+.btn:not(.invert) img {
+  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
 }
 .btn:not(.invert).pressed {
   color: #343A40;
   background-color: transparent;
 }
+.btn:not(.invert).pressed img {
+  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+}
+.btn.bold {
+  border: 2px solid #343A40;
+}
 .btn:hover:not(.pressed) {
   color: #343A40;
   background-color: transparent;
 }
+.btn:hover:not(.pressed) img {
+  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+}
 .btn:hover:not(.pressed).invert {
   color: #E9ECEF;
   background-color: #343A40;
+}
+.btn:hover:not(.pressed).invert img {
+  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
 }
 .btn:hover:not(.pressed):not(.static) {
   transform: translateY(-2.5px);
