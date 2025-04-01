@@ -11,22 +11,18 @@ function ArticleBack({ data }) {
         return time.toString()
     }
 
-    useEffect(() => {
-        console.log(data)
-    }, [])
-
     return (
         <>
             <div className="article__back">
                 <div className="article__back-info">
-                    <h3 className="article__back-title">
+                    <h3 className="article__title">
                         { data.Title }
                     </h3>
-                    <div className="article__back-subtitle">
+                    <div id="mst" className="article__subtitle">
                         { `${readingTime(data.Text)}m • ${(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")}` }
                     </div>
                 </div>
-                <div className="article__back-text">
+                <div className="article__text">
                     { data.Subtitle }
                 </div>
             </div>

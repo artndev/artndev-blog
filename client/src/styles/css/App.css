@@ -5,6 +5,7 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   background-color: #E9ECEF;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body, html {
@@ -18,18 +19,31 @@ button:focus {
 a {
   text-decoration: none;
   color: inherit;
-}
-a.lnk {
-  font-size: 13px;
-  color: #68727B;
+  transition: color 0.1s ease-in-out;
 }
 a.lnk:hover {
   text-decoration: underline;
+}
+a.lnkg:hover {
+  color: #68727B;
 }
 
 #err {
   font-size: 13px;
   color: #ff4444;
+}
+
+#mst {
+  font-size: 13px;
+  color: #68727B;
+}
+
+.article__title {
+  font-size: 20px;
+}
+
+.article__text {
+  font-size: 15px;
 }
 
 .form__title {
@@ -41,6 +55,9 @@ a.lnk:hover {
 }
 
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   font-size: 13px;
   transition: all 0.1s ease-in-out;

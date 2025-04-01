@@ -9,8 +9,3 @@
   flex-direction: column;
   gap: 5px;
 }
-
-.article__front-subtitle {
-  color: #68727B;
-  font-size: 14px;
-}

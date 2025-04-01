@@ -8,6 +8,7 @@
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
     background-color: $white;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body, html {
@@ -21,13 +22,17 @@ button:focus {
 a {
     text-decoration: none;
     color: inherit;
+    transition: color .1s ease-in-out;
 
     &.lnk {
-        font-size: $f-smx;
-        color: $grey;
-
         &:hover {
             text-decoration: underline;
+        }
+    }
+
+    &.lnkg {
+        &:hover {
+            color: $grey;
         }
     }
 }
@@ -35,6 +40,19 @@ a {
 #err {
     font-size: $f-smx;
     color: $red;
+}
+
+#mst {
+    font-size: $f-smx;
+    color: $grey;
+}
+
+.article__title {
+    font-size: $s-mdx;
+}
+
+.article__text {
+    font-size: $s-md;
 }
 
 .form__title {
@@ -46,6 +64,9 @@ a {
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
     font-size: $f-smx;
     transition: all .1s ease-in-out;

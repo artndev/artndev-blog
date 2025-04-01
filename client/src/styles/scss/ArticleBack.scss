@@ -1,15 +1,18 @@
 @import "./vars.scss";
 
+
 .article__back {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    gap: $s-smx;
     width: 100%;
     height: 100%;
     border: 1px solid $grey;
     border-radius: 5px;
-    padding: 15px;
+    padding: $s-mdx;
     transition: transform .15s ease-in-out;
+    color: $black;
     
     &:hover {
         border: 1px solid $black;
@@ -20,10 +23,5 @@
 .article__back-info {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-}
-
-.article__back-subtitle {
-    color: $grey;
-    font-size: 14px;
+    gap: $s-sm;
 }

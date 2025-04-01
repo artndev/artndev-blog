@@ -3,7 +3,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 50px;
+  padding: 50px 20px 20px 20px;
+  color: #343A40;
 }
 
 .article__subcontainer {
@@ -11,7 +12,6 @@
   flex-direction: column;
   gap: 20px;
   width: min(1000px, 100%);
-  padding: 0 20px 20px 20px;
 }
 
 .article__btns-container {

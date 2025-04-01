@@ -1,18 +1,21 @@
+@import "./vars.scss";
+
+
 .articles__container {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 50px 20px 0 20px;
-    //background-color: blue;
+    padding: $s-hg $s-mdx $s-mdx $s-mdx;
+    color: $black;
 }
 
 .articles__subcontainer {
     display: grid;
     grid-template-columns: repeat(2, minmax(250px, 500px));
     grid-template-rows: repeat(3, max-content);
-    gap: 20px 15px;
+    gap: $s-mdx $s-md;
     width: min(1000px, 100%);
-    //background-color: red;
 }
 
 @media screen and (max-width: 600px) {

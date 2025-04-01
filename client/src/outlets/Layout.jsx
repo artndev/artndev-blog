@@ -12,20 +12,14 @@ function Layout() {
                 Blog.
               </h3>
               <nav className="nav__container">
-                <Link className="nav__item-link" to={"/articles/create"}>
-                  <div className="nav__item">
-                    CREATE
-                  </div>
+                <Link className="nav__item lnkg" to={"/articles/create"}>
+                  CREATE
                 </Link>
-                <Link className="nav__item-link" to={"/articles"}>
-                  <div className="nav__item">
-                    ARTICLES
-                  </div>
+                <Link className="nav__item lnkg" to={"/articles"}>
+                  ARTICLES
                 </Link>
-                <Link className="nav__item-link" to={"/profile"}>
-                  <div className="nav__item">
-                    PROFILE
-                  </div>
+                <Link className="nav__item lnkg" to={"/profile"}>
+                  PROFILE
                 </Link>
               </nav>
             </div>

@@ -1,8 +1,10 @@
 .articles__container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 50px 20px 0 20px;
+  padding: 50px 20px 20px 20px;
+  color: #343A40;
 }
 
 .articles__subcontainer {

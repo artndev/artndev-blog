@@ -78,7 +78,7 @@ function AuthForm({
                         type={"submit"}
                         content={"Submit"}
                     />
-                    <Link className="lnk" to={btnLink}>
+                    <Link id="mst" className="lnk" to={btnLink}>
                         {btnText}
                     </Link>
                 </div>
