@@ -24,15 +24,11 @@ a {
     color: inherit;
     transition: color .1s ease-in-out;
 
-    &.lnk {
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+    &:hover {
+        color: $grey; // если что - переопределение
 
-    &.lnkg {
-        &:hover {
-            color: $grey;
+        &.lnk {
+            text-decoration: underline;
         }
     }
 }

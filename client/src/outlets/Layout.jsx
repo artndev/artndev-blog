@@ -12,13 +12,13 @@ function Layout() {
                 Blog.
               </h3>
               <nav className="nav__container">
-                <Link className="nav__item lnkg" to={"/articles/create"}>
+                <Link className="nav__item" to={"/articles/create"}>
                   CREATE
                 </Link>
-                <Link className="nav__item lnkg" to={"/articles"}>
+                <Link className="nav__item" to={"/articles"}>
                   ARTICLES
                 </Link>
-                <Link className="nav__item lnkg" to={"/profile"}>
+                <Link className="nav__item" to={"/profile"}>
                   PROFILE
                 </Link>
               </nav>
