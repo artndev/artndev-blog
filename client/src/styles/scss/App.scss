@@ -20,6 +20,11 @@ body, html {
 }
 
 .btn {
+    border-radius: 5px;
+    font-size: $f-smx;
+    transition: all .1s ease-in-out;
+    user-select: none;
+
     img {
         width: 15px;
         height: 15px;
@@ -68,11 +73,6 @@ body, html {
         border: 2px solid $black;
     }
 
-    border-radius: 5px;
-    font-size: $f-smx;
-    transition: all .1s ease-in-out;
-    user-select: none;
-
     &:hover:not(.pressed) {
         color: $black;
         background-color: transparent;
@@ -101,6 +101,11 @@ body, html {
     border-radius: 5px;
     font-size: $f-smx;
     padding: $s-md;
+
+    &.hidden {
+        position: absolute;
+        visibility: hidden;
+    }
 
     &:focus {
         border: 2px solid $black;

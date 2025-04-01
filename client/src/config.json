@@ -3,8 +3,8 @@
     "TEXT_MAXSYMBOLS": 200,
     "WPS": 255,
     "TYPEWRITER_STRINGS": [
-        "Hello, I'm Artyom Luzhkov.",
-        "Hey, I'm mad about coding!",
-        "Hi, I'm Backend Web Developer."
+        "Hi, I am Artyom Luzhkov.",
+        "Hey, I am mad about coding!",
+        "Hello, I am Backend Web Developer."
     ]
 }

@@ -35,28 +35,6 @@
   width: inherit;
 }
 
-.profile__form-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
-  height: 35px;
-  border: 1px solid #343A40;
-  border-radius: 5px;
-  transition: all 0.1s ease-in-out;
-}
-.profile__form-btn img {
-  width: 15px;
-  height: 15px;
-  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
-}
-.profile__form-btn:hover {
-  background-color: #343A40;
-}
-.profile__form-btn:hover img {
-  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
-}
-
 @media screen and (max-width: 600px) {
   .profile__articles-container {
     grid-template-columns: 100%;

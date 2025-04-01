@@ -32,10 +32,10 @@ function ArticleForm({
                             Title:
                         </label>
                         <Input 
-                            name={"title"}
-                            defaultValue={defaultTitle}
                             width={"min(500px, 100%)"}
                             height={45}
+                            name={"title"}
+                            defaultValue={defaultTitle}
                         />
                     </div>
                     <div className="article__form-group">
@@ -43,10 +43,10 @@ function ArticleForm({
                             Subtitle:
                         </label>
                         <Input 
-                            name={"subtitle"}
-                            defaultValue={defaultSubtitle}
                             width={"min(500px, 100%)"}
                             height={45}
+                            name={"subtitle"}
+                            defaultValue={defaultSubtitle}
                         />
                     </div>
                     <div className="article__form-group">
@@ -55,21 +55,18 @@ function ArticleForm({
                         </div>
                         <MarkdownEditor value={text} onChange={setText} />
                         <Input 
+                            className={"hidden"}
                             name={"text"}
                             value={text}
                             defaultValue={defaultText}
-                            style={{
-                                position: "absolute",
-                                visibility: "hidden" 
-                            }}
                         />
                     </div>
                 </div>
                 <Button 
-                    content={"Submit"}
-                    type={"submit"}
                     width={"min(200px, 50%)"}
                     height={45}
+                    type={"submit"}
+                    content={"Submit"}
                 />
             </form>
         </div>

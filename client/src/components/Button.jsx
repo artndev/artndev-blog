@@ -13,7 +13,7 @@ function Button({
 }) {
   return (
     <button 
-        className={`btn${(className && ` ${className}`) || ""}`}
+        className={`btn${className ? ` ${className}` : ""}`}
         ref={ ref }
         type={ type || "button" }
         onClick={ onClick }

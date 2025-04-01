@@ -38,7 +38,7 @@ function Article() {
     const deleteArticle = () => {
         axios
             .delete(`/articles/${article_id}/delete`)
-            .then(() => navigator("/"))
+            .then(() => navigator("/articles"))
             .catch((err) => {
                 console.log(err)
 
@@ -151,11 +151,6 @@ function Article() {
                 //alert(err.response.data.message)
             })
     }
-
-    // utils
-    const formatNumber = (number) => {
-        return Intl.NumberFormat('en', { notation: 'compact' }).format(number)
-    }
   
     // useEffect(() => {
     //   console.log(data)
@@ -198,7 +193,7 @@ function Article() {
                                 }
                             />
                             <div className="likes">
-                                { formatNumber(data.Likes) }
+                                { Intl.NumberFormat('en', { notation: 'compact' }).format(data.Likes) }
                             </div>
                         </div>
                         <Button 

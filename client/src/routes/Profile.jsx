@@ -4,9 +4,9 @@ import ArticleBack from '../components/ArticleBack.jsx'
 import axios from "../axios.js"
 import AuthContext from '../contexts/Auth.jsx'
 import { Link, useNavigate } from 'react-router-dom'
-import config from "../config.json"
 import AdminContext from "../contexts/Admin.jsx";
 import exit from "../imgs/exit.svg"
+import Button from "../components/Button.jsx";
 
 
 function Profile() {
@@ -57,7 +57,7 @@ function Profile() {
                 <div className="profile__subcontainer">
                     <div className="profile__group">
                         <div className="profile__info">
-                            You are logged as <strong>@{ auth?.username }</strong> ({
+                            You are logged as <strong>@{ auth.username }</strong> ({
                                 admin 
                                 ? <span id="admin">
                                     admin
@@ -72,9 +72,15 @@ function Profile() {
                             method="post" 
                             onSubmit={logout}
                         >
-                            <button type="submit" className="profile__form-btn">
-                                <img src={exit} alt="Logout" />
-                            </button>
+                            <Button 
+                                width={35}
+                                height={35}
+                                className={"static invert"}
+                                type={"submit"}
+                                content={
+                                    <img src={exit} alt="Logout" />
+                                }
+                            />
                         </form>
                     </div>
                     <div className="profile__articles-container">
