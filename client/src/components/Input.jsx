@@ -15,6 +15,7 @@ function Input({
 }) {
   return (
     <input 
+        className="ipt"
         ref={ ref }
         type={ type || "text" }
         id={ name }
@@ -22,7 +23,6 @@ function Input({
         value={ value }
         defaultValue={ defaultValue }
         placeholder={placeholder || `Enter ${name}...`}
-        className="inpt"
         style={{
             width: width,
             height: height,

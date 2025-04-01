@@ -3,9 +3,9 @@
 .article__container {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     padding-top: 50px;
-    //background-color: blue;
 }
 
 .article__subcontainer {
@@ -14,10 +14,9 @@
     gap: 20px;
     width: min(1000px, 100%);
     padding: 0 20px 20px 20px;
-    //background-color: red;
 }
 
-.btns__container {
+.article__btns-container {
     display: flex;
     gap: 15px;
 
@@ -55,7 +54,7 @@
     }
 }
 
-.btn__groupss {
+.article__btns-container__group {
     display: flex;
     align-items: center;
     gap: 10px;

@@ -3,17 +3,20 @@ import React from 'react'
 
 function Button({
     content,  
+    className,
     ref,
     type, 
+    onClick,
     width, 
     height,
     style
 }) {
   return (
     <button 
-        ref={ref}
+        className={`btn${(className && ` ${className}`) || ""}`}
+        ref={ ref }
         type={ type || "button" }
-        className="btn"
+        onClick={ onClick }
         style={{
             width: width,
             height: height,

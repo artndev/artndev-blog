@@ -9,6 +9,7 @@ import heart from "../imgs/heart.svg"
 import bookmark from "../imgs/bookmark.svg"
 import pen from "../imgs/pen.svg"
 import bin from "../imgs/bin.svg"
+import Button from "../components/Button.jsx";
 
 
 function Article() {
@@ -171,8 +172,11 @@ function Article() {
                         subtitle={(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                         text={data.Text}
                     />
-                    <div className="btns__container">
-                        <div className="btn__groupss">
+                    <div className="article__btns-container">
+                        <div className="article__btns-container__group">
+                            <Button 
+                                
+                            />
                             <button 
                                 className={isLiked ? "pressed" : ""}
                                 type="button" 

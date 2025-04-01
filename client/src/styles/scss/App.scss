@@ -20,23 +20,52 @@ body, html {
 }
 
 .btn {
-    color: $white;
-    background-color: $black;
+    &.invert {
+        color: $black;
+        background-color: transparent;
+
+        &.pressed {
+            color: $white;
+            background-color: $black;
+        }
+    }
+
+    &:not(.invert) {
+        color: $white;
+        background-color: $black;
+
+        &.pressed {
+            color: $black;
+            background-color: transparent;
+        }
+    }
+
     border: 2px solid $black;
     border-radius: 5px;
+    font-size: $f-smx;
     transition: all .1s ease-in-out;
+    user-select: none;
 
-    &:hover {
+    &:hover:not(.pressed) {
         color: $black;
-        background: none;
-        transform: translateY(-2.5px);
+        background-color: transparent;
+
+        &.invert {
+            color: $white;
+            background-color: $black;
+        }
+
+        &:not(.static) {
+            transform: translateY(-2.5px);
+        }
     }
 }
 
-.inpt {
-    padding: 10px;
+.ipt {
     border: 1px solid $grey;
-    border-radius: 5px;
+    border-radius: $s-sm;
+    font-size: $f-smx;
+    padding: $s-md;
 
     &:focus {
         border: 2px solid $black;

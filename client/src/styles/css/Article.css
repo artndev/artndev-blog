@@ -1,6 +1,7 @@
 .article__container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   padding-top: 50px;
 }
@@ -13,11 +14,11 @@
   padding: 0 20px 20px 20px;
 }
 
-.btns__container {
+.article__btns-container {
   display: flex;
   gap: 15px;
 }
-.btns__container button {
+.article__btns-container button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,25 +28,25 @@
   border-radius: 5px;
   transition: all 0.1s ease-in-out;
 }
-.btns__container button img {
+.article__btns-container button img {
   width: 15px;
   height: 15px;
   filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
 }
-.btns__container button:hover:not(.pressed) {
+.article__btns-container button:hover:not(.pressed) {
   background-color: #343A40;
 }
-.btns__container button:hover:not(.pressed) img {
+.article__btns-container button:hover:not(.pressed) img {
   filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
 }
-.btns__container button.pressed {
+.article__btns-container button.pressed {
   background-color: #343A40;
 }
-.btns__container button.pressed img {
+.article__btns-container button.pressed img {
   filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
 }
 
-.btn__groupss {
+.article__btns-container__group {
   display: flex;
   align-items: center;
   gap: 10px;
