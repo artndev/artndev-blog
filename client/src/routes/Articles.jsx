@@ -29,22 +29,26 @@ function Articles() {
 
   return (
     <>
-        <div className="articles__container">
-            <div className="articles__subcontainer">
-                {
-                    data
-                    ? data.map((val, i) => {
-                        return <Link 
-                            key={i} 
-                            to={`/articles/${val.Id}`}
-                        >
-                            <ArticleBack data={val} />
-                        </Link>
-                    })
-                    : "Loading..."
-                }
-            </div>
-        </div>
+        {
+            data
+            ? <div className="articles__container f-md">
+                <div className="articles__subcontainer">
+                    {
+                        data
+                        ? data.map((val, i) => {
+                            return <Link 
+                                key={i} 
+                                to={`/articles/${val.Id}`}
+                            >
+                                <ArticleBack data={val} />
+                            </Link>
+                        })
+                        : "Loading..."
+                    }
+                </div>
+            </div> 
+            : "Loading..."
+        }
     </>
   )
 }

@@ -14,12 +14,12 @@
   width: min(1000px, 100%);
 }
 
-.article__btns-container {
+.article__btns {
   display: flex;
   gap: 15px;
 }
 
-.article__btns-container__group {
+.article__btns-group {
   display: flex;
   align-items: center;
   gap: 10px;

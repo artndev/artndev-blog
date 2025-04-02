@@ -45,7 +45,6 @@ function LoginForm() {
   }
 
   return (
-    <>
             <AuthForm 
                 formTitle="Login" 
                 err={err}
@@ -53,7 +52,6 @@ function LoginForm() {
                 btnLink={"/register"}
                 btnText={"I want to register"}
             />
-    </>
   )
 }
 

@@ -12,8 +12,7 @@ function ArticleBack({ data }) {
     }
 
     return (
-        <>
-            <div className="article__back f-md" id="black">
+            <div className="article__back f-md">
                 <div className="article__back-group">
                     <h3 className="article__title f-bg">
                         { data.Title }
@@ -26,7 +25,6 @@ function ArticleBack({ data }) {
                     { data.Subtitle }
                 </div>
             </div>
-        </>
     )
 }
 

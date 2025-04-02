@@ -160,15 +160,15 @@ function Article() {
       <>
         {
             data
-            ? <div className="article__container">
+            ? <div className="article__container f-md">
                 <div className="article__subcontainer">
                     <ArticleFront
                         title={data.Title}
                         subtitle={(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")} 
                         text={data.Text}
                     />
-                    <div className="article__btns-container">
-                        <div className="article__btns-container__group">
+                    <div className="article__btns">
+                        <div className="article__btns-group">
                             <Button 
                                 width={35}
                                 height={35}
@@ -192,7 +192,7 @@ function Article() {
                                     <img src={heart} alt="Like" />
                                 }
                             />
-                            <div className="likes">
+                            <div>
                                 { Intl.NumberFormat('en', { notation: 'compact' }).format(data.Likes) }
                             </div>
                         </div>

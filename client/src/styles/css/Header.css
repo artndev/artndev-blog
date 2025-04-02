@@ -10,7 +10,7 @@
           user-select: none;
 }
 
-.header__subcontainer {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;

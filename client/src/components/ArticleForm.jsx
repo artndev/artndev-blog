@@ -16,11 +16,11 @@ function ArticleForm({
   const [text, setText] = useState(defaultText)
 
   return (
-    <div className="article__form-container f-md" id="black">
+    <div className="article__form-container f-md">
         <div className="article__form-subcontainer">
-            <h2 className="f-hg">
+            <h1 className="f-hg">
                 {formTitle}
-            </h2>
+            </h1>
             <form 
                 className="article__form" 
                 method="post" 

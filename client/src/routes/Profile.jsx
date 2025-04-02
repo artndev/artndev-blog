@@ -52,8 +52,7 @@ function Profile() {
     // }, [data])
 
     return (
-        <>
-            <div className="profile__container f-md" id="black">
+            <div className="profile__container f-md">
                 <div className="profile">
                     <div className="profile__group">
                         <div className="profile__info">
@@ -99,7 +98,6 @@ function Profile() {
                     </div>
                 </div>
             </div>
-        </>
     )
 }
 

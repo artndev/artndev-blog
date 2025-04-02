@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "../styles/css/Home.css"
 import React from 'react'
 import Button from "../components/Button.jsx"
@@ -7,12 +7,13 @@ import config from "../config.json"
 
 
 function Home() {
+  const navigator = useNavigate()
+
   return (
-    <>
-        <div className="hero__container">
+        <div className="hero__container f-md">
           <div className="hero">
             <div className="hero__group">
-              <h1 className="hero__title">
+              <h1>
                 <Typewriter
                   options={{
                     strings: config.TYPEWRITER_STRINGS,
@@ -21,25 +22,23 @@ function Home() {
                   }}
                 />
               </h1>
-              <div className="hero__subgroup">
-                <div className="hero__subtitle">
+              <div className="hero__info">
+                <div>
                   I just write my thoughts sipping my coffee here...
                 </div>
-                <div className="hero__desc">
+                <div>
                   Grab some coffee too, mate!
                 </div>
               </div>
             </div>
-            <Link to={"/articles"} className="a-reset">
-              <Button 
-                content={"Enjoy yourself"}
-                width={200}
-                height={45}
-              />
-            </Link>
+            <Button 
+              width={"min(200px, 100%)"}
+              height={45}
+              onClick={() => navigator("/articles")}
+              content={"Enjoy yourself"}
+            />
           </div>
         </div>
-    </>
   )
 }
 

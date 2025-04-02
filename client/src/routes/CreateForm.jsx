@@ -32,13 +32,11 @@ function CreateForm() {
   }
 
   return (
-    <>
-          <ArticleForm 
-            formTitle={"Create"}
-            err={err}
-            onSubmit={createArticle}
-          />
-    </>
+    <ArticleForm 
+      formTitle={"Create"}
+      err={err}
+      onSubmit={createArticle}
+    />
   )
 }
 

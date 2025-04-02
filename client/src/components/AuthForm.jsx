@@ -23,11 +23,11 @@ function AuthForm({
   }, [inputType])
 
   return (
-    <div className="auth__form-container f-md" id="black">
+    <div className="auth__form-container f-md">
         <div className="auth__form-subcontainer">
-            <h2 className="f-hg">
+            <h1 className="f-hg">
                 {formTitle}
-            </h2>
+            </h1>
             <form 
                 className="auth__form" 
                 method="post" 

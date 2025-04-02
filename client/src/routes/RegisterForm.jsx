@@ -45,7 +45,6 @@ function RegisterForm() {
     }
 
     return (
-        <>
             <AuthForm 
                 formTitle="Register" 
                 err={err}
@@ -53,7 +52,6 @@ function RegisterForm() {
                 btnLink={"/login"}
                 btnText={"I want to login"}
             />
-        </>
     );
 }
 

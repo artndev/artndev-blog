@@ -13,8 +13,7 @@ function ArticleFront({ title, subtitle, text,  }) {
     }
 
     return (
-        <>
-            <div className="article__front f-md" id="black">
+            <div className="article__front f-md">
                 <div className="article__front-group">
                     <h3 className="article__title f-bg">
                         { title }
@@ -25,7 +24,6 @@ function ArticleFront({ title, subtitle, text,  }) {
                 </div>
                 <MarkdownPreview source={text} />
             </div>
-        </>
     )
 }
 

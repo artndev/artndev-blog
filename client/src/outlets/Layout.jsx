@@ -6,12 +6,12 @@ import { Outlet, Link } from 'react-router-dom'
 function Layout() {
   return (
     <>
-        <header className="header__container">
-            <div className="header__subcontainer">
-              <h3 className="header__logo">
+        <header className="header__container f-md">
+            <div className="header">
+              <h1 className="f-bg">
                 Blog.
-              </h3>
-              <nav className="nav__container f-md">
+              </h1>
+              <nav className="nav__container">
                 <Link className="nav__item" to={"/articles/create"}>
                   CREATE
                 </Link>
