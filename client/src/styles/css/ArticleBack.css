@@ -16,7 +16,7 @@
   transform: translateY(-2.5px);
 }
 
-.article__back-info {
+.article__back-group {
   display: flex;
   flex-direction: column;
   gap: 5px;

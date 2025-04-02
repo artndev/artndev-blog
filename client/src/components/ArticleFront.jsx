@@ -14,16 +14,16 @@ function ArticleFront({ title, subtitle, text,  }) {
 
     return (
         <>
-            <div className="article__front">
-                <div className="article__front-info">
-                    <h3 className="article__title">
+            <div className="article__front f-md" id="black">
+                <div className="article__front-group">
+                    <h3 className="article__title f-bg">
                         { title }
                     </h3>
-                    <div id="mst">
+                    <div className="f-smx" id="grey">
                         { `${readingTime(text)}m • ${subtitle}` }
                     </div>
                 </div>
-                <MarkdownPreview source={text} className={"article__text"} />
+                <MarkdownPreview source={text} />
             </div>
         </>
     )

@@ -16,7 +16,7 @@ function ArticleForm({
   const [text, setText] = useState(defaultText)
 
   return (
-    <div className="article__form-container" id="black">
+    <div className="article__form-container f-md" id="black">
         <div className="article__form-subcontainer">
             <h2 className="f-hg">
                 {formTitle}
@@ -33,7 +33,7 @@ function ArticleForm({
                         </span>
                     }
                     <div className="article__form-group">
-                        <label className="f-md" htmlFor="title">
+                        <label htmlFor="title">
                             Title<span id="red">*</span>:
                         </label>
                         <Input 
@@ -44,7 +44,7 @@ function ArticleForm({
                         />
                     </div>
                     <div className="article__form-group">
-                        <label className="f-md" htmlFor="subtitle">
+                        <label htmlFor="subtitle">
                             Subtitle<span id="red">*</span>:
                         </label>
                         <Input 
@@ -55,7 +55,7 @@ function ArticleForm({
                         />
                     </div>
                     <div className="article__form-group">
-                        <div className="f-md">
+                        <div>
                             Text<span id="red">*</span>:
                         </div>
                         <MarkdownEditor value={text} onChange={setText} />

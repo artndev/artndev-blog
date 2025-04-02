@@ -36,7 +36,6 @@ function Articles() {
                     ? data.map((val, i) => {
                         return <Link 
                             key={i} 
-                            className="a-reset"
                             to={`/articles/${val.Id}`}
                         >
                             <ArticleBack data={val} />

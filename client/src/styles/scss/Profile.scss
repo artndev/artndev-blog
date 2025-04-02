@@ -9,14 +9,14 @@
     color: $black;
 }
 
-.profile__subcontainer {
+.profile {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: min(1000px, 100%);
 }
 
-.profile__articles-container {
+.profile__articles {
     display: grid;
     grid-template-columns: repeat(2, minmax(250px, 500px));
     grid-template-rows: repeat(3, max-content);
@@ -32,7 +32,7 @@
 }
 
 @media screen and (max-width: 600px) {
-    .profile__articles-container {
+    .profile__articles {
         grid-template-columns: 100%;
     }
 }

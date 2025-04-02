@@ -23,8 +23,7 @@ function AuthForm({
   }, [inputType])
 
   return (
-    <>
-    <div className="auth__form-container" id="black">
+    <div className="auth__form-container f-md" id="black">
         <div className="auth__form-subcontainer">
             <h2 className="f-hg">
                 {formTitle}
@@ -41,7 +40,7 @@ function AuthForm({
                         </span>
                     }
                     <div className="auth__form-group">
-                        <label className="f-md" htmlFor="username">
+                        <label htmlFor="username">
                             Username<span id="red">*</span>:
                         </label>
                         <Input 
@@ -51,7 +50,7 @@ function AuthForm({
                         />
                     </div>
                     <div className="auth__form-group">
-                        <label className="f-md" htmlFor="password">
+                        <label htmlFor="password">
                             Password<span id="red">*</span>:
                         </label>
                         <div className="auth__form-ipt__group">
@@ -85,7 +84,6 @@ function AuthForm({
             </form>
         </div>
     </div>
-    </>
   );
 }
 

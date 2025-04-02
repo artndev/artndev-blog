@@ -53,16 +53,16 @@ function Profile() {
 
     return (
         <>
-            <div className="profile__container">
-                <div className="profile__subcontainer">
+            <div className="profile__container f-md" id="black">
+                <div className="profile">
                     <div className="profile__group">
                         <div className="profile__info">
                             You are logged as <strong>@{ auth.username }</strong> ({
                                 admin 
-                                ? <span id="admin">
+                                ? <span id="red">
                                     admin
                                 </span> 
-                                : <span id="user">
+                                : <span id="blue">
                                     user
                                 </span>
                             })
@@ -83,14 +83,13 @@ function Profile() {
                             />
                         </form>
                     </div>
-                    <div className="profile__articles-container">
+                    <div className="profile__articles">
                         {
                             data && data.length > 0
                             ? data.map((val, i) => {
                                 return <Link
                                     key={i}
                                     to={`/articles/${val.Id}`}
-                                    className="a-reset"
                                 >
                                     <ArticleBack data={val} />
                                 </Link>

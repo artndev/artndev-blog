@@ -5,7 +5,7 @@
   color: #343A40;
 }
 
-.article__front-info {
+.article__front-group {
   display: flex;
   flex-direction: column;
   gap: 5px;
