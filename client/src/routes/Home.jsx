@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
-import "../styles/css/Home.css"
+import { useNavigate } from "react-router-dom"
 import React from 'react'
 import Button from "../components/Button.jsx"
 import Typewriter from 'typewriter-effect';

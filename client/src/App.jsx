@@ -1,8 +1,9 @@
 import "./styles/css/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import "./styles/css/Hero.css"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Layout from "./outlets/Layout.jsx";
 import Articles from "./routes/Articles.jsx";
-import NotFound from "./routes/NotFound.jsx";
+import Error from "./routes/Error.jsx";
 import Article from "./routes/Article.jsx";
 import Home from "./routes/Home.jsx";
 import IsNotLogged from "./outlets/IsNotLogged.jsx";
@@ -45,7 +46,8 @@ function App() {
               </Route>
             </Route>
 
-            <Route path="*" element={<NotFound />} />
+            <Route path="/errors/:code" element={<Error />} />
+            <Route path="*" element={<Navigate to={"/errors/404"} />} />
           </Routes>
         </BrowserRouter>
     </>

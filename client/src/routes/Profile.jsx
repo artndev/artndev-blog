@@ -56,7 +56,7 @@ function Profile() {
                 <div className="profile">
                     <div className="profile__group">
                         <div className="profile__info">
-                            You are logged as <strong>@{ auth.username }</strong> ({
+                            You are logged as <span className="bold">@{ auth.username }</span> ({
                                 admin 
                                 ? <span id="red">
                                     admin

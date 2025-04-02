@@ -11,7 +11,7 @@ function IsNotLogged() {
       {
         !auth
         ? <Outlet />
-        : <Navigate to="/" />
+        : <Navigate to="/articles" />
       }
     </>
   )
