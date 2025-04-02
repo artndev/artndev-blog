@@ -16,9 +16,9 @@ function ArticleForm({
   const [text, setText] = useState(defaultText)
 
   return (
-    <div className="article__form-container">
+    <div className="article__form-container" id="black">
         <div className="article__form-subcontainer">
-            <h2 className="form__title">
+            <h2 className="f-hg">
                 {formTitle}
             </h2>
             <form 
@@ -28,13 +28,13 @@ function ArticleForm({
             >
                 <div className="article__form-groups">
                     {
-                        err && <span id="err">
+                        err && <span id="red">
                             Unknown error has occurred
                         </span>
                     }
                     <div className="article__form-group">
-                        <label className="form__label" htmlFor="title">
-                            Title<span id="err">*</span>:
+                        <label className="f-md" htmlFor="title">
+                            Title<span id="red">*</span>:
                         </label>
                         <Input 
                             width={"min(500px, 100%)"}
@@ -44,8 +44,8 @@ function ArticleForm({
                         />
                     </div>
                     <div className="article__form-group">
-                        <label className="form__label" htmlFor="subtitle">
-                            Subtitle<span id="err">*</span>:
+                        <label className="f-md" htmlFor="subtitle">
+                            Subtitle<span id="red">*</span>:
                         </label>
                         <Input 
                             width={"min(500px, 100%)"}
@@ -55,8 +55,8 @@ function ArticleForm({
                         />
                     </div>
                     <div className="article__form-group">
-                        <div className="article__form-group__title form__label">
-                            Text<span id="err">*</span>:
+                        <div className="f-md">
+                            Text<span id="red">*</span>:
                         </div>
                         <MarkdownEditor value={text} onChange={setText} />
                         <Input 

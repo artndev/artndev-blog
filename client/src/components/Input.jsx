@@ -16,7 +16,7 @@ function Input({
 }) {
   return (
     <input 
-        className={`ipt${className ? ` ${className}` : ""}`}
+        className={`ipt f-smx ${className ? ` ${className}` : ""}`}
         ref={ ref }
         type={ type || "text" }
         id={ name }

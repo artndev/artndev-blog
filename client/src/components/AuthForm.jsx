@@ -24,9 +24,9 @@ function AuthForm({
 
   return (
     <>
-    <div className="auth__form-container">
+    <div className="auth__form-container" id="black">
         <div className="auth__form-subcontainer">
-            <h2 className="form__title">
+            <h2 className="f-hg">
                 {formTitle}
             </h2>
             <form 
@@ -36,13 +36,13 @@ function AuthForm({
             >
                 <div className="auth__form-groups">
                     {
-                        err && <span id="err">
+                        err && <span id="red">
                             Username or password is incorrect
                         </span>
                     }
                     <div className="auth__form-group">
-                        <label className="form__label" htmlFor="username">
-                            Username<span id="err">*</span>:
+                        <label className="f-md" htmlFor="username">
+                            Username<span id="red">*</span>:
                         </label>
                         <Input 
                             width={"inherit"}
@@ -51,8 +51,8 @@ function AuthForm({
                         />
                     </div>
                     <div className="auth__form-group">
-                        <label className="form__label" htmlFor="password">
-                            Password<span id="err">*</span>:
+                        <label className="f-md" htmlFor="password">
+                            Password<span id="red">*</span>:
                         </label>
                         <div className="auth__form-ipt__group">
                             <Input 
@@ -78,7 +78,7 @@ function AuthForm({
                         type={"submit"}
                         content={"Submit"}
                     />
-                    <Link id="mst" className="lnk" to={btnLink}>
+                    <Link className="lnk f-smx" id="grey" to={btnLink}>
                         {btnText}
                     </Link>
                 </div>

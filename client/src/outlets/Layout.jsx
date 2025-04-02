@@ -11,7 +11,7 @@ function Layout() {
               <h3 className="header__logo">
                 Blog.
               </h3>
-              <nav className="nav__container">
+              <nav className="nav__container f-md">
                 <Link className="nav__item" to={"/articles/create"}>
                   CREATE
                 </Link>

@@ -28,30 +28,60 @@ a:hover.lnk {
   text-decoration: underline;
 }
 
-#err {
-  font-size: 13px;
-  color: #ff4444;
+#black {
+  color: #343A40;
 }
 
-#mst {
-  font-size: 13px;
+#dark {
+  color: #495057;
+}
+
+#grey {
   color: #68727B;
 }
 
-.article__title {
-  font-size: 20px;
+#white {
+  color: #E9ECEF;
 }
 
-.article__text {
+#red {
+  color: #ff4444;
+}
+
+#blue {
+  color: #4099ff;
+}
+
+.f-sm {
+  font-size: 11px;
+}
+
+.f-smx {
+  font-size: 13px;
+}
+
+.f-md {
   font-size: 15px;
 }
 
-.form__title {
+.f-mdx {
+  font-size: 17px;
+}
+
+.f-bg {
+  font-size: 19px;
+}
+
+.f-bgx {
+  font-size: 21px;
+}
+
+.f-hg {
+  font-size: 23px;
+}
+
+.f-hgx {
   font-size: 25px;
-}
-
-.form__label {
-  font-size: 15px;
 }
 
 .btn {
@@ -59,7 +89,6 @@ a:hover.lnk {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  font-size: 13px;
   transition: all 0.1s ease-in-out;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -123,7 +152,6 @@ a:hover.lnk {
 .ipt {
   border: 1px solid #68727B;
   border-radius: 5px;
-  font-size: 13px;
   padding: 15px;
 }
 .ipt.hidden {

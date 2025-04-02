@@ -18,7 +18,7 @@ function ArticleBack({ data }) {
                     <h3 className="article__title">
                         { data.Title }
                     </h3>
-                    <div id="mst" className="article__subtitle">
+                    <div id="mst">
                         { `${readingTime(data.Text)}m • ${(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")}` }
                     </div>
                 </div>

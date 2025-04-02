@@ -33,38 +33,69 @@ a {
     }
 }
 
-#err {
-    font-size: $f-smx;
-    color: $red;
+#black {
+    color: $black;
 }
 
-#mst {
-    font-size: $f-smx;
+#dark {
+    color: $dark;
+}
+
+#grey {
     color: $grey;
 }
 
-.article__title {
-    font-size: $s-mdx;
+#white {
+    color: $white;
 }
 
-.article__text {
-    font-size: $s-md;
+#red {
+    color: $red;
 }
 
-.form__title {
-    font-size: $s-bg;
+#blue {
+    color: $blue;
 }
 
-.form__label {
-    font-size: $s-md;
+
+.f-sm {
+    font-size: $f-sm;
 }
+
+.f-smx {
+    font-size: $f-smx;
+}
+
+.f-md {
+    font-size: $f-md;
+}
+
+.f-mdx {
+    font-size: $f-mdx;
+}
+
+.f-bg {
+    font-size: $f-bg;
+}
+
+.f-bgx {
+    font-size: $f-bgx;
+}
+
+.f-hg {
+    font-size: $f-hg;
+}
+
+.f-hgx {
+    font-size: $f-hgx;
+}
+
 
 .btn {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    font-size: $f-smx;
     transition: all .1s ease-in-out;
     user-select: none;
 
@@ -142,7 +173,6 @@ a {
 .ipt {
     border: 1px solid $grey;
     border-radius: 5px;
-    font-size: $f-smx;
     padding: $s-md;
 
     &.hidden {
