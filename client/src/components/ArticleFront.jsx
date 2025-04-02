@@ -15,9 +15,9 @@ function ArticleFront({ title, subtitle, text,  }) {
     return (
             <div className="article__front f-md">
                 <div className="article__front-group">
-                    <h3 className="article__title f-bg">
+                    <h1 className="article__title f-bg">
                         { title }
-                    </h3>
+                    </h1>
                     <div className="f-smx" id="grey">
                         { `${readingTime(text)}m • ${subtitle}` }
                     </div>

@@ -14,9 +14,9 @@ function ArticleBack({ data }) {
     return (
             <div className="article__back f-md">
                 <div className="article__back-group">
-                    <h3 className="article__title f-bg">
+                    <h1 className="article__title f-bg">
                         { data.Title }
-                    </h3>
+                    </h1>
                     <div className="f-smx" id="grey">
                         { `${readingTime(data.Text)}m • ${(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")}` }
                     </div>
