@@ -3,7 +3,7 @@ import Button from "../components/Button.jsx"
 import { useNavigate, useParams } from "react-router-dom"
 
 
-function NotFound() {
+function Error() {
   const navigator = useNavigate()
   const { code } = useParams()
 
@@ -36,4 +36,4 @@ function NotFound() {
   )
 }
 
-export default NotFound
+export default Error
