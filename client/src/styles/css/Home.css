@@ -17,7 +17,7 @@
   gap: 10px;
 }
 
-.hero__subgroup {
+.hero__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,5 +31,4 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  height: 100%;
 }

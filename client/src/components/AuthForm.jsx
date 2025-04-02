@@ -72,7 +72,7 @@ function AuthForm({
                 </div>
                 <div className="auth__form-btn__group">
                     <Button 
-                        width={"min(200px, 50%)"}
+                        width={"min(200px, 100%)"}
                         height={45}
                         type={"submit"}
                         content={"Submit"}

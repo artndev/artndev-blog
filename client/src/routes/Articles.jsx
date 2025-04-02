@@ -32,7 +32,7 @@ function Articles() {
         {
             data
             ? <div className="articles__container f-md">
-                <div className="articles__subcontainer">
+                <div className="articles">
                     {
                         data
                         ? data.map((val, i) => {

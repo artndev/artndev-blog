@@ -7,7 +7,7 @@
   color: #343A40;
 }
 
-.articles__subcontainer {
+.articles {
   display: grid;
   grid-template-columns: repeat(2, minmax(250px, 500px));
   grid-template-rows: repeat(3, max-content);

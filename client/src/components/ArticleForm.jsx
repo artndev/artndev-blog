@@ -68,7 +68,7 @@ function ArticleForm({
                     </div>
                 </div>
                 <Button 
-                    width={"min(200px, 50%)"}
+                    width={"min(200px, 100%)"}
                     height={45}
                     type={"submit"}
                     content={"Submit"}

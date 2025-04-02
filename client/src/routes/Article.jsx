@@ -161,7 +161,7 @@ function Article() {
         {
             data
             ? <div className="article__container f-md">
-                <div className="article__subcontainer">
+                <div className="article">
                     <ArticleFront
                         title={data.Title}
                         subtitle={(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")} 

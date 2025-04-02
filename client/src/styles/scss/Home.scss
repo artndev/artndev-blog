@@ -1,3 +1,6 @@
+@import "./vars.scss";
+
+
 .hero__container {
     display: flex;
     justify-content: center;
@@ -6,8 +9,7 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    padding: 20px;
-    color: $black;
+    padding: $s-mdx;
 }
 
 .hero__group {
@@ -15,7 +17,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: $s-smx;
 }
 
 .hero__info {
@@ -23,15 +25,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: $s-sm;
 }
 
 .hero {
-    //background-color: red;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    height: 100%;
+    gap: $s-bgx;
 }
