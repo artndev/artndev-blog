@@ -53,6 +53,10 @@ a:hover.lnk {
   color: #4099ff;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .f-sm {
   font-size: 11px;
 }
@@ -89,12 +93,12 @@ a:hover.lnk {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #343A40;
   border-radius: 5px;
   transition: all 0.1s ease-in-out;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  border: 1px solid #343A40;
 }
 .btn img {
   width: 15px;
@@ -128,9 +132,6 @@ a:hover.lnk {
 }
 .btn:not(.invert).pressed img {
   filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
-}
-.btn.bold {
-  border: 2px solid #343A40;
 }
 .btn:hover:not(.pressed) {
   color: #343A40;

@@ -4,14 +4,14 @@ import config from "../config.json"
 import MarkdownPreview from "./MarkdownPreview.jsx"
 
 
+const readingTime = (text) => {
+    const words = text.trim().split(/\s+/).length;
+    const time = Math.ceil(words / config.WPS);
+
+    return time.toString()
+}
+
 function ArticleFront({ title, subtitle, text,  }) {
-    const readingTime = (text) => {
-        const words = text.trim().split(/\s+/).length;
-        const time = Math.ceil(words / config.WPS);
-
-        return time.toString()
-    }
-
     return (
             <div className="article__front f-md">
                 <div className="article__front-group">
