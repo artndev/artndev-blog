@@ -30,7 +30,7 @@ const sliceArray = (arr, n) => {
 function Articles() {
   const [data, setData] = useState([])
   const [pages, setPages] = useState(0)
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const [err, setErr] = useState(null)
 
   useEffect(() => {
@@ -40,7 +40,6 @@ function Articles() {
             const ans = sliceArray(response.data.answer, config.MAX_ARTICLES_PER_PAGE)
 
             setPages(ans.length - 1)
-            setPage(1)
             setData(ans)
         })
         .catch((err) => {
@@ -58,7 +57,7 @@ function Articles() {
     <>
         <div className="articles__container f-md">
             {
-                data && data.length - 1 > 0
+                data && pages > 0
                 ? <div className="articles__subcontainer">
                     <div className="articles">
                         {
