@@ -7,9 +7,9 @@ import AdminContext from "../contexts/Admin.jsx";
 
 
 function RegisterForm() {
+    const navigator = useNavigate() 
     const { setAuth } = useContext(AuthContext)
     const { setAdmin } = useContext(AdminContext)
-    const navigator = useNavigate() 
     const [err, setErr] = React.useState(null)
   
     const registerUser = (e) => {
@@ -40,7 +40,7 @@ function RegisterForm() {
           .catch((err) => {
               console.log(err)
   
-              setErr(err.response.data.message)
+              setErr(err.response)
           })
     }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ArticleForm from '../components/ArticleForm.jsx'
+import ArticleForm from "../components/ArticleForm.jsx"
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from "../axios.js"
 import ErrorHandler from '../components/ErrorHandler.jsx'
@@ -31,7 +31,7 @@ function UpdateForm() {
       .catch((err) => {
         console.log(err)
 
-        setErr(err.response.data.message)
+        setErr(err.response)
       })
   }
 
@@ -44,25 +44,25 @@ function UpdateForm() {
       .catch((err) => {
           console.log(err)
 
-          //alert(err.response.data.message)
+          setErr(err.response)
       })
   }, [article_id])
 
   return (
-    <>
-      {
-        data
-        ? <ArticleForm 
-          formTitle={"Update"}
-          defaultTitle={data.Title}
-          defaultText={data.Text}
-          defaultSubtitle={data.Subtitle}
-          err={err}
-          onSubmit={updateArticle}
-        />
-        : <ErrorHandler err={err} />
-      }
-    </>
+      <div className="article__form-container f-md">
+        {
+          data
+          ? <ArticleForm 
+            formTitle={"Update"}
+            defaultTitle={data.Title}
+            defaultText={data.Text}
+            defaultSubtitle={data.Subtitle}
+            err={err}
+            onSubmit={updateArticle}
+          />
+          : <ErrorHandler err={err} />
+        }
+      </div>
   )
 }
 

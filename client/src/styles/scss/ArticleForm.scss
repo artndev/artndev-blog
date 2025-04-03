@@ -1,6 +1,13 @@
 @import "./vars.scss";
 
 
+.article__form-pseudo__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .article__form-container {
     display: flex;
     justify-content: center;

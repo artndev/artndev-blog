@@ -27,16 +27,18 @@ function CreateForm() {
       .catch((err) => {
         console.log(err)
 
-        setErr(err.response.data.message)
+        setErr(err.response)
       })
   }
 
   return (
-    <ArticleForm 
-      formTitle={"Create"}
-      err={err}
-      onSubmit={createArticle}
-    />
+    <div className="article__form-container f-md">
+      <ArticleForm 
+        formTitle={"Create"}
+        err={err}
+        onSubmit={createArticle}
+      />
+    </div>
   )
 }
 

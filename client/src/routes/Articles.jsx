@@ -89,13 +89,7 @@ function Articles() {
                             }
                     </div>
                 </div>
-                : <>
-                    {
-                        data.length - 1 > 0
-                        ? <ErrorHandler err={err} />
-                        : "The author is sleeping. To be honest, he has not published anything yet..."
-                    }
-                </>
+                : <ErrorHandler err={err} />
             }
         </div> 
     </>

@@ -9,7 +9,6 @@
   border-radius: 5px;
   padding: 20px;
   transition: transform 0.15s ease-in-out;
-  color: #343A40;
 }
 .article__back:hover {
   border: 1px solid #343A40;

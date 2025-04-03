@@ -7,9 +7,9 @@ import AdminContext from "../contexts/Admin.jsx";
 
 
 function LoginForm() {
+  const navigator = useNavigate()
   const { setAuth } = useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
-  const navigator = useNavigate()
   const [err, setErr] = useState(null)
 
   const submitCredentials = (e) => {
@@ -40,7 +40,7 @@ function LoginForm() {
         .catch((err) => {
             console.log(err)
 
-            setErr(err.response.data.message)
+            setErr(err.response)
         })
   }
 
