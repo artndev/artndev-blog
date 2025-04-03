@@ -1,12 +1,12 @@
 @import "./vars.scss";
 
+
 .header__container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: $s-bgx $s-mdx 0 $s-mdx;
-    color: $black;
     user-select: none;
 }
 

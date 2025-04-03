@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  color: #343A40;
 }
 
 .article__front-group {
