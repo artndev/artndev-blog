@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ArticleForm from '../components/ArticleForm.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from "../axios.js"
+import ErrorHandler from '../components/ErrorHandler.jsx'
 
 
 function UpdateForm() {
@@ -59,7 +60,7 @@ function UpdateForm() {
           err={err}
           onSubmit={updateArticle}
         />
-        : "Loading..."
+        : <ErrorHandler err={err} />
       }
     </>
   )

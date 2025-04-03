@@ -29,7 +29,7 @@ function ArticleForm({
                 <div className="article__form-groups">
                     {
                         err && <span id="red">
-                            Unknown error has occurred
+                            An unknown error has been occurred
                         </span>
                     }
                     <div className="article__form-group">

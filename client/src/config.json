@@ -5,5 +5,6 @@
         "Hey, I am mad about coding!",
         "Hello, I am Backend Web Developer."
     ],
-    "MAX_ARTICLES_PER_PAGE": 6
+    "MAX_ARTICLES_PER_PAGE": 6,
+    "ACCEPTED_ERR_CODES": [401]
 }

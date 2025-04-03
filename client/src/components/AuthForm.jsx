@@ -36,7 +36,7 @@ function AuthForm({
                 <div className="auth__form-groups">
                     {
                         err && <span id="red">
-                            Username or password is incorrect
+                            Your username or password is incorrect
                         </span>
                     }
                     <div className="auth__form-group">

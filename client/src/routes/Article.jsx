@@ -1,7 +1,7 @@
 import "../styles/css/Article.css";
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArticleFront from '../components/ArticleFront.jsx'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import axios from "../axios.js";
 import AdminContext from "../contexts/Admin.jsx";
 import AuthContext from '../contexts/Auth.jsx';
@@ -10,18 +10,21 @@ import bookmark from "../imgs/bookmark.svg"
 import pen from "../imgs/pen.svg"
 import bin from "../imgs/bin.svg"
 import Button from "../components/Button.jsx";
+import config from "../config.json";
+import ErrorHandler from "../components/ErrorHandler.jsx";
 
 
 function Article() {
     const navigator = useNavigate()
+    const { article_id } = useParams()
     const { auth } = useContext(AuthContext)
     const { admin } = useContext(AdminContext)
-    const { article_id } = useParams()
     const [data, setData] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
     const [isSaved, setIsSaved] = useState(false)
+    const [err, setErr] = useState(null)
 
-    // article data
+    // ========= DATA ========= 
     useEffect(() => {
       axios
           .get(`/articles/${article_id}`)
@@ -31,7 +34,7 @@ function Article() {
           .catch((err) => {
               console.log(err)
 
-              //alert(err.response.data.message)
+              setErr(err.response)
           })
     }, [article_id, isLiked])
 
@@ -42,11 +45,11 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                //alert(err.response.data.message)
+                setErr(err.response)
             })
     }
 
-    // likes or dislikes
+    // ========= REACTIONS ========= 
     useEffect(() => {
         axios
             .get(`/likes/${article_id}/state`)
@@ -56,23 +59,9 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                //alert(err.response.data.message)
+                setErr(err.response)
             })
     }, [article_id])
-
-    // useEffect(() => {
-    //     if (!likeBtn)
-    //         return
-
-    //     setTimeout(() => {
-
-    //     }, 1000)
-    //     console.log(likeBtn, isLiked)
-    //     if (isLiked)
-    //         likeBtn.current.classList.add("pressed")
-    //     else
-    //         likeBtn.current.classList.remove("pressed")
-    // }, [isLiked])
 
     const likeArticle = () => {
         if (isLiked)
@@ -86,7 +75,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
   
-                //alert(err.response.data.message)
+                setErr(err.response)
             })
     }
 
@@ -102,11 +91,11 @@ function Article() {
             .catch((err) => {
                 console.log(err)
   
-                //alert(err.response.data.message)
+                setErr(err.response)
             })       
     }
 
-    // saves
+    // ========= SAVES ========= 
     useEffect(() => {
         axios
             .get(`/saves/${article_id}/state`)
@@ -116,7 +105,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                //alert(err.response.data.message)
+                setErr(err.response)
             })
     }, [article_id])
 
@@ -132,7 +121,7 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                //alert(err.response.data.message)
+                setErr(err.response)
             })
     }
 
@@ -148,20 +137,23 @@ function Article() {
             .catch((err) => {
                 console.log(err)
 
-                //alert(err.response.data.message)
+                setErr(err.response)
             })
     }
   
     // useEffect(() => {
     //   console.log(data)
     // }, [data])
+
+    // useEffect(() => {
+    //   console.log(err)
+    // }, [err])
   
     return (
-      <>
-        {
-            data
-            ? <div className="article__container f-md">
-                <div className="article">
+            <div className="article__container f-md">
+            {
+                data
+                ? <div className="article">
                     <ArticleFront
                         title={data.Title}
                         subtitle={(new Date(data.Updated)).toLocaleDateString().replaceAll(".", "/")} 
@@ -185,7 +177,7 @@ function Article() {
                                         dislikeArticle()
                                         return
                                     }
-    
+
                                     likeArticle()
                                 }}
                                 content={
@@ -212,7 +204,7 @@ function Article() {
                                     unsaveArticle()
                                     return
                                 }
-    
+
                                 saveArticle()
                             }}
                             content={
@@ -220,8 +212,7 @@ function Article() {
                             }
                         />
                         {
-                            admin
-                            ? <>
+                            admin && <>
                                 <Button 
                                     width={35}
                                     height={35}
@@ -241,14 +232,12 @@ function Article() {
                                     }
                                 />
                             </>
-                            : ""
                         }
                     </div>
                 </div>
+                : <ErrorHandler err={err} />
+            }
             </div>
-            : "Loading..."
-        }
-      </>
     )
 }
 

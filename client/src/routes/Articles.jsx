@@ -2,12 +2,13 @@ import "../styles/css/Articles.css";
 import ArticleBack from "../components/ArticleBack.jsx";
 import React, { useEffect, useState } from 'react'
 import axios from "../axios.js";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import config from "../config.json"
 import Button from "../components/Button.jsx";
+import ErrorHandler from "../components/ErrorHandler.jsx";
 
 
-const divideArray = (arr, n) => {
+const sliceArray = (arr, n) => {
     let ans = [null]
     let dict = []
 
@@ -27,36 +28,38 @@ const divideArray = (arr, n) => {
 }
 
 function Articles() {
-  const [data, setData] = useState(null)
-  const [pages, setPages] = useState(1)
-  const [page, setPage] = useState(1)
+  const [data, setData] = useState([])
+  const [pages, setPages] = useState(0)
+  const [page, setPage] = useState(0)
+  const [err, setErr] = useState(null)
 
   useEffect(() => {
     axios
         .get("/articles")
         .then((response) => {
-            const ans = divideArray(response.data.answer, config.MAX_ARTICLES_PER_PAGE)
+            const ans = sliceArray(response.data.answer, config.MAX_ARTICLES_PER_PAGE)
 
             setPages(ans.length - 1)
+            setPage(1)
             setData(ans)
         })
         .catch((err) => {
             console.log(err)
 
-            //alert(err.response.data.message)
+            setErr(err.response)
         })
   }, [])
 
-//   useEffect(() => {
-//     console.log(data)
-//   }, [data])
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
   return (
     <>
-        {
-            data
-            ? <div className="articles__container f-md">
-                <div className="articles__subcontainer">
+        <div className="articles__container f-md">
+            {
+                data && data.length - 1 > 0
+                ? <div className="articles__subcontainer">
                     <div className="articles">
                         {
                             data[page].map((val, i) => {
@@ -72,7 +75,7 @@ function Articles() {
                     <div className="articles__btns">
                             {
                                 [...Array(pages)].map((_, i) => {
-                                    return <div>
+                                    return <div key={i}>
                                         <Button 
                                             width={35}
                                             height={35}
@@ -86,9 +89,15 @@ function Articles() {
                             }
                     </div>
                 </div>
-            </div> 
-            : "Loading..."
-        }
+                : <>
+                    {
+                        data.length - 1 > 0
+                        ? <ErrorHandler err={err} />
+                        : "The author is sleeping. To be honest, he has not published anything yet..."
+                    }
+                </>
+            }
+        </div> 
     </>
   )
 }

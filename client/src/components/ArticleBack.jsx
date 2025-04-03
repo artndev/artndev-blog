@@ -1,16 +1,16 @@
 import "../styles/css/ArticleBack.css"
-import React, { useEffect } from 'react'
+import React from 'react'
 import config from "../config.json"
 
 
+const readingTime = (text) => {
+    const words = text.trim().split(/\s+/).length;
+    const time = Math.ceil(words / config.WPS);
+
+    return time.toString()
+}
+
 function ArticleBack({ data }) {
-    const readingTime = (text) => {
-        const words = text.trim().split(/\s+/).length;
-        const time = Math.ceil(words / config.WPS);
-
-        return time.toString()
-    }
-
     return (
             <div className="article__back f-md">
                 <div className="article__back-group">
