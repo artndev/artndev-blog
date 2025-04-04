@@ -20,8 +20,13 @@
 .articles__btns {
     display: grid;
     grid-template-columns: repeat(3, max-content);
-    //grid-template-rows: max-content;
     gap: $s-smx;
+
+    @for $i from 1 through 2 {
+        &:has(> :last-child:nth-child(#{$i})) {
+            grid-template-columns: repeat(#{$i}, max-content);
+        }
+    }
 }
 
 .articles {

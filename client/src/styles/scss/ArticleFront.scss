@@ -4,7 +4,8 @@
 .article__front {
     display: flex;
     flex-direction: column;
-    gap: $s-mdx;
+    gap: $s-smx;
+    width: inherit;
 }
 
 .article__front-group {

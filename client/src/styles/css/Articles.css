@@ -19,6 +19,12 @@
   grid-template-columns: repeat(3, max-content);
   gap: 10px;
 }
+.articles__btns:has(> :last-child:nth-child(1)) {
+  grid-template-columns: repeat(1, max-content);
+}
+.articles__btns:has(> :last-child:nth-child(2)) {
+  grid-template-columns: repeat(2, max-content);
+}
 
 .articles {
   display: grid;
