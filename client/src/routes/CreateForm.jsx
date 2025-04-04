@@ -34,7 +34,7 @@ function CreateForm() {
   return (
     <div className="article__form-container f-md">
       <ArticleForm 
-        formTitle={"Create"}
+        formTitle={"Create."}
         err={err}
         onSubmit={createArticle}
       />

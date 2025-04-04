@@ -46,7 +46,7 @@ function LoginForm() {
 
   return (
             <AuthForm 
-                formTitle="Login" 
+                formTitle="Login." 
                 err={err}
                 onSubmit={submitCredentials} 
                 btnLink={"/register"}

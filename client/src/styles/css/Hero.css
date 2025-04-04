@@ -12,16 +12,12 @@
 .hero__group {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
 }
 
 .hero__info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 5px;
 }
 

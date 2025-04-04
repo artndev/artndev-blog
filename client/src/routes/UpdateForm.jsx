@@ -53,7 +53,7 @@ function UpdateForm() {
         {
           data
           ? <ArticleForm 
-            formTitle={"Update"}
+            formTitle={"Update."}
             defaultTitle={data.Title}
             defaultText={data.Text}
             defaultSubtitle={data.Subtitle}
