@@ -1,187 +1,191 @@
-@import "./vars.scss";
+@import './vars.scss';
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-    color: $black;
-    background-color: $white;
-    -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  color: $black;
+  background-color: $white;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body, html {
-    height: 100%;
+body,
+html {
+  height: 100%;
 }
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    transition: color .1s ease-in-out;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.1s ease-in-out;
 
-    &:hover {
-        color: $grey; // если что - переопределение
+  &:hover {
+    color: $grey; // если что - переопределение
 
-        &.lnk {
-            text-decoration: underline;
-        }
+    &.lnk {
+      text-decoration: underline;
     }
+  }
 }
 
 #black {
-    color: $black;
+  color: $black;
 }
 
 #dark {
-    color: $dark;
+  color: $dark;
 }
 
 #grey {
-    color: $grey;
+  color: $grey;
 }
 
 #white {
-    color: $white;
+  color: $white;
 }
 
 #red {
-    color: $red;
+  color: $red;
 }
 
 #blue {
-    color: $blue;
+  color: $blue;
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-
 .f-sm {
-    font-size: $f-sm;
+  font-size: $f-sm;
 }
 
 .f-smx {
-    font-size: $f-smx;
+  font-size: $f-smx;
 }
 
 .f-md {
-    font-size: $f-md;
+  font-size: $f-md;
 }
 
 .f-mdx {
-    font-size: $f-mdx;
+  font-size: $f-mdx;
 }
 
 .f-bg {
-    font-size: $f-bg;
+  font-size: $f-bg;
 }
 
 .f-bgx {
-    font-size: $f-bgx;
+  font-size: $f-bgx;
 }
 
 .f-hg {
-    font-size: $f-hg;
+  font-size: $f-hg;
 }
 
 .f-hgx {
-    font-size: $f-hgx;
+  font-size: $f-hgx;
 }
 
-
 .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid $black;
-    border-radius: 5px;
-    transition: all .1s ease-in-out;
-    user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $black;
+  border-radius: 5px;
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+
+  img {
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+  }
+
+  &.invert {
+    color: $black;
+    background-color: transparent;
 
     img {
-        width: 15px;
-        height: 15px;
-        background-color: transparent;
+      filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg)
+        brightness(94%) contrast(86%);
+    }
+
+    &.pressed {
+      color: $white;
+      background-color: $black;
+
+      img {
+        filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg)
+          brightness(111%) contrast(87%);
+      }
+    }
+  }
+
+  &:not(.invert) {
+    color: $white;
+    background-color: $black;
+
+    img {
+      filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg)
+        brightness(111%) contrast(87%);
+    }
+
+    &.pressed {
+      color: $black;
+      background-color: transparent;
+
+      img {
+        filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg)
+          brightness(94%) contrast(86%);
+      }
+    }
+  }
+
+  &:hover:not(.pressed) {
+    color: $black;
+    background-color: transparent;
+
+    img {
+      filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg)
+        brightness(94%) contrast(86%);
     }
 
     &.invert {
-        color: $black;
-        background-color: transparent;
+      color: $white;
+      background-color: $black;
 
-        img {
-            filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
-        }
-
-        &.pressed {
-            color: $white;
-            background-color: $black;
-            
-            img {
-                filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
-            }
-        }
+      img {
+        filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg)
+          brightness(111%) contrast(87%);
+      }
     }
 
-    &:not(.invert) {
-        color: $white;
-        background-color: $black;
-
-        img {
-            filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
-        }
-
-        &.pressed {
-            color: $black;
-            background-color: transparent;
-
-            img {
-                filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
-            }
-        }
+    &:not(.static) {
+      transform: translateY(-2.5px);
     }
-
-    &:hover:not(.pressed) {
-        color: $black;
-        background-color: transparent;
-        
-        img {
-            filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
-        }
-
-        &.invert {
-            color: $white;
-            background-color: $black;
-            
-            img {
-                filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
-            }
-        }
-
-        &:not(.static) {
-            transform: translateY(-2.5px);
-        }
-    }
+  }
 }
 
 .ipt {
-    border: 1px solid $grey;
-    border-radius: 5px;
-    padding: $s-md;
+  border: 1px solid $grey;
+  border-radius: 5px;
+  padding: $s-md;
 
-    &.hidden {
-        position: absolute;
-        visibility: hidden;
-    }
+  &.hidden {
+    position: absolute;
+    visibility: hidden;
+  }
 
-    &:focus {
-        border: 2px solid $black;
-        outline: none;
-    }
+  &:focus {
+    border: 2px solid $black;
+    outline: none;
+  }
 }

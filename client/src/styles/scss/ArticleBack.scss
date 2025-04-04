@@ -1,26 +1,25 @@
-@import "./vars.scss";
-
+@import './vars.scss';
 
 .article__back {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: $s-smx;
-    width: 100%;
-    height: 100%;
-    border: 1px solid $grey;
-    border-radius: 5px;
-    padding: $s-md;
-    transition: transform .15s ease-in-out;
-    
-    &:hover {
-        border: 1px solid $black;
-        transform: translateY(-2.5px);
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $s-smx;
+  width: 100%;
+  height: 100%;
+  border: 1px solid $grey;
+  border-radius: 5px;
+  padding: $s-md;
+  transition: transform 0.15s ease-in-out;
+
+  &:hover {
+    border: 1px solid $black;
+    transform: translateY(-2.5px);
+  }
 }
 
 .article__back-group {
-    display: flex;
-    flex-direction: column;
-    gap: $s-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $s-sm;
 }

@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import ArticleForm from '../components/ArticleForm.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from "../axios.js"
-
+import axios from '../axios.js'
 
 function CreateForm() {
   const navigator = useNavigate()
   const [err, setErr] = useState(null)
 
-  const createArticle = (e) => {
+  const createArticle = e => {
     e.preventDefault()
 
     const formData = new FormData(e.target)
     console.log(formData)
 
     let data = {}
-    formData.forEach((val, key) => data[key] = val)
+    formData.forEach((val, key) => (data[key] = val))
 
     axios
-      .post("/articles/create", {
+      .post('/articles/create', {
         title: data.title,
         subtitle: data.subtitle,
-        text: data.text
+        text: data.text,
       })
-      .then(() => navigator("/articles"))
-      .catch((err) => {
+      .then(() => navigator('/articles'))
+      .catch(err => {
         console.log(err)
 
         setErr(err.response)
@@ -33,11 +32,7 @@ function CreateForm() {
 
   return (
     <div className="article__form-container f-md">
-      <ArticleForm 
-        formTitle={"Create."}
-        err={err}
-        onSubmit={createArticle}
-      />
+      <ArticleForm formTitle={'Create.'} err={err} onSubmit={createArticle} />
     </div>
   )
 }

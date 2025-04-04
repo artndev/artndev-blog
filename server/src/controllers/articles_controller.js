@@ -1,5 +1,5 @@
-import pool from '../pool.js';
-import * as utils from "../utils.js"
+import pool from '../pool.js'
+import * as utils from '../utils.js'
 
 // CREATE TABLE Articles (
 //     Id INT AUTO_INCREMENT,
@@ -10,35 +10,34 @@ import * as utils from "../utils.js"
 //     PRIMARY KEY(Id)
 // );
 
-
 // ====== SEND REQUESTS ======
 
 export async function Create(req, res) {
-    try {
-        // run query
-        await pool.query(
-            "INSERT INTO Articles (Title, Subtitle, Text) VALUES (?, ?, ?);",
-            [req.body.title, req.body.subtitle, req.body.text]
-        )
+  try {
+    // run query
+    await pool.query(
+      'INSERT INTO Articles (Title, Subtitle, Text) VALUES (?, ?, ?);',
+      [req.body.title, req.body.subtitle, req.body.text]
+    )
 
-        // send answer
-        res.status(200).json({
-            message: "You have successfully created article",
-            answer: true
-        })
-    } catch (err) {
-        console.log(err)
+    // send answer
+    res.status(200).json({
+      message: 'You have successfully created article',
+      answer: true,
+    })
+  } catch (err) {
+    console.log(err)
 
-        // send answer
-        res.status(500).json(utils.errHandler(err))
-    }
+    // send answer
+    res.status(500).json(utils.errHandler(err))
+  }
 }
 
 export async function Update(req, res) {
-    try {
-        // run query
-        const [rows] = await pool.query(
-            `
+  try {
+    // run query
+    const [rows] = await pool.query(
+      `
                 UPDATE Articles SET 
                     Title = ?, 
                     Subtitle = ?,
@@ -46,30 +45,29 @@ export async function Update(req, res) {
                     Updated = CURRENT_TIMESTAMP() 
                 WHERE Id = ?;
             `,
-            [req.body.title, req.body.subtitle, req.body.text, req.params.article_id]
-        )
+      [req.body.title, req.body.subtitle, req.body.text, req.params.article_id]
+    )
 
-        // check for condition
-        if (!rows.affectedRows)
-        {
-            res.status(404).json({
-                message: "Article with such id can not be found",
-                answer: null
-            })
-            return
-        }
-
-        // send answer
-        res.status(200).json({
-            message: "You have successfully updated article",
-            answer: true
-        })
-    } catch (err) {
-        console.log(err)
-
-        // send answer
-        res.status(500).json(utils.errHandler(err))
+    // check for condition
+    if (!rows.affectedRows) {
+      res.status(404).json({
+        message: 'Article with such id can not be found',
+        answer: null,
+      })
+      return
     }
+
+    // send answer
+    res.status(200).json({
+      message: 'You have successfully updated article',
+      answer: true,
+    })
+  } catch (err) {
+    console.log(err)
+
+    // send answer
+    res.status(500).json(utils.errHandler(err))
+  }
 }
 
 // export async function DeleteAll(_, res) {
@@ -77,10 +75,10 @@ export async function Update(req, res) {
 //         // run query
 //         const [rows] = await pool.query(
 //             `
-//                 DELETE FROM Likes; 
+//                 DELETE FROM Likes;
 //                 DELETE FROM Saves;
-//                 DELETE FROM Articles; 
-//                 ALTER TABLE Articles AUTO_INCREMENT = 1;          
+//                 DELETE FROM Articles;
+//                 ALTER TABLE Articles AUTO_INCREMENT = 1;
 //             `
 //         )
 
@@ -108,10 +106,10 @@ export async function Update(req, res) {
 // }
 
 export async function Delete(req, res) {
-    try {
-        // run query
-        await pool.query(
-            `
+  try {
+    // run query
+    await pool.query(
+      `
                 DELETE FROM Likes, Saves
                 USING Likes, Saves
                 WHERE 
@@ -119,88 +117,86 @@ export async function Delete(req, res) {
                     Likes.ArticleId = Saves.ArticleId AND
                     Likes.ArticleId = ?;
             `,
-            req.params.article_id
-        )
+      req.params.article_id
+    )
 
-        // run query
-        const [rows] = await pool.query(
-            "DELETE FROM Articles WHERE Id = ?;",
-            req.params.article_id
-        )
+    // run query
+    const [rows] = await pool.query(
+      'DELETE FROM Articles WHERE Id = ?;',
+      req.params.article_id
+    )
 
-        // check for condition
-        if (!rows.affectedRows)
-        {
-            res.status(404).json({
-                message: "Article with such id can not be found",
-                answer: null
-            })
-            return
-        }
-
-        // send answer
-        res.status(200).json({
-            message: "You have successfully deleted article",
-            answer: true
-        })
-    } catch (err) {
-        console.log(err)
-
-        // send answer
-        res.status(500).json(utils.errHandler(err))
+    // check for condition
+    if (!rows.affectedRows) {
+      res.status(404).json({
+        message: 'Article with such id can not be found',
+        answer: null,
+      })
+      return
     }
+
+    // send answer
+    res.status(200).json({
+      message: 'You have successfully deleted article',
+      answer: true,
+    })
+  } catch (err) {
+    console.log(err)
+
+    // send answer
+    res.status(500).json(utils.errHandler(err))
+  }
 }
 
 export async function GetAll(_, res) {
-    try {
-        // run query
-        const [rows] = await pool.query("SELECT * FROM Articles;")
+  try {
+    // run query
+    const [rows] = await pool.query('SELECT * FROM Articles;')
 
-        // send answer
-        res.status(200).json({
-            message: "You have successfully got all articles",
-            answer: rows
-        })
-    } catch (err) {
-        console.log(err)
+    // send answer
+    res.status(200).json({
+      message: 'You have successfully got all articles',
+      answer: rows,
+    })
+  } catch (err) {
+    console.log(err)
 
-        // send answer
-        res.status(500).json(utils.errHandler(err))
-    }
+    // send answer
+    res.status(500).json(utils.errHandler(err))
+  }
 }
 
 export async function Get(req, res) {
-    try {
-        // run query
-        const [rows] = await pool.query(
-            "SELECT * FROM Articles WHERE Id = ?;",
-            req.params.article_id
-        )
+  try {
+    // run query
+    const [rows] = await pool.query(
+      'SELECT * FROM Articles WHERE Id = ?;',
+      req.params.article_id
+    )
 
-        // check for condition
-        if (!rows.length)
-        {
-            res.status(404).json({
-                message: "Article with such id can not be found",
-                answer: null
-            })
-            return
-        }
-
-        const [rows2] = await pool.query(
-            "SELECT * FROM Likes WHERE ArticleId = ?;",
-            req.params.article_id
-        )
-
-        // send answer
-        res.status(200).json({
-            message: "You have successfully got the article",
-            answer: {...rows[0], Likes: rows2.length}
-        })
-    } catch (err) {
-        console.log(err)
-
-        // send answer
-        res.status(500).json(utils.errHandler(err))
+    // check for condition
+    if (!rows.length) {
+      res.status(404).json({
+        message: 'Article with such id can not be found',
+        answer: null,
+      })
+      return
     }
+
+    const [rows2] = await pool.query(
+      'SELECT * FROM Likes WHERE ArticleId = ?;',
+      req.params.article_id
+    )
+
+    // send answer
+    res.status(200).json({
+      message: 'You have successfully got the article',
+      answer: { ...rows[0], Likes: rows2.length },
+    })
+  } catch (err) {
+    console.log(err)
+
+    // send answer
+    res.status(500).json(utils.errHandler(err))
+  }
 }

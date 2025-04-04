@@ -1,15 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-  color: #343A40;
-  background-color: #E9ECEF;
+  font-family: 'Inter', sans-serif;
+  color: #343a40;
+  background-color: #e9ecef;
   -webkit-tap-highlight-color: transparent;
 }
 
-body, html {
+body,
+html {
   height: 100%;
 }
 
@@ -23,14 +24,14 @@ a {
   transition: color 0.1s ease-in-out;
 }
 a:hover {
-  color: #68727B;
+  color: #68727b;
 }
 a:hover.lnk {
   text-decoration: underline;
 }
 
 #black {
-  color: #343A40;
+  color: #343a40;
 }
 
 #dark {
@@ -38,11 +39,11 @@ a:hover.lnk {
 }
 
 #grey {
-  color: #68727B;
+  color: #68727b;
 }
 
 #white {
-  color: #E9ECEF;
+  color: #e9ecef;
 }
 
 #red {
@@ -93,12 +94,12 @@ a:hover.lnk {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #343A40;
+  border: 1px solid #343a40;
   border-radius: 5px;
   transition: all 0.1s ease-in-out;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .btn img {
   width: 15px;
@@ -106,53 +107,59 @@ a:hover.lnk {
   background-color: transparent;
 }
 .btn.invert {
-  color: #343A40;
+  color: #343a40;
   background-color: transparent;
 }
 .btn.invert img {
-  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg)
+    brightness(94%) contrast(86%);
 }
 .btn.invert.pressed {
-  color: #E9ECEF;
-  background-color: #343A40;
+  color: #e9ecef;
+  background-color: #343a40;
 }
 .btn.invert.pressed img {
-  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg)
+    brightness(111%) contrast(87%);
 }
 .btn:not(.invert) {
-  color: #E9ECEF;
-  background-color: #343A40;
+  color: #e9ecef;
+  background-color: #343a40;
 }
 .btn:not(.invert) img {
-  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg)
+    brightness(111%) contrast(87%);
 }
 .btn:not(.invert).pressed {
-  color: #343A40;
+  color: #343a40;
   background-color: transparent;
 }
 .btn:not(.invert).pressed img {
-  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg)
+    brightness(94%) contrast(86%);
 }
 .btn:hover:not(.pressed) {
-  color: #343A40;
+  color: #343a40;
   background-color: transparent;
 }
 .btn:hover:not(.pressed) img {
-  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg) brightness(94%) contrast(86%);
+  filter: invert(19%) sepia(7%) saturate(1064%) hue-rotate(169deg)
+    brightness(94%) contrast(86%);
 }
 .btn:hover:not(.pressed).invert {
-  color: #E9ECEF;
-  background-color: #343A40;
+  color: #e9ecef;
+  background-color: #343a40;
 }
 .btn:hover:not(.pressed).invert img {
-  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg) brightness(111%) contrast(87%);
+  filter: invert(88%) sepia(7%) saturate(481%) hue-rotate(196deg)
+    brightness(111%) contrast(87%);
 }
 .btn:hover:not(.pressed):not(.static) {
   transform: translateY(-2.5px);
 }
 
 .ipt {
-  border: 1px solid #68727B;
+  border: 1px solid #68727b;
   border-radius: 5px;
   padding: 15px;
 }
@@ -161,6 +168,6 @@ a:hover.lnk {
   visibility: hidden;
 }
 .ipt:focus {
-  border: 2px solid #343A40;
+  border: 2px solid #343a40;
   outline: none;
 }

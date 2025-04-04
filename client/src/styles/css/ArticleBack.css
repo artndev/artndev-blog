@@ -5,13 +5,13 @@
   gap: 10px;
   width: 100%;
   height: 100%;
-  border: 1px solid #68727B;
+  border: 1px solid #68727b;
   border-radius: 5px;
   padding: 15px;
   transition: transform 0.15s ease-in-out;
 }
 .article__back:hover {
-  border: 1px solid #343A40;
+  border: 1px solid #343a40;
   transform: translateY(-2.5px);
 }
 

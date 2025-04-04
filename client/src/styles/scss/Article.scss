@@ -1,28 +1,27 @@
-@import "./vars.scss";
-
+@import './vars.scss';
 
 .article__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: $s-hg $s-mdx $s-mdx $s-mdx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: $s-hg $s-mdx $s-mdx $s-mdx;
 }
 
 .article {
-    display: flex;
-    flex-direction: column;
-    gap: $s-mdx;
-    width: min(1000px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: $s-mdx;
+  width: min(1000px, 100%);
 }
 
 .article__btns {
-    display: flex;
-    gap: $s-md;
+  display: flex;
+  gap: $s-md;
 }
 
 .article__btns-group {
-    display: flex;
-    align-items: center;
-    gap: $s-smx;
+  display: flex;
+  align-items: center;
+  gap: $s-smx;
 }

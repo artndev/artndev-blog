@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import ArticleForm from "../components/ArticleForm.jsx"
+import ArticleForm from '../components/ArticleForm.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from "../axios.js"
+import axios from '../axios.js'
 import ErrorHandler from '../components/ErrorHandler.jsx'
-
 
 function UpdateForm() {
   const navigator = useNavigate()
@@ -11,24 +10,24 @@ function UpdateForm() {
   const [data, setData] = useState(null)
   const [err, setErr] = useState(null)
 
-  const updateArticle = (e) => {
+  const updateArticle = e => {
     e.preventDefault()
 
     const formData = new FormData(e.target)
     console.log(formData)
 
     let data = {}
-    formData.forEach((val, key) => data[key] = val)
+    formData.forEach((val, key) => (data[key] = val))
 
     console.log(data)
     axios
       .put(`/articles/${article_id}/update`, {
         title: data.title,
         subtitle: data.subtitle,
-        text: data.text
+        text: data.text,
       })
-      .then(() => navigator("/articles"))
-      .catch((err) => {
+      .then(() => navigator('/articles'))
+      .catch(err => {
         console.log(err)
 
         setErr(err.response)
@@ -38,31 +37,31 @@ function UpdateForm() {
   useEffect(() => {
     axios
       .get(`/articles/${article_id}`)
-      .then((response) => {
+      .then(response => {
         setData(response.data.answer)
       })
-      .catch((err) => {
-          console.log(err)
+      .catch(err => {
+        console.log(err)
 
-          setErr(err.response)
+        setErr(err.response)
       })
   }, [article_id])
 
   return (
-      <div className="article__form-container f-md">
-        {
-          data
-          ? <ArticleForm 
-            formTitle={"Update."}
-            defaultTitle={data.Title}
-            defaultText={data.Text}
-            defaultSubtitle={data.Subtitle}
-            err={err}
-            onSubmit={updateArticle}
-          />
-          : <ErrorHandler err={err} />
-        }
-      </div>
+    <div className="article__form-container f-md">
+      {data ? (
+        <ArticleForm
+          formTitle={'Update.'}
+          defaultTitle={data.Title}
+          defaultText={data.Text}
+          defaultSubtitle={data.Subtitle}
+          err={err}
+          onSubmit={updateArticle}
+        />
+      ) : (
+        <ErrorHandler err={err} />
+      )}
+    </div>
   )
 }
 

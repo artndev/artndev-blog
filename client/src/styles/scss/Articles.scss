@@ -1,44 +1,43 @@
-@import "./vars.scss";
-
+@import './vars.scss';
 
 .articles__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: $s-hg $s-mdx $s-bg $s-mdx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: $s-hg $s-mdx $s-bg $s-mdx;
 }
 
 .articles__subcontainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: inherit;
-    gap: $s-hg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: inherit;
+  gap: $s-hg;
 }
 
 .articles__btns {
-    display: grid;
-    grid-template-columns: repeat(3, max-content);
-    gap: $s-smx;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: $s-smx;
 
-    @for $i from 1 through 2 {
-        &:has(> :last-child:nth-child(#{$i})) {
-            grid-template-columns: repeat(#{$i}, max-content);
-        }
+  @for $i from 1 through 2 {
+    &:has(> :last-child:nth-child(#{$i})) {
+      grid-template-columns: repeat(#{$i}, max-content);
     }
+  }
 }
 
 .articles {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(250px, 500px));
-    //grid-template-rows: max-content;
-    gap: $s-mdx $s-md;
-    width: min(1000px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 500px));
+  //grid-template-rows: max-content;
+  gap: $s-mdx $s-md;
+  width: min(1000px, 100%);
 }
 
 @media screen and (max-width: 600px) {
-    .articles {
-        grid-template-columns: 100%;
-    }
+  .articles {
+    grid-template-columns: 100%;
+  }
 }

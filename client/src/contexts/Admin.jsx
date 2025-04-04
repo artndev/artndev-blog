@@ -1,23 +1,20 @@
-import React, { createContext, useState, useContext } from 'react';
-import AuthContext from './Auth.jsx';
+import React, { createContext, useState, useContext } from 'react'
+import AuthContext from './Auth.jsx'
 
-
-const AdminContext = createContext({});
+const AdminContext = createContext({})
 export const AdminProvider = ({ children }) => {
-    const { auth } = useContext(AuthContext);
-    const [admin, setAdmin] = useState(
-        auth ? auth.is_admin : null
-    );
+  const { auth } = useContext(AuthContext)
+  const [admin, setAdmin] = useState(auth ? auth.is_admin : null)
 
-    // useEffect(() => {
-    //     console.log(admin)
-    // }, [admin]);
+  // useEffect(() => {
+  //     console.log(admin)
+  // }, [admin]);
 
-    return (
-        <AdminContext.Provider value={{ admin, setAdmin }}>
-            { children }
-        </AdminContext.Provider>
-    );
-};
+  return (
+    <AdminContext.Provider value={{ admin, setAdmin }}>
+      {children}
+    </AdminContext.Provider>
+  )
+}
 
-export default AdminContext;
+export default AdminContext

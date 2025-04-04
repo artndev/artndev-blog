@@ -1,10 +1,10 @@
 {
-    "WPS": 255,
-    "TYPEWRITER_STRINGS": [
-        "Hi, I am Artyom Luzhkov.",
-        "Hey, I am mad about coding!",
-        "Hello, I am Backend Web Developer."
-    ],
-    "MAX_ARTICLES_PER_PAGE": 6,
-    "ACCEPTED_ERR_CODES": [401]
+  "WPS": 255,
+  "TYPEWRITER_STRINGS": [
+    "Hi, I am Artyom Luzhkov.",
+    "Hey, I am mad about coding!",
+    "Hello, I am Backend Web Developer."
+  ],
+  "MAX_ARTICLES_PER_PAGE": 6,
+  "ACCEPTED_ERR_CODES": [401]
 }

@@ -1,34 +1,33 @@
-@import "./vars.scss";
-
+@import './vars.scss';
 
 .header__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: $s-bgx $s-mdx 0 $s-mdx;
-    user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: $s-bgx $s-mdx 0 $s-mdx;
+  user-select: none;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: min(1000px, 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(1000px, 100%);
 }
 
 .nav__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: $s-bgx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $s-bgx;
 }
 
 .nav__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
 }
 
 @media screen and (max-width: 450px) {

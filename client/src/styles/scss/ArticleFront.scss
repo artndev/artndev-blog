@@ -1,14 +1,13 @@
-@import "./vars.scss";
-
+@import './vars.scss';
 
 .article__front {
-    display: flex;
-    flex-direction: column;
-    gap: $s-smx;
+  display: flex;
+  flex-direction: column;
+  gap: $s-smx;
 }
 
 .article__front-group {
-    display: flex;
-    flex-direction: column;
-    gap: $s-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $s-sm;
 }
