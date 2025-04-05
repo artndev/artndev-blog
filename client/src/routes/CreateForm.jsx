@@ -8,8 +8,6 @@ function CreateForm() {
   const [err, setErr] = useState(null)
 
   const createArticle = e => {
-    e.preventDefault()
-
     const formData = new FormData(e.target)
     console.log(formData)
 
