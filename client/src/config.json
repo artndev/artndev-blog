@@ -8,7 +8,6 @@
   "MAX_ARTICLES_PER_PAGE": 6,
   "ACCEPTED_ERR_CODES": [401],
   "REST_API_URL": "http://localhost:5000",
-  "_comment": "Username pattern needs start index 4 instead of 5",
   "PATTERNS": {
     "AUTH_FORM": {
       "USERNAME": "^(?=.*[a-z])(?=[a-z_]+[a-z0-9_])[a-z0-9_]{5,20}$",
