@@ -63,7 +63,11 @@ function ArticleForm({
           )}
           <div className="article__form-group">
             <label htmlFor="title">
-              Title<span id="red">*</span>:
+              Title
+              <span className="f-smx" id="red">
+                *
+              </span>
+              :
             </label>
             <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
@@ -76,7 +80,11 @@ function ArticleForm({
           </div>
           <div className="article__form-group">
             <label htmlFor="subtitle">
-              Subtitle<span id="red">*</span>:
+              Subtitle
+              <span className="f-smx" id="red">
+                *
+              </span>
+              :
             </label>
             <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
@@ -89,7 +97,11 @@ function ArticleForm({
           </div>
           <div className="article__form-group">
             <div>
-              Text<span id="red">*</span>:
+              Text
+              <span className="f-smx" id="red">
+                *
+              </span>
+              :
             </div>
             <div className="f-smx">Must contain 5 to 5000 characters</div>
             <MarkdownEditor value={text} onChange={setText} />
