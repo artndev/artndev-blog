@@ -1,8 +1,13 @@
 import '../styles/css/ArticleForm.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MarkdownEditor from './MarkdownEditor'
 import Button from './Button.jsx'
 import Input from './Input.jsx'
+import config from '../config.json'
+
+const minmax = (n, min, max) => {
+  return n >= min && n <= max
+}
 
 function ArticleForm({
   formTitle,
@@ -13,7 +18,13 @@ function ArticleForm({
   onSubmit,
 }) {
   const [err2, setErr2] = useState(err) // || null
-  const [text, setText] = useState(defaultText) // || ''
+  const [title, setTitle] = useState(defaultTitle || '') // || ''
+  const [subtitle, setSubtitle] = useState(defaultSubtitle || '')
+  const [text, setText] = useState(defaultText || '')
+
+  useEffect(() => {
+    console.log(title, subtitle, text)
+  }, [title, subtitle, text])
 
   return (
     <div className="article__form-subcontainer">
@@ -24,12 +35,23 @@ function ArticleForm({
         onSubmit={e => {
           e.preventDefault()
 
-          if (text.length < 5 || text.length > 5000) {
+          const regexp = !new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL)
+          if (!minmax(title.replaceAll(regexp, '').length, 5, 100)) {
             setErr2(true)
             return
           }
 
-          onSubmit(e)
+          if (!minmax(subtitle.replaceAll(regexp, '').length, 5, 100)) {
+            setErr2(true)
+            return
+          }
+
+          if (!minmax(text.replaceAll(regexp, '').length, 5, 5000)) {
+            setErr2(true)
+            return
+          }
+
+          onSubmit(title.trim(), subtitle.trim(), text.trim())
         }}
       >
         <div className="article__form-groups">
@@ -43,12 +65,13 @@ function ArticleForm({
             <label htmlFor="title">
               Title<span id="red">*</span>:
             </label>
-            <div className="f-smx">Must contain 5 to 100 characters</div>
+            <div className="f-smx">
+              Must contain 5 to 100 characters (spaces are not included)
+            </div>
             <Input
               width={'min(500px, 100%)'}
               height={45}
-              minLength={5}
-              maxLength={100}
+              onChange={e => setTitle(e.target.value)}
               name={'title'}
               defaultValue={defaultTitle}
             />
@@ -57,12 +80,13 @@ function ArticleForm({
             <label htmlFor="subtitle">
               Subtitle<span id="red">*</span>:
             </label>
-            <div className="f-smx">Must contain 5 to 100 characters</div>
+            <div className="f-smx">
+              Must contain 5 to 100 characters (spaces are not included)
+            </div>
             <Input
               width={'min(500px, 100%)'}
               height={45}
-              minLength={5}
-              maxLength={100}
+              onChange={e => setSubtitle(e.target.value)}
               name={'subtitle'}
               defaultValue={defaultSubtitle}
             />
@@ -71,14 +95,10 @@ function ArticleForm({
             <div>
               Text<span id="red">*</span>:
             </div>
-            <div className="f-smx">Must contain 5 to 5000 characters</div>
+            <div className="f-smx">
+              Must contain 5 to 5000 characters (spaces are not included)
+            </div>
             <MarkdownEditor value={text} onChange={setText} />
-            <Input
-              className={'hidden'}
-              name={'text'}
-              value={text}
-              defaultValue={defaultText}
-            />
           </div>
         </div>
         <Button

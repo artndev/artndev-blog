@@ -23,22 +23,26 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
         <form className="auth__form" method="post" onSubmit={onSubmit}>
           <div className="auth__form-groups">
             {err && (
-              <span id="red">Your username or password is incorrect</span>
+              <span id="red">
+                This username has been taken or your credentials are incorrect
+              </span>
             )}
             <div className="auth__form-group">
               <label htmlFor="username">
                 Username<span id="red">*</span>:
               </label>
               <div className="auth__form-group__info f-smx">
-                Must contain 5 to 20 characters including:
-                <p>'a-z/A-Z/0-9' and '_'</p>
+                Must contain 5 to 20 characters (spaces are permitted)
+                including:
+                <p>'a-z/A-Z/0-9/_'</p>
               </div>
               <Input
                 width={'inherit'}
                 height={45}
-                minLength={5}
-                maxLength={20}
-                pattern={config.PATTERNS.USERNAME}
+                onKeyDown={e => {
+                  if (e.code === 'Space') e.preventDefault()
+                }}
+                pattern={config.PATTERNS.AUTH_FORM.USERNAME}
                 name={'username'}
               />
             </div>
@@ -47,18 +51,20 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
                 Password<span id="red">*</span>:
               </label>
               <div className="auth__form-group__info f-smx">
-                Must contain 5 to 20 characters including:
+                Must contain 5 to 20 characters (spaces are permitted)
+                including:
                 <p>'a-z', 'A-Z', '0-9' and './_/!/@/#/$/%/^/&/*'</p>
               </div>
               <div className="auth__form-ipt__group">
                 <Input
                   width={'inherit'}
                   height={45}
+                  onKeyDown={e => {
+                    if (e.code === 'Space') e.preventDefault()
+                  }}
                   ref={inputRef}
                   type={inputType ? 'text' : 'password'}
-                  minLength={5}
-                  maxLength={20}
-                  pattern={config.PATTERNS.PASSWORD}
+                  pattern={config.PATTERNS.AUTH_FORM.PASSWORD}
                   name={'password'}
                 />
                 <button

@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: center;
   gap: $s-mdx;
-  width: min(350px, 100%);
+  width: min(max-content, 100%); // max-content bc of info content
 }
 
 .auth__form {

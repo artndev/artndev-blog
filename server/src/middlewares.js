@@ -48,7 +48,7 @@ export const isNotLogged = (req, res, next) => {
 
 export const isAdmin = (req, res, next) => {
   try {
-    if (!process.env.ADMIN_TOKENS.split(' ').includes(req.cookies.token)) {
+    if (process.env.ADMIN_TOKEN !== req.cookies.token) {
       res.status(403).json({
         message: 'You have no access to request',
         answer: null,

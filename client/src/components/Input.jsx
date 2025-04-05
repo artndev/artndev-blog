@@ -5,11 +5,11 @@ function Input({
   className,
   ref,
   type,
+  onKeyDown,
+  onChange,
   name,
   value,
   defaultValue,
-  minLength,
-  maxLength,
   pattern,
   placeholder,
   width,
@@ -21,12 +21,12 @@ function Input({
       className={`ipt f-smx ${className ? ` ${className}` : ''}`}
       ref={ref}
       type={type || 'text'}
+      onKeyDown={onKeyDown}
+      onChange={onChange}
       id={name}
       name={name}
       value={value}
       defaultValue={defaultValue}
-      minLength={minLength}
-      maxLength={maxLength}
       pattern={pattern}
       placeholder={placeholder || `Enter ${name}...`}
       style={{

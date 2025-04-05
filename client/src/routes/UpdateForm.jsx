@@ -10,19 +10,12 @@ function UpdateForm() {
   const [data, setData] = useState(null)
   const [err, setErr] = useState(null)
 
-  const updateArticle = e => {
-    const formData = new FormData(e.target)
-    console.log(formData)
-
-    let data = {}
-    formData.forEach((val, key) => (data[key] = val))
-
-    console.log(data)
+  const updateArticle = (title, subtitle, text) => {
     axios
       .put(`/articles/${article_id}/update`, {
-        title: data.title,
-        subtitle: data.subtitle,
-        text: data.text,
+        title: title,
+        subtitle: subtitle,
+        text: text,
       })
       .then(() => navigator('/articles'))
       .catch(err => {

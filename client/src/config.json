@@ -8,8 +8,14 @@
   "MAX_ARTICLES_PER_PAGE": 6,
   "ACCEPTED_ERR_CODES": [401],
   "REST_API_URL": "http://localhost:5000",
+  "_comment": "Username pattern needs start index 4 instead of 5",
   "PATTERNS": {
-    "USERNAME": "^[A-Za-z][a-zA-Z0-9_]{5,20}$",
-    "PASSWORD": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[._!@#$%^&*]).{5,20}$"
+    "AUTH_FORM": {
+      "USERNAME": "^[A-Za-z][a-zA-Z0-9_].{5,20}$",
+      "PASSWORD": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[._!@#$%^&*]).{5,20}$"
+    },
+    "ARTICLE_FORM": {
+      "UNIVERSAL": "/\\s/g"
+    }
   }
 }

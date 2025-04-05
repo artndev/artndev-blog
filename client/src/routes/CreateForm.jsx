@@ -7,18 +7,12 @@ function CreateForm() {
   const navigator = useNavigate()
   const [err, setErr] = useState(null)
 
-  const createArticle = e => {
-    const formData = new FormData(e.target)
-    console.log(formData)
-
-    let data = {}
-    formData.forEach((val, key) => (data[key] = val))
-
+  const createArticle = (title, subtitle, text) => {
     axios
       .post('/articles/create', {
-        title: data.title,
-        subtitle: data.subtitle,
-        text: data.text,
+        title: title,
+        subtitle: subtitle,
+        text: text,
       })
       .then(() => navigator('/articles'))
       .catch(err => {

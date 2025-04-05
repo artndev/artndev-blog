@@ -7,7 +7,7 @@ import config from '../config.json' with { type: 'json' }
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
 //     Username VARCHAR(20) NOT NULL UNIQUE,
-//     Password VARCHAR(20) NOT NULL,
+//     Password VARCHAR(255) NOT NULL, // VARCHAR(255) bc there is hashed password
 //     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );
@@ -44,7 +44,7 @@ export async function Register(req, res) {
     const data = {
       user_id: rows[0].Id,
       username: req.body.username,
-      is_admin: process.env.ADMIN_TOKENS.split(' ').includes(token),
+      is_admin: process.env.ADMIN_TOKEN === token,
     }
     res
       .cookie('user_data', JSON.stringify(data), {
@@ -98,7 +98,7 @@ export async function Login(req, res) {
     const data = {
       user_id: rows[0].Id,
       username: req.body.username,
-      is_admin: process.env.ADMIN_TOKENS.split(' ').includes(token),
+      is_admin: process.env.ADMIN_TOKEN === token,
     }
     res
       .cookie('user_data', JSON.stringify(data), {

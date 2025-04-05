@@ -11,7 +11,8 @@
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  width: min(350px, 100%);
+  width: min(-moz-max-content, 100%);
+  width: min(max-content, 100%);
 }
 
 .auth__form {
