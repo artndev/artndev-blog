@@ -3,9 +3,9 @@ import * as utils from '../utils.js'
 
 // CREATE TABLE Articles (
 //     Id INT AUTO_INCREMENT,
-//     Title VARCHAR(255) NOT NULL,
-//     Subtitle VARCHAR(255) NOT NULL,
-//     Text TEXT NOT NULL,
+//     Title VARCHAR(100) NOT NULL,
+//     Subtitle VARCHAR(100) NOT NULL,
+//     Text VARCHAR(5000) NOT NULL,
 //     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );

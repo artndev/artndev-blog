@@ -24,7 +24,7 @@ function ArticleForm({
         onSubmit={e => {
           e.preventDefault()
 
-          if (text.length < 5 || text.length > 4000) {
+          if (text.length < 5 || text.length > 5000) {
             setErr2(true)
             return
           }
@@ -71,7 +71,7 @@ function ArticleForm({
             <div>
               Text<span id="red">*</span>:
             </div>
-            <div className="f-smx">Must contain 5 to 4000 characters</div>
+            <div className="f-smx">Must contain 5 to 5000 characters</div>
             <MarkdownEditor value={text} onChange={setText} />
             <Input
               className={'hidden'}

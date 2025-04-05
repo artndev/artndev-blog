@@ -6,8 +6,8 @@ import config from '../config.json' with { type: 'json' }
 
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
-//     Username VARCHAR(255) NOT NULL UNIQUE,
-//     Password VARCHAR(255) NOT NULL,
+//     Username VARCHAR(20) NOT NULL UNIQUE,
+//     Password VARCHAR(20) NOT NULL,
 //     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );
