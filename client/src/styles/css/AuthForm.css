@@ -37,6 +37,11 @@
   width: inherit;
 }
 
+.auth__form-group__info {
+  display: flex;
+  flex-direction: column;
+}
+
 .auth__form-btn__group {
   display: flex;
   flex-direction: column;
@@ -65,8 +70,8 @@
   border: none;
 }
 .auth__form-ipt__group-btn.opened {
-  background-image: url('../../imgs/eye_opened.png');
+  background-image: url("../../imgs/eye_opened.png");
 }
 .auth__form-ipt__group-btn.closed {
-  background-image: url('../../imgs/eye_closed.png');
+  background-image: url("../../imgs/eye_closed.png");
 }

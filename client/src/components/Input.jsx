@@ -8,6 +8,9 @@ function Input({
   name,
   value,
   defaultValue,
+  minLength,
+  maxLength,
+  pattern,
   placeholder,
   width,
   height,
@@ -22,6 +25,9 @@ function Input({
       name={name}
       value={value}
       defaultValue={defaultValue}
+      minLength={minLength}
+      maxLength={maxLength}
+      pattern={pattern}
       placeholder={placeholder || `Enter ${name}...`}
       style={{
         width: width,

@@ -11,8 +11,6 @@ function UpdateForm() {
   const [err, setErr] = useState(null)
 
   const updateArticle = e => {
-    e.preventDefault()
-
     const formData = new FormData(e.target)
     console.log(formData)
 

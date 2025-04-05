@@ -12,21 +12,43 @@ function ArticleForm({
   err,
   onSubmit,
 }) {
-  const [text, setText] = useState(defaultText)
+  const [err2, setErr2] = useState(err) // || null
+  const [text, setText] = useState(defaultText) // || ''
 
   return (
     <div className="article__form-subcontainer">
       <h1 className="f-hg">{formTitle}</h1>
-      <form className="article__form" method="post" onSubmit={onSubmit}>
+      <form
+        className="article__form"
+        method="post"
+        onSubmit={e => {
+          e.preventDefault()
+
+          if (text.length < 5 || text.length > 4000) {
+            setErr2(true)
+            return
+          }
+
+          onSubmit(e)
+        }}
+      >
         <div className="article__form-groups">
-          {err && <span id="red">An unknown error has been occurred</span>}
+          {err2 && (
+            <span id="red">
+              An unknown error has been occurred or the validation has not been
+              passed
+            </span>
+          )}
           <div className="article__form-group">
             <label htmlFor="title">
               Title<span id="red">*</span>:
             </label>
+            <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
               width={'min(500px, 100%)'}
               height={45}
+              minLength={5}
+              maxLength={100}
               name={'title'}
               defaultValue={defaultTitle}
             />
@@ -35,9 +57,12 @@ function ArticleForm({
             <label htmlFor="subtitle">
               Subtitle<span id="red">*</span>:
             </label>
+            <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
               width={'min(500px, 100%)'}
               height={45}
+              minLength={5}
+              maxLength={100}
               name={'subtitle'}
               defaultValue={defaultSubtitle}
             />
@@ -46,6 +71,7 @@ function ArticleForm({
             <div>
               Text<span id="red">*</span>:
             </div>
+            <div className="f-smx">Must contain 5 to 4000 characters</div>
             <MarkdownEditor value={text} onChange={setText} />
             <Input
               className={'hidden'}

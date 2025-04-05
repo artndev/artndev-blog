@@ -6,5 +6,10 @@
     "Hello, I am Backend Web Developer."
   ],
   "MAX_ARTICLES_PER_PAGE": 6,
-  "ACCEPTED_ERR_CODES": [401]
+  "ACCEPTED_ERR_CODES": [401],
+  "REST_API_URL": "http://localhost:5000",
+  "PATTERNS": {
+    "USERNAME": "^[A-Za-z][a-zA-Z0-9_]{5,20}$",
+    "PASSWORD": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[._!@#$%^&*]).{5,20}$"
+  }
 }

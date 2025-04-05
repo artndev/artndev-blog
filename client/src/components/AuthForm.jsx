@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
 import Input from './Input.jsx'
 import Button from './Button.jsx'
+import config from '../config.json'
 
 function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
   const inputRef = useRef(null)
@@ -28,18 +29,36 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
               <label htmlFor="username">
                 Username<span id="red">*</span>:
               </label>
-              <Input width={'inherit'} height={45} name={'username'} />
+              <div className="auth__form-group__info f-smx">
+                Must contain 5 to 20 characters including:
+                <p>'a-z/A-Z/0-9' and '_'</p>
+              </div>
+              <Input
+                width={'inherit'}
+                height={45}
+                minLength={5}
+                maxLength={20}
+                pattern={config.PATTERNS.USERNAME}
+                name={'username'}
+              />
             </div>
             <div className="auth__form-group">
               <label htmlFor="password">
                 Password<span id="red">*</span>:
               </label>
+              <div className="auth__form-group__info f-smx">
+                Must contain 5 to 20 characters including:
+                <p>'a-z', 'A-Z', '0-9' and './_/!/@/#/$/%/^/&/*'</p>
+              </div>
               <div className="auth__form-ipt__group">
                 <Input
                   width={'inherit'}
                   height={45}
                   ref={inputRef}
                   type={inputType ? 'text' : 'password'}
+                  minLength={5}
+                  maxLength={20}
+                  pattern={config.PATTERNS.PASSWORD}
                   name={'password'}
                 />
                 <button
