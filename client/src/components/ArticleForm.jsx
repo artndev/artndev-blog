@@ -22,9 +22,9 @@ function ArticleForm({
   const [text, setText] = useState(defaultText || '')
   const [err2, setErr2] = useState(err)
 
-  useEffect(() => {
-    console.log(title, subtitle, text)
-  }, [title, subtitle, text])
+  // useEffect(() => {
+  //   console.log(title, subtitle, text)
+  // }, [title, subtitle, text])
 
   return (
     <div className="article__form-subcontainer">
