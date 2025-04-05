@@ -17,10 +17,10 @@ function ArticleForm({
   err,
   onSubmit,
 }) {
-  const [err2, setErr2] = useState(err) // || null
-  const [title, setTitle] = useState(defaultTitle || '') // || ''
+  const [title, setTitle] = useState(defaultTitle || '')
   const [subtitle, setSubtitle] = useState(defaultSubtitle || '')
   const [text, setText] = useState(defaultText || '')
+  const [err2, setErr2] = useState(err)
 
   useEffect(() => {
     console.log(title, subtitle, text)
@@ -65,9 +65,7 @@ function ArticleForm({
             <label htmlFor="title">
               Title<span id="red">*</span>:
             </label>
-            <div className="f-smx">
-              Must contain 5 to 100 characters (spaces are not included)
-            </div>
+            <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
               width={'min(500px, 100%)'}
               height={45}
@@ -80,9 +78,7 @@ function ArticleForm({
             <label htmlFor="subtitle">
               Subtitle<span id="red">*</span>:
             </label>
-            <div className="f-smx">
-              Must contain 5 to 100 characters (spaces are not included)
-            </div>
+            <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
               width={'min(500px, 100%)'}
               height={45}
@@ -95,9 +91,7 @@ function ArticleForm({
             <div>
               Text<span id="red">*</span>:
             </div>
-            <div className="f-smx">
-              Must contain 5 to 5000 characters (spaces are not included)
-            </div>
+            <div className="f-smx">Must contain 5 to 5000 characters</div>
             <MarkdownEditor value={text} onChange={setText} />
           </div>
         </div>

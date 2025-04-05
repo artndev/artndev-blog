@@ -24,17 +24,21 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
           <div className="auth__form-groups">
             {err && (
               <span id="red">
-                This username has been taken or your credentials are incorrect
+                This username has already been taken or your credentials are
+                incorrect
               </span>
             )}
             <div className="auth__form-group">
               <label htmlFor="username">
-                Username<span id="red">*</span>:
+                Username
+                <span className="f-smx" id="red">
+                  * (can not be started with a digit)
+                </span>
+                :
               </label>
               <div className="auth__form-group__info f-smx">
-                Must contain 5 to 20 characters (spaces are permitted)
-                including:
-                <p>'a-z/A-Z/0-9/_'</p>
+                Must contain 5 to 20 characters without spaces:
+                <i>'a-z/0-9/_'</i>
               </div>
               <Input
                 width={'inherit'}
@@ -48,12 +52,15 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
             </div>
             <div className="auth__form-group">
               <label htmlFor="password">
-                Password<span id="red">*</span>:
+                Password
+                <span className="f-smx" id="red">
+                  *
+                </span>
+                :
               </label>
               <div className="auth__form-group__info f-smx">
-                Must contain 5 to 20 characters (spaces are permitted)
-                including:
-                <p>'a-z', 'A-Z', '0-9' and './_/!/@/#/$/%/^/&/*'</p>
+                Must contain 5 to 20 characters without spaces:
+                <i>'a-z', 'A-Z', '0-9' and './_/!/@/#/$/%/^/&/*'</i>
               </div>
               <div className="auth__form-ipt__group">
                 <Input

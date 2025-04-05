@@ -11,8 +11,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  width: min(-moz-max-content, 100%);
-  width: min(max-content, 100%);
+  width: min(400px, 100%);
 }
 
 .auth__form {
@@ -61,9 +60,9 @@
   width: 20px;
   height: 20px;
   position: absolute;
-  left: 90%;
+  left: 95%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-90%, -50%);
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
