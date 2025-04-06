@@ -12,7 +12,8 @@ import ErrorHandler from '../components/ErrorHandler.jsx'
 function Profile() {
   const navigator = useNavigate()
   const { admin, setAdmin } = useContext(AdminContext)
-  const { auth, setAuth } = useContext(AuthContext)
+  const { removeCookies, setToken, userData, setUserData } =
+    useContext(AuthContext)
   const [data, setData] = useState(null)
   const [err, setErr] = useState(null)
 
@@ -24,7 +25,10 @@ function Profile() {
       .then(() => navigator('/articles'))
       .then(() => {
         setTimeout(() => {
-          setAuth(null)
+          removeCookies('user_data')
+          removeCookies('token')
+          setUserData(null)
+          setToken(null)
           setAdmin(null)
         }, 4)
       })
@@ -58,7 +62,8 @@ function Profile() {
         <div className="profile">
           <div className="profile__group">
             <div className="profile__info">
-              You are logged as <span className="bold">@{auth.username}</span> (
+              You are logged as{' '}
+              <span className="bold">@{userData.username}</span> (
               {admin ? (
                 <span id="red">admin</span>
               ) : (

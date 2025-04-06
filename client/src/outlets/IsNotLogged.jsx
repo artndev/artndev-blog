@@ -1,11 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import AuthContext from '../contexts/Auth.jsx'
 
 function IsNotLogged() {
-  const { auth } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
 
-  return <>{!auth ? <Outlet /> : <Navigate to="/articles" />}</>
+  // useEffect(() => {
+  //   console.log(token)
+  // }, [token])
+
+  return <>{!token ? <Outlet /> : <Navigate to="/articles" />}</>
 }
 
 export default IsNotLogged

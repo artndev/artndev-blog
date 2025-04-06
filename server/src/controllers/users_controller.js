@@ -41,28 +41,15 @@ export async function Register(req, res) {
     )
 
     // send answer
-    const data = {
-      user_id: rows[0].Id,
-      username: req.body.username,
-      is_admin: process.env.ADMIN_TOKEN === token,
-    }
-    res
-      .cookie('user_data', JSON.stringify(data), {
-        maxAge: config.COOKIES_MAXAGE,
-        sameSite: 'None',
-        secure: true,
-      })
-      .cookie('token', token, {
-        httpOnly: true,
-        maxAge: config.COOKIES_MAXAGE,
-        sameSite: 'None',
-        secure: true,
-      })
-      .status(200)
-      .json({
-        message: 'You have successfully registered',
-        answer: data,
-      })
+    res.status(200).json({
+      message: 'You have successfully registered',
+      answer: {
+        user_id: rows[0].Id,
+        username: req.body.username,
+        token: token,
+        is_admin: process.env.ADMIN_TOKEN === token,
+      },
+    })
   } catch (err) {
     console.log(err)
 
@@ -99,28 +86,15 @@ export async function Login(req, res) {
     }
 
     // send answer
-    const data = {
-      user_id: rows[0].Id,
-      username: req.body.username,
-      is_admin: process.env.ADMIN_TOKEN === token,
-    }
-    res
-      .cookie('user_data', JSON.stringify(data), {
-        maxAge: config.COOKIES_MAXAGE,
-        sameSite: 'None',
-        secure: true,
-      })
-      .cookie('token', token, {
-        httpOnly: true,
-        maxAge: config.COOKIES_MAXAGE,
-        sameSite: 'None',
-        secure: true,
-      })
-      .status(200)
-      .json({
-        message: 'You have successfully logged in',
-        answer: data,
-      })
+    res.status(200).json({
+      message: 'You have successfully logged in',
+      answer: {
+        user_id: rows[0].Id,
+        username: req.body.username,
+        token: token,
+        is_admin: process.env.ADMIN_TOKEN === token,
+      },
+    })
   } catch (err) {
     console.log(err)
 

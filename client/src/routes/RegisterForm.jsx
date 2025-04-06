@@ -4,10 +4,11 @@ import axios from '../axios.js'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from '../contexts/Auth.jsx'
 import AdminContext from '../contexts/Admin.jsx'
+import config from '../config.json'
 
 function RegisterForm() {
   const navigator = useNavigate()
-  const { setAuth } = useContext(AuthContext)
+  const { setCookies, setToken, setUserData } = useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
   const [err, setErr] = React.useState(null)
 
@@ -32,8 +33,13 @@ function RegisterForm() {
       })
       .then(response => {
         setTimeout(() => {
-          setAuth(response.data.answer)
-          setAdmin(response.data.answer.is_admin)
+          const { token, ...userData } = response.data.answer
+
+          setCookies('user_data', userData, config.COOKIES_OPTIONS)
+          setCookies('token', token, config.COOKIES_OPTIONS)
+          setUserData(userData)
+          setToken(token)
+          setAdmin(userData.is_admin)
         }, 4)
       })
       .catch(err => {
