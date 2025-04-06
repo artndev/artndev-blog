@@ -2,7 +2,7 @@ import axios from 'axios'
 import config from './config.json'
 
 const instance = axios.create({
-  baseURL: config.REST_API_URL,
+  baseURL: config.BACKEND_URL,
   withCredentials: true,
 })
 

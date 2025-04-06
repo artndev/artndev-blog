@@ -1,5 +1,6 @@
 {
   "_comment": "86400000ms = 24h, 3600000ms = 1h, 30000ms = 30s",
   "COOKIES_MAXAGE": 86400000,
-  "SERVER_PORT": 5000
+  "SERVER_PORT": 5000,
+  "FRONTEND_URL": "http://localhost:3000"
 }
