@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
 import Input from './Input.jsx'
 import Button from './Button.jsx'
-import config from '../../config.json'
+import config from '../config.json'
 
 function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
   const inputRef = useRef(null)
