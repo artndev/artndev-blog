@@ -2,17 +2,24 @@ import jwt from 'jsonwebtoken'
 
 export const isLogged = (req, res, next) => {
   try {
-    if (
-      !req.cookies.token ||
-      !jwt.verify(req.cookies.token, process.env.SECRET_KEY)
-    ) {
-      res.clearCookie('user_data').status(401).json({
+    if (!req.headers.authorization) {
+      res.status(401).json({
         message: 'You are not authorized',
         answer: null,
       })
       return
     }
 
+    const token = req.headers.authorization.split(' ')[1]
+    if (!jwt.verify(token, process.env.SECRET_KEY)) {
+      res.status(401).json({
+        message: 'You are not authorized',
+        answer: null,
+      })
+      return
+    }
+
+    req.user = jwt.decode(token)
     next()
   } catch (err) {
     console.log(err)
@@ -27,7 +34,7 @@ export const isLogged = (req, res, next) => {
 
 export const isNotLogged = (req, res, next) => {
   try {
-    if (req.cookies.token) {
+    if (req.headers.authorization) {
       res.status(403).json({
         message: 'You have already authorized',
         answer: null,
@@ -48,7 +55,8 @@ export const isNotLogged = (req, res, next) => {
 
 export const isAdmin = (req, res, next) => {
   try {
-    if (process.env.ADMIN_TOKEN !== req.cookies.token) {
+    const token = req.headers.authorization.split(' ')[1]
+    if (token !== process.env.ADMIN_TOKEN) {
       res.status(403).json({
         message: 'You have no access to request',
         answer: null,
@@ -56,6 +64,7 @@ export const isAdmin = (req, res, next) => {
       return
     }
 
+    req.user = jwt.decode(token)
     next()
   } catch (err) {
     console.log(err)

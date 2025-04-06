@@ -14,7 +14,7 @@ import * as utils from '../utils.js'
 export async function Like(req, res) {
   try {
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows] = await pool.query(
@@ -53,7 +53,7 @@ export async function Like(req, res) {
 export async function Dislike(req, res) {
   try {
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows] = await pool.query(
@@ -145,7 +145,7 @@ export async function GetState(req, res) {
     }
 
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows2] = await pool.query(

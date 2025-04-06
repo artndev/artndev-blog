@@ -14,7 +14,7 @@ import * as utils from '../utils.js'
 export async function Save(req, res) {
   try {
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows] = await pool.query(
@@ -53,7 +53,7 @@ export async function Save(req, res) {
 export async function Unsave(req, res) {
   try {
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows] = await pool.query(
@@ -88,7 +88,7 @@ export async function Unsave(req, res) {
 export async function GetSaves(req, res) {
   try {
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows] = await pool.query(
@@ -139,7 +139,7 @@ export async function GetState(req, res) {
     }
 
     // get id of current user from cookies
-    const { user_id } = JSON.parse(req.cookies.user_data)
+    const { user_id } = req.user
 
     // run query
     const [rows2] = await pool.query(

@@ -7,7 +7,9 @@ import config from '../config.json' with { type: 'json' }
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
 //     Username VARCHAR(20) NOT NULL UNIQUE,
-//     Password VARCHAR(255) NOT NULL, // VARCHAR(255) bc there is hashed password
+//      NULL is important
+//      VARCHAR(255) bc there is hashed password
+//     Password VARCHAR(255),
 //     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
 //     PRIMARY KEY(Id)
 // );
@@ -16,10 +18,26 @@ import config from '../config.json' with { type: 'json' }
 
 export async function Register(req, res) {
   try {
+    // run db query
+    await pool.query(
+      'INSERT INTO Users (Username) VALUES (?);',
+      req.body.username
+    )
+
+    // run db query
+    const [rows] = await pool.query(
+      'SELECT * FROM Users WHERE Username = ?;',
+      req.body.username
+    )
+
     // generate jwt
+    const data = {
+      user_id: rows[0].Id,
+      username: req.body.username,
+    }
     const token = jwt.sign(
       {
-        api_key: uuidv4(), // for double security
+        ...data,
         password: req.body.password,
       },
       process.env.SECRET_KEY,
@@ -28,24 +46,17 @@ export async function Register(req, res) {
       }
     )
 
-    // run db query
-    await pool.query('INSERT INTO Users (Username, Password) VALUES (?, ?);', [
-      req.body.username,
+    // insert jwt
+    await pool.query('UPDATE Users SET Password = ? WHERE Id = ?;', [
       token,
+      data.user_id,
     ])
-
-    // run db query
-    const [rows] = await pool.query(
-      'SELECT * FROM Users WHERE Username = ?;',
-      req.body.username
-    )
 
     // send answer
     res.status(200).json({
       message: 'You have successfully registered',
       answer: {
-        user_id: rows[0].Id,
-        username: req.body.username,
+        ...data,
         token: token,
         is_admin: process.env.ADMIN_TOKEN === token,
       },
@@ -64,7 +75,7 @@ export async function Login(req, res) {
     const [rows] = await pool.query('SELECT * FROM Users WHERE Username = ?;', [
       req.body.username,
     ])
-    console.log(rows)
+
     // check for condition
     if (!rows.length) {
       res.status(404).json({

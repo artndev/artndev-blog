@@ -12,7 +12,7 @@ import ErrorHandler from '../components/ErrorHandler.jsx'
 function Profile() {
   const navigator = useNavigate()
   const { admin, setAdmin } = useContext(AdminContext)
-  const { removeCookies, setToken, userData, setUserData } =
+  const { removeCookies, token, setToken, userData, setUserData } =
     useContext(AuthContext)
   const [data, setData] = useState(null)
   const [err, setErr] = useState(null)
@@ -21,7 +21,11 @@ function Profile() {
     e.preventDefault()
 
     axios
-      .post('/users/logout')
+      .post('/users/logout', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => navigator('/articles'))
       .then(() => {
         setTimeout(() => {
@@ -41,7 +45,11 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get('/saves')
+      .get('/saves', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(response => {
         setData(response.data.answer)
       })

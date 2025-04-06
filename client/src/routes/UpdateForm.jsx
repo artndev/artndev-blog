@@ -1,22 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ArticleForm from '../components/ArticleForm.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../axios.js'
 import ErrorHandler from '../components/ErrorHandler.jsx'
+import AuthContext from '../contexts/Auth.jsx'
 
 function UpdateForm() {
   const navigator = useNavigate()
+  const { token } = useContext(AuthContext)
   const { article_id } = useParams()
   const [data, setData] = useState(null)
   const [err, setErr] = useState(null)
 
   const updateArticle = (title, subtitle, text) => {
     axios
-      .put(`/articles/${article_id}/update`, {
-        title: title,
-        subtitle: subtitle,
-        text: text,
-      })
+      .put(
+        `/articles/${article_id}/update`,
+        {
+          title: title,
+          subtitle: subtitle,
+          text: text,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => navigator('/articles'))
       .catch(err => {
         console.log(err)

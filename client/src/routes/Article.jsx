@@ -14,9 +14,9 @@ import ErrorHandler from '../components/ErrorHandler.jsx'
 
 function Article() {
   const navigator = useNavigate()
-  const { article_id } = useParams()
-  const { auth } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
   const { admin } = useContext(AdminContext)
+  const { article_id } = useParams()
   const [data, setData] = useState(null)
   const [isLiked, setIsLiked] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
@@ -38,7 +38,11 @@ function Article() {
 
   const deleteArticle = () => {
     axios
-      .delete(`/articles/${article_id}/delete`)
+      .delete(`/articles/${article_id}/delete`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => navigator('/articles'))
       .catch(err => {
         console.log(err)
@@ -50,7 +54,11 @@ function Article() {
   // ========= REACTIONS =========
   useEffect(() => {
     axios
-      .get(`/likes/${article_id}/state`)
+      .get(`/likes/${article_id}/state`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(response => {
         setIsLiked(response.data.answer)
       })
@@ -65,7 +73,11 @@ function Article() {
     if (isLiked) return
 
     axios
-      .post(`/likes/${article_id}/like`)
+      .post(`/likes/${article_id}/like`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
         setIsLiked(true)
       })
@@ -80,7 +92,11 @@ function Article() {
     if (!isLiked) return
 
     axios
-      .post(`/likes/${article_id}/dislike`)
+      .post(`/likes/${article_id}/dislike`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
         setIsLiked(false)
       })
@@ -94,7 +110,11 @@ function Article() {
   // ========= SAVES =========
   useEffect(() => {
     axios
-      .get(`/saves/${article_id}/state`)
+      .get(`/saves/${article_id}/state`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(response => {
         setIsSaved(response.data.answer)
       })
@@ -109,7 +129,11 @@ function Article() {
     if (isSaved) return
 
     axios
-      .post(`/saves/${article_id}/save`)
+      .post(`/saves/${article_id}/save`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
         setIsSaved(true)
       })
@@ -124,7 +148,11 @@ function Article() {
     if (!isSaved) return
 
     axios
-      .post(`/saves/${article_id}/unsave`)
+      .post(`/saves/${article_id}/unsave`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
         setIsSaved(false)
       })
@@ -161,7 +189,7 @@ function Article() {
                 height={35}
                 className={`static invert ${isLiked ? ' pressed' : ''}`}
                 onClick={() => {
-                  if (!auth) {
+                  if (!token) {
                     navigator('/login')
                     return
                   }
@@ -186,7 +214,7 @@ function Article() {
               height={35}
               className={`static invert ${isSaved ? ' pressed' : ''}`}
               onClick={() => {
-                if (!auth) {
+                if (!token) {
                   navigator('/login')
                   return
                 }
