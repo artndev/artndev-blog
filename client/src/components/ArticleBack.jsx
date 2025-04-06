@@ -1,6 +1,6 @@
 import '../styles/css/ArticleBack.css'
 import React from 'react'
-import config from '../config.json'
+import config from '../../config.json'
 
 const readingTime = text => {
   const words = text.trim().split(/\s+/).length

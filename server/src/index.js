@@ -7,7 +7,7 @@ import users from './routers/users.js'
 import saves from './routers/saves.js'
 import cookieParser from 'cookie-parser'
 import * as middlewares from './middlewares.js'
-import config from './config.json' with { type: 'json' }
+import config from '../config.json' with { type: 'json' }
 
 const app = express()
 app.use(

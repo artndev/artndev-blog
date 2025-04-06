@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import MarkdownEditor from './MarkdownEditor'
 import Button from './Button.jsx'
 import Input from './Input.jsx'
-import config from '../config.json'
+import config from '../../config.json'
 
 const minmax = (n, min, max) => {
   return n >= min && n <= max

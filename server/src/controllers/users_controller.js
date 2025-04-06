@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import pool from '../pool.js'
 import { v4 as uuidv4 } from 'uuid'
 import * as utils from '../utils.js'
-import config from '../config.json' with { type: 'json' }
+import config from '../../config.json' with { type: 'json' }
 
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,

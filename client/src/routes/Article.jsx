@@ -1,7 +1,7 @@
 import '../styles/css/Article.css'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArticleFront from '../components/ArticleFront.jsx'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../axios.js'
 import AdminContext from '../contexts/Admin.jsx'
 import AuthContext from '../contexts/Auth.jsx'
@@ -10,7 +10,6 @@ import bookmark from '../imgs/bookmark.svg'
 import pen from '../imgs/pen.svg'
 import bin from '../imgs/bin.svg'
 import Button from '../components/Button.jsx'
-import config from '../config.json'
 import ErrorHandler from '../components/ErrorHandler.jsx'
 
 function Article() {

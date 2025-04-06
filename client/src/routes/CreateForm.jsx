@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ArticleForm from '../components/ArticleForm.jsx'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from '../axios.js'
 
 function CreateForm() {
