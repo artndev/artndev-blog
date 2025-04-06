@@ -12,7 +12,7 @@ import config from './config.json' with { type: 'json' }
 const app = express()
 app.use(
   cors({
-    origin: '*',
+    origin: config.FRONTEND_URL,
     credentials: true,
   })
 )
