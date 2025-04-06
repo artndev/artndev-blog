@@ -4,7 +4,9 @@ import * as middlewares from '../middlewares.js'
 
 const router = express.Router()
 
-router.get('/', await articlesController.GetAll)
+router.get('/', async (req, res) => {
+  return await articlesController.GetAll(req, res)
+})
 
 router.get('/:article_id', await articlesController.Get)
 
