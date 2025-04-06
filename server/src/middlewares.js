@@ -1,5 +1,10 @@
 import jwt from 'jsonwebtoken'
 
+export const allowCrossDomain = (_, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
+}
+
 export const isLogged = (req, res, next) => {
   try {
     if (

@@ -20,10 +20,10 @@ app.use(
 app.use(express.json())
 app.use(cookieParser())
 
-app.use('/articles', articles)
-app.use('/users', users)
-app.use('/likes', likes)
-app.use('/saves', middlewares.isLogged, saves)
+app.use('/articles', middlewares.allowCrossDomain, articles)
+app.use('/users', middlewares.allowCrossDomain, users)
+app.use('/likes', middlewares.allowCrossDomain, likes)
+app.use('/saves', middlewares.allowCrossDomain, middlewares.isLogged, saves)
 
 const port = config.SERVER_PORT || 8000
 app.listen(port, () => console.log(`Server listening on port ${port}`))
