@@ -3,15 +3,15 @@ import { useCookies } from 'react-cookie'
 
 const AuthContext = createContext({})
 export const AuthProvider = ({ children }) => {
-  const [cookies, setCookies, removeCookies] = useCookies([]) // auto-decoded
+  const [cookies, setCookie, removeCookie] = useCookies([]) // auto-decoded
   const [token, setToken] = useState(cookies?.token)
   const [userData, setUserData] = useState(cookies?.user_data)
 
   return (
     <AuthContext.Provider
       value={{
-        setCookies,
-        removeCookies,
+        setCookie,
+        removeCookie,
         token,
         setToken,
         userData,

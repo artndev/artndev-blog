@@ -8,7 +8,7 @@ import config from '../config.json'
 
 function RegisterForm() {
   const navigator = useNavigate()
-  const { setCookies, setToken, setUserData } = useContext(AuthContext)
+  const { setCookie, setToken, setUserData } = useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
   const [err, setErr] = React.useState(null)
 
@@ -35,8 +35,8 @@ function RegisterForm() {
         setTimeout(() => {
           const { token, ...userData } = response.data.answer
 
-          setCookies('user_data', userData, config.COOKIES_OPTIONS)
-          setCookies('token', token, config.COOKIES_OPTIONS)
+          setCookie('user_data', userData, config.COOKIES_OPTIONS)
+          setCookie('token', token, config.COOKIES_OPTIONS)
           setUserData(userData)
           setToken(token)
           setAdmin(userData.is_admin)

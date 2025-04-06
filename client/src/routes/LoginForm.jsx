@@ -9,7 +9,7 @@ import {} from 'react-cookie'
 
 function LoginForm() {
   const navigator = useNavigate()
-  const { setCookies, setToken, setUserData } = useContext(AuthContext)
+  const { setCookie, setToken, setUserData } = useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
   const [err, setErr] = useState(null)
 
@@ -37,8 +37,8 @@ function LoginForm() {
           const { token, ...userData } = response.data.answer
           // console.log(token, userData)
 
-          setCookies('user_data', userData, config.COOKIES_OPTIONS)
-          setCookies('token', token, config.COOKIES_OPTIONS)
+          setCookie('user_data', userData, config.COOKIES_OPTIONS)
+          setCookie('token', token, config.COOKIES_OPTIONS)
           setUserData(userData)
           setToken(token)
           setAdmin(userData.is_admin)
