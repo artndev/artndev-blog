@@ -154,7 +154,7 @@ export async function GetAll(_, res) {
     const [rows] = await pool.query('SELECT * FROM Articles;')
 
     // send answer
-    res.header('Access-Control-Allow-Origin', '*').status(200).json({
+    res.status(200).json({
       message: 'You have successfully got all articles',
       answer: rows,
     })
