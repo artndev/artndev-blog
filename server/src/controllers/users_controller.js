@@ -49,10 +49,14 @@ export async function Register(req, res) {
     res
       .cookie('user_data', JSON.stringify(data), {
         maxAge: config.COOKIES_MAXAGE,
+        sameSite: 'None',
+        secure: true,
       })
       .cookie('token', token, {
         httpOnly: true,
         maxAge: config.COOKIES_MAXAGE,
+        sameSite: 'None',
+        secure: true,
       })
       .status(200)
       .json({
@@ -103,10 +107,14 @@ export async function Login(req, res) {
     res
       .cookie('user_data', JSON.stringify(data), {
         maxAge: config.COOKIES_MAXAGE,
+        sameSite: 'None',
+        secure: true,
       })
       .cookie('token', token, {
         httpOnly: true,
         maxAge: config.COOKIES_MAXAGE,
+        sameSite: 'None',
+        secure: true,
       })
       .status(200)
       .json({
