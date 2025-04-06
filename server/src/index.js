@@ -12,15 +12,11 @@ import config from './config.json' with { type: 'json' }
 const app = express()
 app.use(
   cors({
-    origin: true,
+    origin: '*',
     credentials: true,
   })
 )
-app.use((_, res) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', '*')
-  res.setHeader('Access-Control-Allow-Credentials', 'true')
-})
+
 app.use(express.json())
 app.use(cookieParser())
 
