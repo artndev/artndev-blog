@@ -4,31 +4,29 @@ import * as middlewares from '../middlewares.js'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  return await articlesController.GetAll(req, res)
-})
+router.get('/', articlesController.GetAll)
 
-router.get('/:article_id', await articlesController.Get)
+router.get('/:article_id', articlesController.Get)
 
 router.post(
   '/create',
   middlewares.isLogged,
   middlewares.isAdmin,
-  await articlesController.Create
+  articlesController.Create
 )
 
 router.put(
   '/:article_id/update',
   middlewares.isLogged,
   middlewares.isAdmin,
-  await articlesController.Update
+  articlesController.Update
 )
 
 router.delete(
   '/:article_id/delete',
   middlewares.isLogged,
   middlewares.isAdmin,
-  await articlesController.Delete
+  articlesController.Delete
 )
 
 export default router
