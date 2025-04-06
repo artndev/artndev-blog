@@ -18,10 +18,10 @@ app.use(
   })
 )
 
-// app.use((_, res, next) => {
-//   res.append('Access-Control-Allow-Origin', ['*'])
-//   next()
-// })
+app.use((_, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*'])
+  next()
+})
 
 app.use(express.json())
 app.use(cookieParser())
