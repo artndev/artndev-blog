@@ -22,6 +22,7 @@ function Article() {
   const [isSaved, setIsSaved] = useState(false)
   const [err, setErr] = useState(null)
 
+  // GET / DELETE requests don't need blank curly brackets
   // ========= DATA =========
   useEffect(() => {
     axios
@@ -73,11 +74,15 @@ function Article() {
     if (isLiked) return
 
     axios
-      .post(`/likes/${article_id}/like`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `/likes/${article_id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setIsLiked(true)
       })
@@ -92,11 +97,15 @@ function Article() {
     if (!isLiked) return
 
     axios
-      .post(`/likes/${article_id}/dislike`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `/likes/${article_id}/dislike`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setIsLiked(false)
       })
@@ -129,11 +138,15 @@ function Article() {
     if (isSaved) return
 
     axios
-      .post(`/saves/${article_id}/save`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `/saves/${article_id}/save`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setIsSaved(true)
       })
@@ -148,11 +161,15 @@ function Article() {
     if (!isSaved) return
 
     axios
-      .post(`/saves/${article_id}/unsave`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `/saves/${article_id}/unsave`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setIsSaved(false)
       })

@@ -21,11 +21,15 @@ function Profile() {
     e.preventDefault()
 
     axios
-      .post('/users/logout', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        '/users/logout',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => navigator('/articles'))
       .then(() => {
         setTimeout(() => {
