@@ -1,12 +1,12 @@
 import axios from 'axios'
 import config from './config.json'
 
-// withCredentials: true,
+// headers: {
+//   'Access-Control-Allow-Credentials': true,
+// },
 const instance = axios.create({
   baseURL: config.BACKEND_URL,
-  headers: {
-    'Access-Control-Allow-Credentials': true,
-  },
+  withCredentials: true,
 })
 
 export default instance
