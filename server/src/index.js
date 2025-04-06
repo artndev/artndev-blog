@@ -17,7 +17,7 @@ app.use(
   })
 )
 
-// app.use((_, res, next) => {
+/// app.use((_, res, next) => {
 //   res.append('Access-Control-Allow-Origin', ['*'])
 //   next()
 // })
