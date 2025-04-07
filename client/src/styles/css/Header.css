@@ -5,8 +5,8 @@
   width: 100%;
   padding: 30px 20px 0 20px;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .header {

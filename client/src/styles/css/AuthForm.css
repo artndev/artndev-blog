@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 50px 20px 0 20px;
+  padding: 50px 20px 20px 20px;
 }
 
 .auth__form-subcontainer {
@@ -70,8 +70,8 @@
   border: none;
 }
 .auth__form-ipt__group-btn.opened {
-  background-image: url('../../imgs/eye_opened.png');
+  background-image: url("../../imgs/eye_opened.png");
 }
 .auth__form-ipt__group-btn.closed {
-  background-image: url('../../imgs/eye_closed.png');
+  background-image: url("../../imgs/eye_closed.png");
 }

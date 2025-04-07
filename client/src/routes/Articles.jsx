@@ -73,11 +73,13 @@ function Articles() {
                 return (
                   <div key={i}>
                     <Button
+                      isInverted={true}
+                      isStatic={true}
+                      isPressed={page === i + 1}
+                      onClick={() => setPage(i + 1)}
                       width={35}
                       height={35}
-                      className={`static invert${page === i + 1 ? ' pressed bold' : ''}`}
                       type={'submit'}
-                      onClick={() => setPage(i + 1)}
                       content={i + 1}
                     />
                   </div>

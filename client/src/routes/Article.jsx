@@ -202,9 +202,8 @@ function Article() {
           <div className="article__btns">
             <div className="article__btns-group">
               <Button
-                width={35}
-                height={35}
-                className={`static invert ${isLiked ? ' pressed' : ''}`}
+                isPressed={isLiked}
+                isInverted={true}
                 onClick={() => {
                   if (!token) {
                     navigator('/login')
@@ -218,6 +217,8 @@ function Article() {
 
                   likeArticle()
                 }}
+                width={35}
+                height={35}
                 content={<img src={heart} alt="Like" />}
               />
               <div>
@@ -227,9 +228,8 @@ function Article() {
               </div>
             </div>
             <Button
-              width={35}
-              height={35}
-              className={`static invert ${isSaved ? ' pressed' : ''}`}
+              isPressed={isSaved}
+              isInverted={true}
               onClick={() => {
                 if (!token) {
                   navigator('/login')
@@ -243,22 +243,24 @@ function Article() {
 
                 saveArticle()
               }}
+              width={35}
+              height={35}
               content={<img src={bookmark} alt="Like" />}
             />
             {admin && (
               <>
                 <Button
+                  isInverted={true}
+                  onClick={() => navigator(`/articles/${article_id}/update`)}
                   width={35}
                   height={35}
-                  className={'static invert'}
-                  onClick={() => navigator(`/articles/${article_id}/update`)}
                   content={<img src={pen} alt="Update" />}
                 />
                 <Button
+                  isInverted={true}
+                  onClick={() => deleteArticle()}
                   width={35}
                   height={35}
-                  className={'static invert'}
-                  onClick={() => deleteArticle()}
                   content={<img src={bin} alt="Delete" />}
                 />
               </>

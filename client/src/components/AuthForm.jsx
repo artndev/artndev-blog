@@ -43,11 +43,8 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
               <Input
                 width={'inherit'}
                 height={45}
-                onKeyDown={e => {
-                  if (e.code === 'Space') e.preventDefault()
-                }}
-                pattern={config.PATTERNS.AUTH_FORM.USERNAME}
                 name={'username'}
+                pattern={config.PATTERNS.AUTH_FORM.USERNAME}
               />
             </div>
             <div className="auth__form-group">
@@ -66,18 +63,15 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
                 <Input
                   width={'inherit'}
                   height={45}
-                  onKeyDown={e => {
-                    if (e.code === 'Space') e.preventDefault()
-                  }}
                   ref={inputRef}
-                  type={inputType ? 'text' : 'password'}
-                  pattern={config.PATTERNS.AUTH_FORM.PASSWORD}
                   name={'password'}
+                  type={!inputType ? 'password' : ''}
+                  pattern={config.PATTERNS.AUTH_FORM.PASSWORD}
                 />
                 <button
+                  className="auth__form-ipt__group-btn closed"
                   ref={btnRef}
                   type="button"
-                  className="auth__form-ipt__group-btn closed"
                   onClick={() => setInputType(!inputType)}
                 />
               </div>
@@ -85,6 +79,7 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
           </div>
           <div className="auth__form-btn__group">
             <Button
+              isStatic={true}
               width={'min(200px, 100%)'}
               height={45}
               type={'submit'}

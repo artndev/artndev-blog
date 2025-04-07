@@ -12,7 +12,7 @@
 }
 .article__back:hover {
   border: 1px solid #343a40;
-  transform: translateY(-2.5px);
+  transform: translateY(-1.5px);
 }
 
 .article__back-group {

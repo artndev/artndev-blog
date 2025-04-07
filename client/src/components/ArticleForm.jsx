@@ -71,9 +71,9 @@ function ArticleForm({
             </label>
             <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
+              onChange={e => setTitle(e.target.value)}
               width={'min(500px, 100%)'}
               height={45}
-              onChange={e => setTitle(e.target.value)}
               name={'title'}
               defaultValue={defaultTitle}
             />
@@ -88,9 +88,9 @@ function ArticleForm({
             </label>
             <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
+              onChange={e => setSubtitle(e.target.value)}
               width={'min(500px, 100%)'}
               height={45}
-              onChange={e => setSubtitle(e.target.value)}
               name={'subtitle'}
               defaultValue={defaultSubtitle}
             />
@@ -108,6 +108,7 @@ function ArticleForm({
           </div>
         </div>
         <Button
+          isStatic={true}
           width={'min(200px, 100%)'}
           height={45}
           type={'submit'}

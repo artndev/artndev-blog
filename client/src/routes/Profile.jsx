@@ -87,7 +87,7 @@ function Profile() {
               <Button
                 width={35}
                 height={35}
-                className={'static invert'}
+                isInverted={true}
                 type={'submit'}
                 content={<img src={exit} alt="Logout" />}
               />

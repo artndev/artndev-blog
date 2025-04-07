@@ -1,39 +1,44 @@
 import React from 'react'
 
 function Input({
-  content,
-  className,
-  ref,
-  type,
-  onKeyDown,
+  includeSpaces,
   onChange,
+  width,
+  height,
+  style,
+  ref,
   name,
+  type,
   value,
   defaultValue,
   pattern,
   placeholder,
-  width,
-  height,
-  style,
+  content,
 }) {
   return (
     <input
-      className={`ipt f-smx ${className ? ` ${className}` : ''}`}
-      ref={ref}
-      type={type || 'text'}
-      onKeyDown={onKeyDown}
+      onKeyDown={
+        !includeSpaces
+          ? e => {
+              if (e.code === 'Space') e.preventDefault()
+            }
+          : null
+      }
       onChange={onChange}
-      id={name}
-      name={name}
-      value={value}
-      defaultValue={defaultValue}
-      pattern={pattern}
-      placeholder={placeholder || `Enter ${name}...`}
+      className={'ipt f-smx'}
       style={{
         width: width,
         height: height,
         ...style,
       }}
+      ref={ref}
+      id={name}
+      name={name}
+      type={type}
+      value={value}
+      defaultValue={defaultValue}
+      pattern={pattern}
+      placeholder={placeholder || `Enter ${name}...`}
       required
     >
       {content}

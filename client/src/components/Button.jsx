@@ -1,21 +1,23 @@
 import React from 'react'
 
 function Button({
-  content,
-  className,
-  ref,
-  type,
+  isInverted,
+  isStatic,
+  isPressed,
   onClick,
   width,
   height,
   style,
+  ref,
+  type,
+  content,
 }) {
   return (
     <button
-      className={`btn f-smx ${className ? ` ${className}` : ''}`}
-      ref={ref}
-      type={type || 'button'}
       onClick={onClick}
+      className={`btn f-smx${isStatic ? ' static' : ''}${isInverted ? ' invert' : ''}${isPressed ? ' pressed' : ''}`}
+      ref={ref}
+      type={type}
       style={{
         width: width,
         height: height,

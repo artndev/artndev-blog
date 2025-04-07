@@ -7,9 +7,9 @@
   ],
 
   "MAX_ARTICLES_PER_PAGE": 6,
-  "ACCEPTED_ERR_CODES": [401],
-  "_comment": "http://localhost:5000",
-  "BACKEND_URL": "https://artndev-blog-backend.vercel.app",
+  "ACCEPTED_ERR_CODES": [401, 403],
+  "_comment": "https://artndev-blog-backend.vercel.app",
+  "BACKEND_URL": "http://localhost:5000",
   "COOKIES_OPTIONS": {
     "secure": true,
     "sameSite": "none",
