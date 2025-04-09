@@ -1,3 +1,63 @@
+#black {
+  color: #343a40;
+}
+
+#dark {
+  color: #495057;
+}
+
+#grey {
+  color: #68727b;
+}
+
+#white {
+  color: #e9ecef;
+}
+
+#red {
+  color: #ff4444;
+}
+
+#blue {
+  color: #4099ff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.f-sm {
+  font-size: 11px;
+}
+
+.f-smx {
+  font-size: 13px;
+}
+
+.f-md {
+  font-size: 15px;
+}
+
+.f-mdx {
+  font-size: 17px;
+}
+
+.f-bg {
+  font-size: 19px;
+}
+
+.f-bgx {
+  font-size: 21px;
+}
+
+.f-hg {
+  font-size: 23px;
+}
+
+.f-hgx {
+  font-size: 25px;
+}
+
 .article__back {
   display: flex;
   flex-direction: column;
