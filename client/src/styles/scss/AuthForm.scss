@@ -72,10 +72,10 @@
   border: none;
 
   &.opened {
-    background-image: url('../../imgs/eye_opened.png');
+    background-image: url('../../imgs/eye-opened.svg');
   }
 
   &.closed {
-    background-image: url('../../imgs/eye_closed.png');
+    background-image: url('../../imgs/eye-closed.svg');
   }
 }
