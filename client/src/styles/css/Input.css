@@ -1,0 +1,13 @@
+.ipt {
+  border: 1px solid #68727b;
+  border-radius: 5px;
+  padding: 15px;
+}
+.ipt.hidden {
+  position: absolute;
+  visibility: hidden;
+}
+.ipt:focus {
+  border: 2px solid #343a40;
+  outline: none;
+}
