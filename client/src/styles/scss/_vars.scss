@@ -22,3 +22,63 @@ $f-bg: 19px;
 $f-bgx: 21px;
 $f-hg: 23px;
 $f-hgx: 25px;
+
+#black {
+  color: $black;
+}
+
+#dark {
+  color: $dark;
+}
+
+#grey {
+  color: $grey;
+}
+
+#white {
+  color: $white;
+}
+
+#red {
+  color: $red;
+}
+
+#blue {
+  color: $blue;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.f-sm {
+  font-size: $f-sm;
+}
+
+.f-smx {
+  font-size: $f-smx;
+}
+
+.f-md {
+  font-size: $f-md;
+}
+
+.f-mdx {
+  font-size: $f-mdx;
+}
+
+.f-bg {
+  font-size: $f-bg;
+}
+
+.f-bgx {
+  font-size: $f-bgx;
+}
+
+.f-hg {
+  font-size: $f-hg;
+}
+
+.f-hgx {
+  font-size: $f-hgx;
+}
