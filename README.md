@@ -2,9 +2,10 @@ You can find there a personal blog created mainly using React / Express. It has 
 
 ### Stack
 
-<div style="display: flex; gap: 20px;">
-    <img src="./assets/react.svg" width=50 />
-    <img src="./assets/express.svg" width=50 />
-    <img src="./assets/axios.svg" width=50 />
-    <img src="./assets/figma.svg" width=50 />
-</div>
+<img src="./assets/react.svg" width=50 />
+&nbsp;
+&nbsp;
+<img src="./assets/express.svg" width=50 />
+&nbsp;
+<img src="./assets/axios.svg" width=50 />
+<img src="./assets/figma.svg" width=50 />
