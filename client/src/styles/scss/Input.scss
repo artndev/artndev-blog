@@ -1,0 +1,17 @@
+@import './vars.scss';
+
+.ipt {
+  border: 1px solid $grey;
+  border-radius: 5px;
+  padding: $s-md;
+
+  &.hidden {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  &:focus {
+    border: 2px solid $black;
+    outline: none;
+  }
+}
