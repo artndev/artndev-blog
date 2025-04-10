@@ -32,12 +32,13 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
               <label htmlFor="username">
                 Username
                 <span className="f-smx" id="red">
-                  * (can not be started with a digit)
+                  *
                 </span>
                 :
               </label>
               <div className="auth__form-group__info f-smx">
-                Must contain 5 to 20 characters without spaces:
+                Can not be started with a digit. Must contain 5 to 20 characters
+                without spaces:
                 <i>'a-z/0-9/_'</i>
               </div>
               <Input
