@@ -1,6 +1,12 @@
 import jwt from 'jsonwebtoken'
+import type { NextFunction, Response } from 'express'
+import type { IRequestWithUser, IUser } from './types.ts'
 
-export const isLogged = (req, res, next) => {
+export const isLogged = (
+  req: IRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     // console.log(req.headers)
 
@@ -12,8 +18,8 @@ export const isLogged = (req, res, next) => {
       return
     }
 
-    const token = req.headers.authorization.split(' ')[1]
-    if (!jwt.verify(token, process.env.SECRET_KEY)) {
+    const token: string = req.headers.authorization.split(' ')[1]!
+    if (!jwt.verify(token, process.env.SECRET_KEY!)) {
       res.status(401).json({
         message: 'You are not authorized',
         answer: null,
@@ -21,7 +27,7 @@ export const isLogged = (req, res, next) => {
       return
     }
 
-    req.user = jwt.decode(token)
+    req.user = jwt.decode(token) as IUser
     next()
   } catch (err) {
     console.log(err)
@@ -34,7 +40,11 @@ export const isLogged = (req, res, next) => {
   }
 }
 
-export const isNotLogged = (req, res, next) => {
+export const isNotLogged = (
+  req: IRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     if (req.headers.authorization) {
       res.status(403).json({
@@ -55,9 +65,13 @@ export const isNotLogged = (req, res, next) => {
   }
 }
 
-export const isAdmin = (req, res, next) => {
+export const isAdmin = (
+  req: IRequestWithUser,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const token = req.headers.authorization.split(' ')[1]
+    const token: string = req.headers.authorization!.split(' ')[1]!
     if (token !== process.env.ADMIN_TOKEN) {
       res.status(403).json({
         message: 'You have no access to request',
@@ -66,7 +80,7 @@ export const isAdmin = (req, res, next) => {
       return
     }
 
-    req.user = jwt.decode(token)
+    req.user = jwt.decode(token) as IUser
     next()
   } catch (err) {
     console.log(err)
