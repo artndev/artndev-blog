@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import type { NextFunction, Response } from 'express'
-import type { IRequestWithUser, IUser } from './types.ts'
+import type { IJwtPayload, IRequestWithUser, IUser } from './types.ts'
 
 export const isLogged = (
   req: IRequestWithUser,
@@ -27,7 +27,7 @@ export const isLogged = (
       return
     }
 
-    req.user = jwt.decode(token) as IUser
+    req.user = jwt.decode(token) as IJwtPayload
     next()
   } catch (err) {
     console.log(err)
@@ -80,7 +80,7 @@ export const isAdmin = (
       return
     }
 
-    req.user = jwt.decode(token) as IUser
+    req.user = jwt.decode(token) as IJwtPayload
     next()
   } catch (err) {
     console.log(err)

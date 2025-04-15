@@ -1,5 +1,7 @@
+import type { ResultSetHeader } from 'mysql2'
 import pool from '../pool.js'
-import * as utils from '../utils.js'
+import type { IArticle, ILike, IRequestWithUser, ISave } from '../types.ts'
+import type { Request, Response } from 'express'
 
 // CREATE TABLE Saves (
 //     ArticleId INT NOT NULL,
@@ -11,13 +13,13 @@ import * as utils from '../utils.js'
 
 // ====== SEND REQUESTS ======
 
-export async function Save(req, res) {
+export async function Save(req: IRequestWithUser, res: Response) {
   try {
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;',
       [req.params.article_id, user_id]
     )
@@ -32,10 +34,10 @@ export async function Save(req, res) {
     }
 
     // run query
-    await pool.query('INSERT INTO Saves (ArticleId, UserId) VALUES (?, ?);', [
-      req.params.article_id,
-      user_id,
-    ])
+    await pool.query<ResultSetHeader>(
+      'INSERT INTO Saves (ArticleId, UserId) VALUES (?, ?);',
+      [req.params.article_id, user_id]
+    )
 
     // send answer
     res.status(200).json({
@@ -46,17 +48,20 @@ export async function Save(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export async function Unsave(req, res) {
+export async function Unsave(req: IRequestWithUser, res: Response) {
   try {
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<ResultSetHeader>(
       'DELETE FROM Saves WHERE ArticleId = ? AND UserId = ?;',
       [req.params.article_id, user_id]
     )
@@ -79,19 +84,22 @@ export async function Unsave(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
 // ====== GET REQUESTS ======
 
-export async function GetSaves(req, res) {
+export async function GetSaves(req: IRequestWithUser, res: Response) {
   try {
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IArticle[]>(
       `
                 SELECT 
                     Articles.Id,
@@ -115,16 +123,19 @@ export async function GetSaves(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
 // ====== STATE REQUEST ======
 
-export async function GetState(req, res) {
+export async function GetState(req: IRequestWithUser, res: Response) {
   try {
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Articles WHERE Id = ?',
       req.params.article_id
     )
@@ -139,10 +150,10 @@ export async function GetState(req, res) {
     }
 
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows2] = await pool.query(
+    const [rows2] = await pool.query<ISave[]>(
       'SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;',
       [req.params.article_id, user_id]
     )
@@ -156,6 +167,9 @@ export async function GetState(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }

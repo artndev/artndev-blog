@@ -1,5 +1,7 @@
+import type { ResultSetHeader, RowDataPacket } from 'mysql2'
 import pool from '../pool.js'
-import * as utils from '../utils.js'
+import type { IArticle, ILike, ILikes, IRequestWithUser } from '../types.js'
+import type { Request, Response } from 'express'
 
 // CREATE TABLE Likes (
 //     ArticleId INT NOT NULL,
@@ -11,13 +13,13 @@ import * as utils from '../utils.js'
 
 // ====== SEND REQUESTS ======
 
-export async function Like(req, res) {
+export async function Like(req: IRequestWithUser, res: Response) {
   try {
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<ILike[]>(
       'SELECT * FROM Likes WHERE ArticleId = ? AND UserId = ?;',
       [req.params.article_id, user_id]
     )
@@ -46,17 +48,20 @@ export async function Like(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export async function Dislike(req, res) {
+export async function Dislike(req: IRequestWithUser, res: Response) {
   try {
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<ResultSetHeader>(
       'DELETE FROM Likes WHERE ArticleId = ? AND UserId = ?;',
       [req.params.article_id, user_id]
     )
@@ -79,16 +84,19 @@ export async function Dislike(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
 // ====== GET REQUESTS ======
 
-export async function CountLikes(req, res) {
+export async function CountLikes(req: Request, res: Response) {
   try {
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Articles WHERE Id = ?;',
       req.params.article_id
     )
@@ -103,7 +111,7 @@ export async function CountLikes(req, res) {
     }
 
     // run query
-    const [rows2] = await pool.query(
+    const [rows2] = await pool.query<ILikes[]>(
       'SELECT COUNT(*) as likes FROM Likes WHERE ArticleId = ?',
       req.params.article_id
     )
@@ -112,25 +120,26 @@ export async function CountLikes(req, res) {
     res.status(200).json({
       message: 'You have successfully got likes of article',
       answer: (() => {
-        const [{ likes }] = rows2
-
-        return likes
+        return rows2[0]!.likes
       })(),
     })
   } catch (err) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
 // ====== STATE REQUEST ======
 
-export async function GetState(req, res) {
+export async function GetState(req: IRequestWithUser, res: Response) {
   try {
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Articles WHERE Id = ?',
       req.params.article_id
     )
@@ -145,10 +154,10 @@ export async function GetState(req, res) {
     }
 
     // get id of current user from cookies
-    const { user_id } = req.user
+    const { user_id } = req.user!
 
     // run query
-    const [rows2] = await pool.query(
+    const [rows2] = await pool.query<ILikes[]>(
       'SELECT COUNT(*) as likes FROM Likes WHERE ArticleId = ? AND UserId = ?',
       [req.params.article_id, user_id]
     )
@@ -157,15 +166,16 @@ export async function GetState(req, res) {
     res.status(200).json({
       message: 'You have successfully got likes-state of article',
       answer: (() => {
-        const [{ likes }] = rows2
-
-        return likes > 0 ? true : false
+        return rows2[0]!.likes > 0 ? true : false
       })(),
     })
   } catch (err) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }

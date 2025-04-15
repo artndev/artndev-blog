@@ -1,8 +1,17 @@
 import jwt from 'jsonwebtoken'
 import pool from '../pool.js'
 import { v4 as uuidv4 } from 'uuid'
-import * as utils from '../utils.js'
 import config from '../config.json' with { type: 'json' }
+import type {
+  IArticle,
+  IJwtPayload,
+  ILike,
+  IRequestWithUser,
+  ISave,
+  IUser,
+} from '../types.ts'
+import type { Request, Response } from 'express'
+import type { ResultSetHeader } from 'mysql2'
 
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
@@ -16,23 +25,23 @@ import config from '../config.json' with { type: 'json' }
 
 // ====== SEND REQUESTS ======
 
-export async function Register(req, res) {
+export async function Register(req: Request, res: Response) {
   try {
     // run db query
-    await pool.query(
+    await pool.query<ResultSetHeader>(
       'INSERT INTO Users (Username) VALUES (?);',
       req.body.username
     )
 
     // run db query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IUser[]>(
       'SELECT * FROM Users WHERE Username = ?;',
       req.body.username
     )
 
     // generate jwt
     const data = {
-      user_id: rows[0].Id,
+      user_id: rows[0]!.Id,
       username: req.body.username,
     }
     const token = jwt.sign(
@@ -40,7 +49,7 @@ export async function Register(req, res) {
         ...data,
         password: req.body.password,
       },
-      process.env.SECRET_KEY,
+      process.env.SECRET_KEY!,
       {
         algorithm: 'HS256',
       }
@@ -65,16 +74,20 @@ export async function Register(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export async function Login(req, res) {
+export async function Login(req: Request, res: Response) {
   try {
     // run db query
-    const [rows] = await pool.query('SELECT * FROM Users WHERE Username = ?;', [
-      req.body.username,
-    ])
+    const [rows] = await pool.query<IUser[]>(
+      'SELECT * FROM Users WHERE Username = ?;',
+      [req.body.username]
+    )
 
     // check for condition
     if (!rows.length) {
@@ -86,8 +99,8 @@ export async function Login(req, res) {
     }
 
     // check for condition
-    const token = rows[0].Password
-    const { password } = jwt.decode(token)
+    const token = rows[0]!.Password
+    const { password } = jwt.decode(token) as IJwtPayload
     if (password !== req.body.password) {
       res.status(400).json({
         message: 'Password is incorrect',
@@ -100,7 +113,7 @@ export async function Login(req, res) {
     res.status(200).json({
       message: 'You have successfully logged in',
       answer: {
-        user_id: rows[0].Id,
+        user_id: rows[0]!.Id,
         username: req.body.username,
         token: token,
         is_admin: process.env.ADMIN_TOKEN === token,
@@ -110,11 +123,14 @@ export async function Login(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export function Logout(_, res) {
+export function Logout(_: Request | undefined, res: Response) {
   try {
     // send answer
     res.clearCookie('user_data').clearCookie('token').status(200).json({
@@ -125,6 +141,9 @@ export function Logout(_, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }

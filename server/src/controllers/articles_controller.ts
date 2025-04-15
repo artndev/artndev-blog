@@ -1,5 +1,7 @@
+import type { ResultSetHeader, RowDataPacket } from 'mysql2'
 import pool from '../pool.js'
-import * as utils from '../utils.js'
+import type { Request, Response } from 'express'
+import type { IArticle, ILike } from '../types.js'
 
 // CREATE TABLE Articles (
 //     Id INT AUTO_INCREMENT,
@@ -12,7 +14,7 @@ import * as utils from '../utils.js'
 
 // ====== SEND REQUESTS ======
 
-export async function Create(req, res) {
+export async function Create(req: Request, res: Response) {
   try {
     // run query
     await pool.query(
@@ -29,14 +31,17 @@ export async function Create(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export async function Update(req, res) {
+export async function Update(req: Request, res: Response) {
   try {
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<ResultSetHeader>(
       `
                 UPDATE Articles SET 
                     Title = ?, 
@@ -66,46 +71,14 @@ export async function Update(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-// export async function DeleteAll(_, res) {
-//     try {
-//         // run query
-//         const [rows] = await pool.query(
-//             `
-//                 DELETE FROM Likes;
-//                 DELETE FROM Saves;
-//                 DELETE FROM Articles;
-//                 ALTER TABLE Articles AUTO_INCREMENT = 1;
-//             `
-//         )
-
-//         // check for condition
-//         if (!rows.affectedRows)
-//         {
-//             res.status(400).json({
-//                 message: "There are no articles to delete",
-//                 answer: null
-//             })
-//             return
-//         }
-
-//         // send answer
-//         res.status(200).json({
-//             message: "You have successfully deleted all articles",
-//             answer: true
-//         })
-//     } catch (err) {
-//         console.log(err)
-
-//         // send answer
-//         res.status(500).json(utils.errHandler(err))
-//     }
-// }
-
-export async function Delete(req, res) {
+export async function Delete(req: Request, res: Response) {
   try {
     // run query
     await pool.query(
@@ -121,7 +94,7 @@ export async function Delete(req, res) {
     )
 
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<ResultSetHeader>(
       'DELETE FROM Articles WHERE Id = ?;',
       req.params.article_id
     )
@@ -144,14 +117,17 @@ export async function Delete(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export async function GetAll(_, res) {
+export async function GetAll(_: Request | undefined, res: Response) {
   try {
     // run query
-    const [rows] = await pool.query('SELECT * FROM Articles;')
+    const [rows] = await pool.query<IArticle[]>('SELECT * FROM Articles;')
 
     // send answer
     res.status(200).json({
@@ -162,14 +138,17 @@ export async function GetAll(_, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
 
-export async function Get(req, res) {
+export async function Get(req: Request, res: Response) {
   try {
     // run query
-    const [rows] = await pool.query(
+    const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Articles WHERE Id = ?;',
       req.params.article_id
     )
@@ -183,7 +162,7 @@ export async function Get(req, res) {
       return
     }
 
-    const [rows2] = await pool.query(
+    const [rows2] = await pool.query<ILike[]>(
       'SELECT * FROM Likes WHERE ArticleId = ?;',
       req.params.article_id
     )
@@ -197,6 +176,9 @@ export async function Get(req, res) {
     console.log(err)
 
     // send answer
-    res.status(500).json(utils.errHandler(err))
+    res.status(500).json({
+      message: 'Server is not responding',
+      answer: err,
+    })
   }
 }
