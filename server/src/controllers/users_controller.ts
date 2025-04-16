@@ -1,17 +1,10 @@
-import jwt from 'jsonwebtoken'
-import pool from '../pool.js'
-import { v4 as uuidv4 } from 'uuid'
-import config from '../config.json' with { type: 'json' }
-import type {
-  IArticle,
-  IJwtPayload,
-  ILike,
-  IRequestWithUser,
-  ISave,
-  IUser,
-} from '../types.ts'
 import type { Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
 import type { ResultSetHeader } from 'mysql2'
+import pool from '../pool.js'
+import type { IJwtPayload, IUser } from '../types.ts'
+import config from '../config.json' with { type: 'json' }
+import { v4 as uuidv4 } from 'uuid'
 
 // CREATE TABLE Users (
 //     Id INT AUTO_INCREMENT,
@@ -52,6 +45,7 @@ export async function Register(req: Request, res: Response) {
       process.env.SECRET_KEY!,
       {
         algorithm: 'HS256',
+        expiresIn: config.ACCESS_TOKEN_OPTIONS.expiresIn,
       }
     )
 
@@ -65,9 +59,17 @@ export async function Register(req: Request, res: Response) {
     res.status(200).json({
       message: 'You have successfully registered',
       answer: {
-        ...data,
-        token: token,
-        is_admin: process.env.ADMIN_TOKEN === token,
+        user: {
+          ...data,
+          is_admin: process.env.ADMIN_TOKEN === token,
+        },
+        refresh_token: {
+          value: uuidv4(),
+          options: config.REFRESH_TOKEN_OPTIONS,
+        },
+        access_token: {
+          value: token,
+        },
       },
     })
   } catch (err) {
