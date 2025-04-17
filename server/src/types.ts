@@ -1,20 +1,12 @@
 import type { Request } from 'express'
+import type { JwtPayload } from 'jsonwebtoken'
 import type { RowDataPacket } from 'mysql2'
-
-export interface IJwtPayload {
-  user_id: number
-  username: string
-  password: string
-}
-
-export interface IRequestWithUser extends Request {
-  user?: IJwtPayload
-}
 
 export interface IUser extends RowDataPacket {
   Id: number
   Username: string
   Password: string
+  Role: string
   Updated: string
 }
 
@@ -39,3 +31,19 @@ export interface ILike extends RowDataPacket {
 export interface ILikes extends RowDataPacket {
   likes: number
 }
+
+export interface IPasswordTokenJwtPayload extends JwtPayload {
+  password: string
+}
+
+export interface IAccessTokenJwtPayload extends JwtPayload {
+  user: {
+    user_id: number
+    username: string
+    is_admin: boolean
+  }
+}
+
+export interface IRequestWithUser
+  extends Request,
+    Partial<IAccessTokenJwtPayload> {}

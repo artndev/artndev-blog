@@ -1,6 +1,6 @@
+import type { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import type { NextFunction, Response } from 'express'
-import type { IJwtPayload, IRequestWithUser, IUser } from './types.ts'
+import type { IAccessTokenJwtPayload, IRequestWithUser } from './types.ts'
 
 export const isLogged = (
   req: IRequestWithUser,
@@ -9,7 +9,6 @@ export const isLogged = (
 ) => {
   try {
     // console.log(req.headers)
-
     if (!req.headers.authorization) {
       res.status(401).json({
         message: 'You are not authorized',
@@ -18,8 +17,8 @@ export const isLogged = (
       return
     }
 
-    const token: string = req.headers.authorization.split(' ')[1]!
-    if (!jwt.verify(token, process.env.SECRET_KEY!)) {
+    const accessToken = req.headers.authorization.split(' ')[1]!
+    if (!jwt.verify(accessToken, process.env.JWT_SECRET_KEY!)) {
       res.status(401).json({
         message: 'You are not authorized',
         answer: null,
@@ -27,21 +26,22 @@ export const isLogged = (
       return
     }
 
-    req.user = jwt.decode(token) as IJwtPayload
+    const { user } = jwt.decode(accessToken) as IAccessTokenJwtPayload
+    req.user = user
     next()
   } catch (err) {
     console.log(err)
 
     res.status(403).json({
       message:
-        'Server has not responded or your authorization credentials are incorrect',
+        'Server is not responding or your authorization credentials are incorrect',
       answer: null,
     })
   }
 }
 
 export const isNotLogged = (
-  req: IRequestWithUser,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -59,7 +59,7 @@ export const isNotLogged = (
     console.log(err)
 
     res.status(500).json({
-      message: 'Server has not responded',
+      message: 'Server is not responding',
       answer: null,
     })
   }
@@ -71,8 +71,7 @@ export const isAdmin = (
   next: NextFunction
 ) => {
   try {
-    const token: string = req.headers.authorization!.split(' ')[1]!
-    if (token !== process.env.ADMIN_TOKEN) {
+    if (!req.user!.is_admin) {
       res.status(403).json({
         message: 'You have no access to request',
         answer: null,
@@ -80,13 +79,12 @@ export const isAdmin = (
       return
     }
 
-    req.user = jwt.decode(token) as IJwtPayload
     next()
   } catch (err) {
     console.log(err)
 
     res.status(500).json({
-      message: 'Server has not responded',
+      message: 'Server is not responding',
       answer: null,
     })
   }

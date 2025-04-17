@@ -3,7 +3,7 @@
   "_comment": "https://artndev-blog.vercel.app",
   "FRONTEND_URL": "http://localhost:3000",
   "_comment2": "1d",
-  "REFRESH_TOKEN_OPTIONS": {
+  "REFRESH_TOKEN_COOKIE_OPTIONS": {
     "httpOnly": true,
     "secure": true,
     "sameSite": "none",

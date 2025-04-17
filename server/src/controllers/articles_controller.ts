@@ -1,6 +1,6 @@
-import type { ResultSetHeader, RowDataPacket } from 'mysql2'
-import pool from '../pool.js'
 import type { Request, Response } from 'express'
+import type { ResultSetHeader } from 'mysql2'
+import pool from '../pool.js'
 import type { IArticle, ILike } from '../types.js'
 
 // CREATE TABLE Articles (
