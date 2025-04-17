@@ -6,19 +6,6 @@ import config from '../config.json' with { type: 'json' }
 import pool from '../pool.js'
 import type { IPasswordTokenJwtPayload, IUser } from '../types.ts'
 
-// CREATE TABLE Users (
-//     Id INT AUTO_INCREMENT,
-//     Username VARCHAR(20) NOT NULL UNIQUE,
-//      NULL is important
-//      VARCHAR(255) bc there is hashed password
-//     Password VARCHAR(255),
-//     Role VARCHAR(20) DEFAULT "User",
-//     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
-//     PRIMARY KEY(Id)
-// );
-
-// ====== SEND REQUESTS ======
-
 export async function Register(req: Request, res: Response) {
   try {
     const passwordToken = jwt.sign(
@@ -152,7 +139,6 @@ export async function Login(req: Request, res: Response) {
       }
     )
 
-    // send answer
     res.status(200).json({
       message: 'You have successfully registered',
       answer: {
@@ -176,10 +162,8 @@ export async function Login(req: Request, res: Response) {
   }
 }
 
-// ??????????????
 export function Logout(_: Request | undefined, res: Response) {
   try {
-    // send answer
     res.clearCookie('user_data').clearCookie('token').status(200).json({
       message: 'You have successfully logged out',
       answer: true,
@@ -187,7 +171,6 @@ export function Logout(_: Request | undefined, res: Response) {
   } catch (err) {
     console.log(err)
 
-    // send answer
     res.status(500).json({
       message: 'Server is not responding',
       answer: err,

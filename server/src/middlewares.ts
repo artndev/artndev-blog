@@ -8,7 +8,6 @@ export const isLogged = (
   next: NextFunction
 ) => {
   try {
-    // console.log(req.headers)
     if (!req.headers.authorization) {
       res.status(401).json({
         message: 'You are not authorized',

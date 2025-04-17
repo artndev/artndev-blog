@@ -1,13 +1,13 @@
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import 'dotenv/config.js'
 import express from 'express'
-import cors from 'cors'
+import config from './config.json' with { type: 'json' }
+import * as middlewares from './middlewares.js'
 import articles from './routers/articles.js'
 import likes from './routers/likes.js'
-import users from './routers/users.js'
 import saves from './routers/saves.js'
-import cookieParser from 'cookie-parser'
-import * as middlewares from './middlewares.js'
-import config from './config.json' with { type: 'json' }
+import users from './routers/users.js'
 
 const app = express()
 app.use(
