@@ -76,16 +76,16 @@ export async function GetSaves(req: IRequestWithUser, res: Response) {
 
     const [rows] = await pool.query<IArticle[]>(
       `
-                SELECT 
-                    Articles.Id,
-                    Articles.Title,
-                    Articles.Subtitle,
-                    Articles.Text,
-                    Articles.Updated 
-                FROM Articles
-                LEFT JOIN Saves ON Articles.Id = Saves.ArticleId
-                WHERE Saves.UserId = ?;
-            `,
+        SELECT 
+          Articles.Id,
+          Articles.Title,
+          Articles.Subtitle,
+          Articles.Text,
+          Articles.Updated 
+        FROM Articles
+        LEFT JOIN Saves ON Articles.Id = Saves.ArticleId
+        WHERE Saves.UserId = ?;
+      `,
       user_id
     )
 
@@ -105,6 +105,8 @@ export async function GetSaves(req: IRequestWithUser, res: Response) {
 
 export async function GetState(req: IRequestWithUser, res: Response) {
   try {
+    const { user_id } = req.user!
+
     const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Articles WHERE Id = ?',
       req.params.article_id
@@ -117,8 +119,6 @@ export async function GetState(req: IRequestWithUser, res: Response) {
       })
       return
     }
-
-    const { user_id } = req.user!
 
     const [rows2] = await pool.query<ISave[]>(
       'SELECT * FROM Saves WHERE ArticleId = ? AND UserId = ?;',

@@ -8,6 +8,6 @@ router.post('/register', middlewares.isNotLogged, usersController.Register)
 
 router.post('/login', middlewares.isNotLogged, usersController.Login)
 
-router.post('/logout', middlewares.isLogged, usersController.Logout)
+// router.post('/logout', middlewares.isLogged, usersController.Logout)
 
 export default router

@@ -162,18 +162,18 @@ export async function Login(req: Request, res: Response) {
   }
 }
 
-export function Logout(_: Request | undefined, res: Response) {
-  try {
-    res.clearCookie('user_data').clearCookie('token').status(200).json({
-      message: 'You have successfully logged out',
-      answer: true,
-    })
-  } catch (err) {
-    console.log(err)
+// export function Logout(_: Request | undefined, res: Response) {
+//   try {
+//     res.clearCookie('user_data').clearCookie('token').status(200).json({
+//       message: 'You have successfully logged out',
+//       answer: true,
+//     })
+//   } catch (err) {
+//     console.log(err)
 
-    res.status(500).json({
-      message: 'Server is not responding',
-      answer: err,
-    })
-  }
-}
+//     res.status(500).json({
+//       message: 'Server is not responding',
+//       answer: err,
+//     })
+//   }
+// }

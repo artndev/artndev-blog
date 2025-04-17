@@ -20,10 +20,10 @@ export async function Like(req: IRequestWithUser, res: Response) {
       return
     }
 
-    await pool.query('INSERT INTO Likes (ArticleId, UserId) VALUES (?, ?);', [
-      req.params.article_id,
-      user_id,
-    ])
+    await pool.query<ResultSetHeader>(
+      'INSERT INTO Likes (ArticleId, UserId) VALUES (?, ?);',
+      [req.params.article_id, user_id]
+    )
 
     res.status(200).json({
       message: 'You have successfully liked article',
@@ -108,6 +108,8 @@ export async function CountLikes(req: Request, res: Response) {
 
 export async function GetState(req: IRequestWithUser, res: Response) {
   try {
+    const { user_id } = req.user!
+
     const [rows] = await pool.query<IArticle[]>(
       'SELECT * FROM Articles WHERE Id = ?',
       req.params.article_id
@@ -120,8 +122,6 @@ export async function GetState(req: IRequestWithUser, res: Response) {
       })
       return
     }
-
-    const { user_id } = req.user!
 
     const [rows2] = await pool.query<ILikes[]>(
       'SELECT COUNT(*) as likes FROM Likes WHERE ArticleId = ? AND UserId = ?',

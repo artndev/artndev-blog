@@ -5,9 +5,9 @@ import type { IArticle, ILike } from '../types.js'
 
 export async function Create(req: Request, res: Response) {
   try {
-    await pool.query(
-      'INSERT INTO Articles (Title, Subtitle, Text) VALUES (?, ?, ?);',
-      [req.body.title, req.body.subtitle, req.body.text]
+    await pool.query<ResultSetHeader>(
+      'INSERT INTO Articles (Title, Subtitle, Content) VALUES (?, ?, ?);',
+      [req.body.title, req.body.subtitle, req.body.content]
     )
 
     res.status(200).json({
@@ -28,14 +28,19 @@ export async function Update(req: Request, res: Response) {
   try {
     const [rows] = await pool.query<ResultSetHeader>(
       `
-                UPDATE Articles SET 
-                    Title = ?, 
-                    Subtitle = ?,
-                    Text = ?, 
-                    Updated = CURRENT_TIMESTAMP() 
-                WHERE Id = ?;
-            `,
-      [req.body.title, req.body.subtitle, req.body.text, req.params.article_id]
+        UPDATE Articles SET 
+          Title = ?, 
+          Subtitle = ?,
+          Content = ?, 
+          Updated = CURRENT_TIMESTAMP() 
+        WHERE Id = ?;
+      `,
+      [
+        req.body.title,
+        req.body.subtitle,
+        req.body.content,
+        req.params.article_id,
+      ]
     )
 
     if (!rows.affectedRows) {
@@ -62,15 +67,15 @@ export async function Update(req: Request, res: Response) {
 
 export async function Delete(req: Request, res: Response) {
   try {
-    await pool.query(
+    await pool.query<ResultSetHeader>(
       `
-                DELETE FROM Likes, Saves
-                USING Likes, Saves
-                WHERE 
-                    Likes.UserId = Likes.UserId AND 
-                    Likes.ArticleId = Saves.ArticleId AND
-                    Likes.ArticleId = ?;
-            `,
+        DELETE FROM Likes, Saves
+        USING Likes, Saves
+        WHERE 
+          Likes.UserId = Likes.UserId AND 
+          Likes.ArticleId = Saves.ArticleId AND
+          Likes.ArticleId = ?;
+      `,
       req.params.article_id
     )
 
@@ -140,7 +145,7 @@ export async function Get(req: Request, res: Response) {
     )
 
     res.status(200).json({
-      message: 'You have successfully got the article',
+      message: 'You have successfully got article',
       answer: { ...rows[0], Likes: rows2.length },
     })
   } catch (err) {

@@ -14,7 +14,7 @@ export interface IArticle extends RowDataPacket {
   Id: number
   Title: string
   Subtitle: string
-  Text: string
+  Content: string
   Updated: string
 }
 
