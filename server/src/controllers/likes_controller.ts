@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express'
 import type { ResultSetHeader } from 'mysql2'
 import pool from '../pool.js'
-import type { IArticle, ILike, ILikes, IRequestWithUser } from '../types.js'
+import type { IArticle, ILike, ILikes, IRequestAccessToken } from '../types.js'
 
-export async function Like(req: IRequestWithUser, res: Response) {
+export async function Like(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 
@@ -39,7 +39,7 @@ export async function Like(req: IRequestWithUser, res: Response) {
   }
 }
 
-export async function Dislike(req: IRequestWithUser, res: Response) {
+export async function Dislike(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 
@@ -106,7 +106,7 @@ export async function CountLikes(req: Request, res: Response) {
   }
 }
 
-export async function GetState(req: IRequestWithUser, res: Response) {
+export async function GetState(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 

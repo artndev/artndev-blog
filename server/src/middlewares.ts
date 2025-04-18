@@ -1,9 +1,14 @@
 import type { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import type { IAccessTokenJwtPayload, IRequestWithUser } from './types.ts'
+import type {
+  IAccessTokenJwtPayload,
+  IRefreshTokenJwtPayload,
+  IRequestAccessToken,
+  IRequestRefreshToken,
+} from './types.ts'
 
-export const isLogged = (
-  req: IRequestWithUser,
+export const isLoggedAccessToken = (
+  req: IRequestAccessToken,
   res: Response,
   next: NextFunction
 ) => {
@@ -26,6 +31,43 @@ export const isLogged = (
     }
 
     const { user } = jwt.decode(accessToken) as IAccessTokenJwtPayload
+    req.user = user
+    next()
+  } catch (err) {
+    console.log(err)
+
+    res.status(403).json({
+      message:
+        'Server is not responding or your authorization credentials are incorrect',
+      answer: null,
+    })
+  }
+}
+
+export const isLoggedRefreshToken = (
+  req: IRequestRefreshToken,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    if (!req.headers.authorization) {
+      res.status(401).json({
+        message: 'You are not authorized',
+        answer: null,
+      })
+      return
+    }
+
+    const refreshToken = req.headers.authorization.split(' ')[1]!
+    if (!jwt.verify(refreshToken, process.env.JWT_SECRET_KEY!)) {
+      res.status(401).json({
+        message: 'You are not authorized',
+        answer: null,
+      })
+      return
+    }
+
+    const { user } = jwt.decode(refreshToken) as IRefreshTokenJwtPayload
     req.user = user
     next()
   } catch (err) {
@@ -65,7 +107,7 @@ export const isNotLogged = (
 }
 
 export const isAdmin = (
-  req: IRequestWithUser,
+  req: IRequestAccessToken,
   res: Response,
   next: NextFunction
 ) => {

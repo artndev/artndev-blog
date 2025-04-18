@@ -10,21 +10,21 @@ router.get('/:article_id', articlesController.Get)
 
 router.post(
   '/create',
-  middlewares.isLogged,
+  middlewares.isLoggedAccessToken,
   middlewares.isAdmin,
   articlesController.Create
 )
 
 router.put(
   '/:article_id/update',
-  middlewares.isLogged,
+  middlewares.isLoggedAccessToken,
   middlewares.isAdmin,
   articlesController.Update
 )
 
 router.delete(
   '/:article_id/delete',
-  middlewares.isLogged,
+  middlewares.isLoggedAccessToken,
   middlewares.isAdmin,
   articlesController.Delete
 )

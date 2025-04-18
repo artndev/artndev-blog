@@ -32,18 +32,30 @@ export interface ILikes extends RowDataPacket {
   likes: number
 }
 
-export interface IPasswordTokenJwtPayload extends JwtPayload {
-  password: string
-}
-
-export interface IAccessTokenJwtPayload extends JwtPayload {
+type AccessTokenJwtPayload = {
   user: {
     user_id: number
     username: string
     is_admin: boolean
   }
 }
+export interface IAccessTokenJwtPayload
+  extends JwtPayload,
+    AccessTokenJwtPayload {}
 
-export interface IRequestWithUser
+type RefreshTokenJwtPayload = {
+  user: {
+    user_id: number
+  }
+}
+export interface IRefreshTokenJwtPayload
+  extends JwtPayload,
+    RefreshTokenJwtPayload {}
+
+export interface IRequestAccessToken
   extends Request,
-    Partial<IAccessTokenJwtPayload> {}
+    Partial<AccessTokenJwtPayload> {}
+
+export interface IRequestRefreshToken
+  extends Request,
+    Partial<RefreshTokenJwtPayload> {}

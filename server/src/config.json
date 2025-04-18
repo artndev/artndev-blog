@@ -11,6 +11,6 @@
   },
   "_comment3": "30m",
   "ACCESS_TOKEN_OPTIONS": {
-    "expiresIn": 1800000
+    "exp": 86400
   }
 }

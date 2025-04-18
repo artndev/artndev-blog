@@ -5,9 +5,14 @@
     "target": "es2022",
     "allowJs": true,
     "resolveJsonModule": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
     "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "lib": ["es2022", "dom", "dom.iterable"]
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "lib": ["es5", "es6", "dom", "dom.iterable"]
   }
 }

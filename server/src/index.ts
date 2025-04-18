@@ -3,7 +3,6 @@ import cors from 'cors'
 import 'dotenv/config.js'
 import express from 'express'
 import config from './config.json' with { type: 'json' }
-import * as middlewares from './middlewares.js'
 import articles from './routers/articles.js'
 import likes from './routers/likes.js'
 import saves from './routers/saves.js'
@@ -29,7 +28,7 @@ app.use(cookieParser())
 app.use('/articles', articles)
 app.use('/users', users)
 app.use('/likes', likes)
-app.use('/saves', middlewares.isLogged, saves)
+app.use('/saves', saves)
 
 const port = config.SERVER_PORT || 8000
 app.listen(port, () => console.log(`Server listening on port ${port}`))

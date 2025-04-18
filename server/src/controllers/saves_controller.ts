@@ -1,9 +1,9 @@
 import type { Response } from 'express'
 import type { ResultSetHeader } from 'mysql2'
 import pool from '../pool.js'
-import type { IArticle, IRequestWithUser, ISave } from '../types.ts'
+import type { IArticle, IRequestAccessToken, ISave } from '../types.ts'
 
-export async function Save(req: IRequestWithUser, res: Response) {
+export async function Save(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 
@@ -39,7 +39,7 @@ export async function Save(req: IRequestWithUser, res: Response) {
   }
 }
 
-export async function Unsave(req: IRequestWithUser, res: Response) {
+export async function Unsave(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 
@@ -70,7 +70,7 @@ export async function Unsave(req: IRequestWithUser, res: Response) {
   }
 }
 
-export async function GetSaves(req: IRequestWithUser, res: Response) {
+export async function GetSaves(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 
@@ -103,7 +103,7 @@ export async function GetSaves(req: IRequestWithUser, res: Response) {
   }
 }
 
-export async function GetState(req: IRequestWithUser, res: Response) {
+export async function GetState(req: IRequestAccessToken, res: Response) {
   try {
     const { user_id } = req.user!
 
