@@ -1,5 +1,4 @@
-import 'dotenv/config.js'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import jwt from 'jsonwebtoken'
 
@@ -11,8 +10,12 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(cookies?.user_data)
 
   useEffect(() => {
+    // console.log(process.env)
+  }, [])
+
+  useEffect(() => {
     try {
-      jwt.verify(accessToken, process.env.JWT_SECRET_KEY)
+      jwt.verify(accessToken, process.env.REACT_APP_JWT_SECRET_KEY)
     } catch (err) {}
   }, [accessToken, refreshToken])
 
@@ -21,10 +24,10 @@ export const AuthProvider = ({ children }) => {
       value={{
         setCookie,
         removeCookie,
-        token,
-        setToken,
-        userData,
-        setUserData,
+        accessToken,
+        setAccessToken,
+        refreshToken,
+        setRefreshToken,
       }}
     >
       {children}
