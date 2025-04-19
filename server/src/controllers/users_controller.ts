@@ -4,8 +4,7 @@ import jwt from 'jsonwebtoken'
 import type { ResultSetHeader } from 'mysql2'
 import { v4 as uuidv4 } from 'uuid'
 import config from '../config.json' with { type: 'json' }
-import pool from '../pool.js'
-import type { IRequestRefreshToken, IUser } from '../types.ts'
+import pool from '../pool'
 
 export async function Register(req: Request, res: Response) {
   try {
@@ -36,7 +35,7 @@ export async function Register(req: Request, res: Response) {
         jti: uuidv4(),
         user: userData,
       },
-      process.env.JWT_SECRET_KEY!,
+      process.env.JWT_ACCESS_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
       }
@@ -50,7 +49,7 @@ export async function Register(req: Request, res: Response) {
           user_id: userData.user_id,
         },
       },
-      process.env.JWT_SECRET_KEY!,
+      process.env.JWT_REFRESH_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
       }
@@ -118,7 +117,7 @@ export async function Login(req: Request, res: Response) {
         jti: uuidv4(),
         user: userData,
       },
-      process.env.JWT_SECRET_KEY!,
+      process.env.JWT_ACCESS_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
       }
@@ -128,8 +127,11 @@ export async function Login(req: Request, res: Response) {
       {
         sub: userData.username,
         jti: uuidv4(),
+        user: {
+          user_id: userData.user_id,
+        },
       },
-      process.env.JWT_SECRET_KEY!,
+      process.env.JWT_REFRESH_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
       }
@@ -161,7 +163,7 @@ export async function Login(req: Request, res: Response) {
 export async function Refresh(req: IRequestRefreshToken, res: Response) {
   try {
     const [rows] = await pool.query<IUser[]>(
-      'SELECT * FROM Users WHERE Username = ?;',
+      'SELECT * FROM Users WHERE Id = ?;',
       req.user!.user_id
     )
 
@@ -179,7 +181,7 @@ export async function Refresh(req: IRequestRefreshToken, res: Response) {
         jti: uuidv4(),
         user: userData,
       },
-      process.env.JWT_SECRET_KEY!,
+      process.env.JWT_ACCESS_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
       }

@@ -1,11 +1,5 @@
 import type { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import type {
-  IAccessTokenJwtPayload,
-  IRefreshTokenJwtPayload,
-  IRequestAccessToken,
-  IRequestRefreshToken,
-} from './types.ts'
 
 export const isLoggedAccessToken = (
   req: IRequestAccessToken,
@@ -22,7 +16,7 @@ export const isLoggedAccessToken = (
     }
 
     const accessToken = req.headers.authorization.split(' ')[1]!
-    if (!jwt.verify(accessToken, process.env.JWT_SECRET_KEY!)) {
+    if (!jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN_SECRET_KEY!)) {
       res.status(401).json({
         message: 'You are not authorized',
         answer: null,
@@ -59,7 +53,7 @@ export const isLoggedRefreshToken = (
     }
 
     const refreshToken = req.headers.authorization.split(' ')[1]!
-    if (!jwt.verify(refreshToken, process.env.JWT_SECRET_KEY!)) {
+    if (!jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET_KEY!)) {
       res.status(401).json({
         message: 'You are not authorized',
         answer: null,

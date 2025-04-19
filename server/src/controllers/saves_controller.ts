@@ -1,7 +1,6 @@
 import type { Response } from 'express'
 import type { ResultSetHeader } from 'mysql2'
-import pool from '../pool.js'
-import type { IArticle, IRequestAccessToken, ISave } from '../types.ts'
+import pool from '../pool'
 
 export async function Save(req: IRequestAccessToken, res: Response) {
   try {

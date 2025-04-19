@@ -1,7 +1,6 @@
 import type { Request, Response } from 'express'
 import type { ResultSetHeader } from 'mysql2'
 import pool from '../pool.js'
-import type { IArticle, ILike } from '../types.js'
 
 export async function Create(req: Request, res: Response) {
   try {
