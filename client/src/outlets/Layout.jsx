@@ -5,7 +5,7 @@ import AdminContext from '../contexts/Admin'
 import AuthContext from '../contexts/Auth'
 
 function Layout() {
-  const { token } = useContext(AuthContext)
+  const { refreshToken } = useContext(AuthContext)
   const { admin } = useContext(AdminContext)
 
   return (
@@ -19,7 +19,7 @@ function Layout() {
             </Link>
             <Link
               className="nav__item"
-              id={`${!token ? 'red' : ''}`}
+              id={`${!refreshToken ? 'red' : ''}`}
               to={'/profile'}
             >
               PROFILE

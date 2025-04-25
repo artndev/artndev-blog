@@ -58,14 +58,12 @@ export async function Register(req: Request, res: Response) {
     res.status(200).json({
       message: 'You have successfully registered',
       answer: {
-        user_data: userData,
+        user: userData,
         refresh_token: {
           value: refreshToken,
           cookie_options: config.REFRESH_TOKEN_COOKIE_OPTIONS,
         },
-        access_token: {
-          value: accessToken,
-        },
+        access_token: accessToken,
       },
     })
   } catch (err) {
@@ -140,14 +138,12 @@ export async function Login(req: Request, res: Response) {
     res.status(200).json({
       message: 'You have successfully registered',
       answer: {
-        user_data: userData,
+        user: userData,
         refresh_token: {
           value: refreshToken,
           cookie_options: config.REFRESH_TOKEN_COOKIE_OPTIONS,
         },
-        access_token: {
-          value: accessToken,
-        },
+        access_token: accessToken,
       },
     })
   } catch (err) {
@@ -190,9 +186,8 @@ export async function Refresh(req: IRequestRefreshToken, res: Response) {
     res.status(200).json({
       message: 'Your access token is successfully refreshed',
       answer: {
-        access_token: {
-          value: accessToken,
-        },
+        user: userData,
+        access_token: accessToken,
       },
     })
   } catch (err) {

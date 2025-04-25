@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-import jwt from 'jsonwebtoken'
+import axios from '../axios'
 
 const AuthContext = createContext({})
 export const AuthProvider = ({ children }) => {
@@ -10,14 +10,29 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(cookies?.user_data)
 
   useEffect(() => {
-    // console.log(process.env)
-  }, [])
+    if (!refreshToken) return
+    if (accessToken) return
+
+    axios
+      .get(`/users/refresh`, {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+        },
+      })
+      .then(response => {
+        const { user, access_token } = response.data.answer
+
+        setAccessToken(access_token)
+        setUserData(user)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [refreshToken, accessToken])
 
   useEffect(() => {
-    try {
-      jwt.verify(accessToken, process.env.REACT_APP_JWT_SECRET_KEY)
-    } catch (err) {}
-  }, [accessToken, refreshToken])
+    console.log(refreshToken, accessToken)
+  }, [refreshToken, accessToken])
 
   return (
     <AuthContext.Provider
@@ -28,6 +43,8 @@ export const AuthProvider = ({ children }) => {
         setAccessToken,
         refreshToken,
         setRefreshToken,
+        userData,
+        setUserData,
       }}
     >
       {children}

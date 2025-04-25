@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom'
 import AuthContext from '../contexts/Auth.jsx'
 import AdminContext from '../contexts/Admin.jsx'
 import config from '../config.json'
-import {} from 'react-cookie'
 
 function LoginForm() {
   const navigator = useNavigate()
-  const { setCookie, setToken, setUserData } = useContext(AuthContext)
+  const { setCookie, setRefreshToken, setAccessToken, setUserData } =
+    useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
   const [err, setErr] = useState(null)
 
@@ -34,14 +34,18 @@ function LoginForm() {
       })
       .then(response => {
         setTimeout(() => {
-          const { token, ...userData } = response.data.answer
-          // console.log(token, userData)
+          const { user, refresh_token, access_token } = response.data.answer
 
-          setCookie('user_data', userData, config.COOKIES_OPTIONS)
-          setCookie('token', token, config.COOKIES_OPTIONS)
-          setUserData(userData)
-          setToken(token)
-          setAdmin(userData.is_admin)
+          console.log(user, refresh_token, access_token)
+          setCookie('refresh_token', refresh_token.value, {
+            secure: true,
+            sameSite: 'none',
+            maxAge: 86400,
+          })
+          setRefreshToken(refresh_token.value)
+          setAccessToken(access_token)
+          setUserData(user)
+          setAdmin(user.is_admin)
         }, 4)
       })
       .catch(err => {

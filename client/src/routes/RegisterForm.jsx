@@ -8,7 +8,8 @@ import config from '../config.json'
 
 function RegisterForm() {
   const navigator = useNavigate()
-  const { setCookie, setToken, setUserData } = useContext(AuthContext)
+  const { setCookie, setRefreshToken, setAccessToken, setUserData } =
+    useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
   const [err, setErr] = React.useState(null)
 
@@ -33,13 +34,17 @@ function RegisterForm() {
       })
       .then(response => {
         setTimeout(() => {
-          const { token, ...userData } = response.data.answer
+          const { user, refresh_token, access_token } = response.data.answer
 
-          setCookie('user_data', userData, config.COOKIES_OPTIONS)
-          setCookie('token', token, config.COOKIES_OPTIONS)
-          setUserData(userData)
-          setToken(token)
-          setAdmin(userData.is_admin)
+          setCookie(
+            'refresh_token',
+            refresh_token.value,
+            refresh_token.cookie_options
+          )
+          setRefreshToken(refresh_token.value)
+          setAccessToken(access_token)
+          setUserData(user)
+          setAdmin(user.is_admin)
         }, 4)
       })
       .catch(err => {
