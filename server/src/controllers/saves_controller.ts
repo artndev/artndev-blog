@@ -79,7 +79,7 @@ export async function GetSaves(req: IRequestAccessToken, res: Response) {
           Articles.Id,
           Articles.Title,
           Articles.Subtitle,
-          Articles.Text,
+          Articles.Content,
           Articles.Updated 
         FROM Articles
         LEFT JOIN Saves ON Articles.Id = Saves.ArticleId

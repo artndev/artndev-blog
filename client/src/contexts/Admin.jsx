@@ -2,6 +2,8 @@ import React, { createContext, useState, useContext, useEffect } from 'react'
 import AuthContext from './Auth.jsx'
 
 const AdminContext = createContext({})
+export const useAdminContext = () => useContext(AdminContext)
+
 export const AdminProvider = ({ children }) => {
   const { userData } = useContext(AuthContext)
   const [admin, setAdmin] = useState(userData?.is_admin)

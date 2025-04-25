@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import AuthContext from '../contexts/Auth.jsx'
+import AuthContext, { useAuthContext } from '../contexts/Auth.jsx'
 
 function IsLogged() {
-  const { refreshToken } = useContext(AuthContext)
+  const { refreshToken } = useAuthContext()
 
   // useEffect(() => {
   //   console.log(refreshToken)

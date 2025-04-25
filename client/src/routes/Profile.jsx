@@ -2,7 +2,7 @@ import '../styles/css/Profile.css'
 import React, { useContext, useEffect, useState } from 'react'
 import ArticleBack from '../components/ArticleBack.jsx'
 import axios from '../axios.js'
-import AuthContext from '../contexts/Auth.jsx'
+import AuthContext, { useAuthContext } from '../contexts/Auth.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminContext from '../contexts/Admin.jsx'
 import exit from '../imgs/exit.svg'
@@ -12,46 +12,39 @@ import ErrorHandler from '../components/ErrorHandler.jsx'
 function Profile() {
   const navigator = useNavigate()
   const { admin, setAdmin } = useContext(AdminContext)
-  const { removeCookie, token, setToken, userData, setUserData } =
-    useContext(AuthContext)
+  const {
+    removeCookie,
+    accessToken,
+    setAccessToken,
+    setRefreshToken,
+    userData,
+    setUserData,
+  } = useAuthContext()
   const [data, setData] = useState(null)
   const [err, setErr] = useState(null)
 
   const logout = e => {
     e.preventDefault()
 
-    axios
-      .post(
-        '/users/logout',
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then(() => navigator('/articles'))
-      .then(() => {
-        setTimeout(() => {
-          removeCookie('user_data')
-          removeCookie('token')
-          setUserData(null)
-          setToken(null)
-          setAdmin(null)
-        }, 4)
-      })
-      .catch(err => {
-        console.log(err)
-
-        setErr(err.response)
-      })
+    navigator('/articles')
+    setTimeout(() => {
+      removeCookie('refresh_token')
+      setRefreshToken(null)
+      setAccessToken(null)
+      setUserData(null)
+      setAdmin(null)
+    }, 4)
   }
+
+  useEffect(() => {
+    console.log('USED:', accessToken)
+  }, [accessToken])
 
   useEffect(() => {
     axios
       .get('/saves', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then(response => {

@@ -16,6 +16,10 @@ export const isLoggedAccessToken = (
     }
 
     const accessToken = req.headers.authorization.split(' ')[1]!
+    // console.log(
+    //   req.headers.authorization,
+    //   process.env.JWT_ACCESS_TOKEN_SECRET_KEY
+    // )
     if (!jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN_SECRET_KEY!)) {
       res.status(401).json({
         message: 'You are not authorized',
