@@ -1,5 +1,5 @@
-import '../styles/css/Button.css'
 import React from 'react'
+import '../styles/css/Button.css'
 
 function Button({
   isInverted,

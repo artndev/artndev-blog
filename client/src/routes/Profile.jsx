@@ -1,17 +1,18 @@
-import '../styles/css/Profile.css'
-import React, { useContext, useEffect, useState } from 'react'
-import ArticleBack from '../components/ArticleBack.jsx'
-import axios from '../axios.js'
-import AuthContext, { useAuthContext } from '../contexts/Auth.jsx'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import AdminContext from '../contexts/Admin.jsx'
-import exit from '../imgs/exit.svg'
+import axios from '../axios.js'
+import ArticleBack from '../components/ArticleBack.jsx'
 import Button from '../components/Button.jsx'
 import ErrorHandler from '../components/ErrorHandler.jsx'
+import config from '../config.json'
+import { useAdminContext } from '../contexts/Admin.jsx'
+import { useAuthContext } from '../contexts/Auth.jsx'
+import exit from '../imgs/exit.svg'
+import '../styles/css/Profile.css'
 
 function Profile() {
   const navigator = useNavigate()
-  const { admin, setAdmin } = useContext(AdminContext)
+  const { admin, setAdmin } = useAdminContext()
   const {
     removeCookie,
     accessToken,
@@ -37,10 +38,6 @@ function Profile() {
   }
 
   useEffect(() => {
-    console.log('USED:', accessToken)
-  }, [accessToken])
-
-  useEffect(() => {
     axios
       .get('/saves', {
         headers: {
@@ -53,13 +50,22 @@ function Profile() {
       .catch(err => {
         console.log(err)
 
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
+
         setErr(err.response)
       })
-  }, [])
+  }, [accessToken]) // Don't forget about dependencies!
 
   // useEffect(() => {
   //     console.log(data)
   // }, [data])
+
+  // useEffect(() => {
+  //   console.log(admin)
+  // }, [admin])
 
   return (
     <div className="profile__container f-md">

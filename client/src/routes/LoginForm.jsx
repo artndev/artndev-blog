@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react'
-import AuthForm from '../components/AuthForm.jsx'
-import axios from '../axios.js'
 import { useNavigate } from 'react-router-dom'
-import AuthContext from '../contexts/Auth.jsx'
+import axios from '../axios.js'
+import AuthForm from '../components/AuthForm.jsx'
 import AdminContext from '../contexts/Admin.jsx'
-import config from '../config.json'
+import AuthContext from '../contexts/Auth.jsx'
 
 function LoginForm() {
   const navigator = useNavigate()
@@ -36,13 +35,12 @@ function LoginForm() {
         setTimeout(() => {
           const { user, refresh_token, access_token } = response.data.answer
 
-          console.log(user, refresh_token, access_token)
-          setCookie('refresh_token', refresh_token.value, {
+          setCookie('refresh_token', refresh_token, {
             secure: true,
             sameSite: 'none',
             maxAge: 86400,
           })
-          setRefreshToken(refresh_token.value)
+          setRefreshToken(refresh_token)
           setAccessToken(access_token)
           setUserData(user)
           setAdmin(user.is_admin)

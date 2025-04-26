@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-import AuthForm from '../components/AuthForm.jsx'
-import axios from '../axios.js'
 import { useNavigate } from 'react-router-dom'
-import AuthContext from '../contexts/Auth.jsx'
+import axios from '../axios.js'
+import AuthForm from '../components/AuthForm.jsx'
 import AdminContext from '../contexts/Admin.jsx'
-import config from '../config.json'
+import AuthContext from '../contexts/Auth.jsx'
 
 function RegisterForm() {
   const navigator = useNavigate()
@@ -36,12 +35,12 @@ function RegisterForm() {
         setTimeout(() => {
           const { user, refresh_token, access_token } = response.data.answer
 
-          setCookie(
-            'refresh_token',
-            refresh_token.value,
-            refresh_token.cookie_options
-          )
-          setRefreshToken(refresh_token.value)
+          setCookie('refresh_token', refresh_token, {
+            secure: true,
+            sameSite: 'none',
+            maxAge: 86400,
+          })
+          setRefreshToken(refresh_token)
           setAccessToken(access_token)
           setUserData(user)
           setAdmin(user.is_admin)

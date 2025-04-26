@@ -1,15 +1,5 @@
 {
   "SERVER_PORT": 5000,
   "_comment": "https://artndev-blog.vercel.app",
-  "FRONTEND_URL": "http://localhost:3000",
-  "_comment2": "1d",
-  "REFRESH_TOKEN_COOKIE_OPTIONS": {
-    "secure": true,
-    "sameSite": "none",
-    "maxAge": 86400
-  },
-  "_comment3": "30m",
-  "ACCESS_TOKEN_OPTIONS": {
-    "exp": 86400
-  }
+  "FRONTEND_URL": "http://localhost:3000"
 }

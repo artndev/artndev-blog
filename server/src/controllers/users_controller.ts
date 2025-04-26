@@ -3,7 +3,6 @@ import type { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import type { ResultSetHeader } from 'mysql2'
 import { v4 as uuidv4 } from 'uuid'
-import config from '../config.json' with { type: 'json' }
 import pool from '../pool'
 
 export async function Register(req: Request, res: Response) {
@@ -31,13 +30,13 @@ export async function Register(req: Request, res: Response) {
     const accessToken = jwt.sign(
       {
         sub: userData.username,
-        exp: Math.floor(Date.now() / 1000) + config.ACCESS_TOKEN_OPTIONS.exp,
         jti: uuidv4(),
         user: userData,
       },
       process.env.JWT_ACCESS_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
+        expiresIn: '10m',
       }
     )
 
@@ -59,10 +58,7 @@ export async function Register(req: Request, res: Response) {
       message: 'You have successfully registered',
       answer: {
         user: userData,
-        refresh_token: {
-          value: refreshToken,
-          cookie_options: config.REFRESH_TOKEN_COOKIE_OPTIONS,
-        },
+        refresh_token: refreshToken,
         access_token: accessToken,
       },
     })
@@ -111,13 +107,13 @@ export async function Login(req: Request, res: Response) {
     const accessToken = jwt.sign(
       {
         sub: userData.username,
-        exp: Math.floor(Date.now() / 1000) + config.ACCESS_TOKEN_OPTIONS.exp,
         jti: uuidv4(),
         user: userData,
       },
       process.env.JWT_ACCESS_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
+        expiresIn: '10m',
       }
     )
 
@@ -139,10 +135,7 @@ export async function Login(req: Request, res: Response) {
       message: 'You have successfully registered',
       answer: {
         user: userData,
-        refresh_token: {
-          value: refreshToken,
-          cookie_options: config.REFRESH_TOKEN_COOKIE_OPTIONS,
-        },
+        refresh_token: refreshToken,
         access_token: accessToken,
       },
     })
@@ -173,13 +166,13 @@ export async function Refresh(req: IRequestRefreshToken, res: Response) {
     const accessToken = jwt.sign(
       {
         sub: userData.username,
-        exp: Math.floor(Date.now() / 1000) + config.ACCESS_TOKEN_OPTIONS.exp,
         jti: uuidv4(),
         user: userData,
       },
       process.env.JWT_ACCESS_TOKEN_SECRET_KEY!,
       {
         algorithm: 'HS256',
+        expiresIn: '10m',
       }
     )
 
@@ -198,6 +191,13 @@ export async function Refresh(req: IRequestRefreshToken, res: Response) {
       answer: err,
     })
   }
+}
+
+export function Test(_: IRequestRefreshToken | undefined, res: Response) {
+  res.status(200).json({
+    message: 'Your access token is valid',
+    answer: true,
+  })
 }
 
 // export function Logout(_: Request | undefined, res: Response) {

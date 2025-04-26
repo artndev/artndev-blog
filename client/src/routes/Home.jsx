@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom'
 import React from 'react'
-import Button from '../components/Button.jsx'
+import { useNavigate } from 'react-router-dom'
 import Typewriter from 'typewriter-effect'
+import Button from '../components/Button.jsx'
 import config from '../config.json'
 
 function Home() {

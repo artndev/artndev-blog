@@ -1,11 +1,11 @@
-import '../styles/css/Articles.css'
-import ArticleBack from '../components/ArticleBack.jsx'
 import React, { useEffect, useState } from 'react'
-import axios from '../axios.js'
 import { Link } from 'react-router-dom'
-import config from '../config.json'
+import axios from '../axios.js'
+import ArticleBack from '../components/ArticleBack.jsx'
 import Button from '../components/Button.jsx'
 import ErrorHandler from '../components/ErrorHandler.jsx'
+import config from '../config.json'
+import '../styles/css/Articles.css'
 
 const sliceArray = (arr, n) => {
   let ans = [null]
@@ -50,9 +50,9 @@ function Articles() {
       })
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+  // useEffect(() => {
+  //   console.log(data)
+  // }, [data])
 
   return (
     <>

@@ -1,32 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react'
-import ArticleForm from '../components/ArticleForm.jsx'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../axios.js'
-import AuthContext from '../contexts/Auth.jsx'
+import ArticleForm from '../components/ArticleForm.jsx'
+import config from '../config.json'
+import { useAuthContext } from '../contexts/Auth.jsx'
 
 function CreateForm() {
   const navigator = useNavigate()
-  const { token } = useContext(AuthContext)
+  const { accessToken, setAccessToken } = useAuthContext()
   const [err, setErr] = useState(null)
 
-  const createArticle = (title, subtitle, text) => {
+  const createArticle = (title, subtitle, content) => {
     axios
       .post(
         '/articles/create',
         {
           title: title,
           subtitle: subtitle,
-          text: text,
+          content: content,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
       .then(() => navigator('/articles'))
       .catch(err => {
         console.log(err)
+
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
 
         setErr(err.response)
       })

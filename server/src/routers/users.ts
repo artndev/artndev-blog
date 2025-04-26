@@ -14,6 +14,8 @@ router.get(
   usersController.Refresh
 )
 
+router.get('/test', middlewares.isLoggedAccessToken, usersController.Test)
+
 // router.post('/logout', middlewares.isLogged, usersController.Logout)
 
 export default router

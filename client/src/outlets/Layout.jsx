@@ -1,12 +1,12 @@
 import '../styles/css/Header.css'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Outlet, Link } from 'react-router-dom'
-import AdminContext from '../contexts/Admin'
-import AuthContext, { useAuthContext } from '../contexts/Auth'
+import { useAdminContext } from '../contexts/Admin'
+import { useAuthContext } from '../contexts/Auth'
 
 function Layout() {
   const { refreshToken } = useAuthContext()
-  const { admin } = useContext(AdminContext)
+  const { admin } = useAdminContext()
 
   return (
     <>

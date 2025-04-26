@@ -1,9 +1,9 @@
-import '../styles/css/AuthForm.css'
-import { Link } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
-import Input from './Input.jsx'
-import Button from './Button.jsx'
+import { Link } from 'react-router-dom'
 import config from '../config.json'
+import '../styles/css/AuthForm.css'
+import Button from './Button.jsx'
+import Input from './Input.jsx'
 
 function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
   const inputRef = useRef(null)

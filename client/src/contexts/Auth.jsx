@@ -1,27 +1,33 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import axios from '../axios'
-import { store, setToken } from '../tokenManager'
+import config from '../config.json'
 
 const AuthContext = createContext({})
 export const AuthProvider = ({ children }) => {
-  const [cookies, setCookie, removeCookie] = useCookies([
-    'refresh_token',
-    'user_data',
-  ]) // auto-decoded
-  const [accessToken, setAccessToken] = useState(store.token)
+  const [cookies, setCookie, removeCookie] = useCookies(['refresh_token'])
   const [refreshToken, setRefreshToken] = useState(cookies?.refresh_token)
-  const [userData, setUserData] = useState(cookies?.user_data)
-
-  // useEffect(() => {
-  //   console.log(getTokenManager().getToken())
-  //   getTokenManager().setToken(accessToken)
-  //   console.log('AFTER: ', getTokenManager().getToken())
-  // }, [accessToken])
+  const [accessToken, setAccessToken] = useState(null)
+  const [userData, setUserData] = useState(null)
 
   useEffect(() => {
-    store.token = 'Lox'
-  })
+    const interval = setInterval(() => {
+      axios
+        .get(`/users/test`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .catch(err => {
+          console.log(err)
+
+          if (config.ACCEPTED_ERR_CODES.includes(err.response.status))
+            setAccessToken(null)
+        })
+    }, 30000)
+
+    return () => clearInterval(interval)
+  }, [accessToken])
 
   useEffect(() => {
     if (!refreshToken) return
@@ -36,7 +42,6 @@ export const AuthProvider = ({ children }) => {
       .then(response => {
         const { user, access_token } = response.data.answer
 
-        setToken(access_token)
         setAccessToken(access_token)
         setUserData(user)
       })
@@ -45,9 +50,9 @@ export const AuthProvider = ({ children }) => {
       })
   }, [refreshToken, accessToken])
 
-  useEffect(() => {
-    console.log(refreshToken, accessToken)
-  }, [refreshToken, accessToken])
+  // useEffect(() => {
+  //   console.log('ACCESS_TOKEN: ', accessToken)
+  // }, [accessToken])
 
   return (
     <AuthContext.Provider

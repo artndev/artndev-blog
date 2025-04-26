@@ -32,7 +32,7 @@ export const isLoggedAccessToken = (
     req.user = user
     next()
   } catch (err) {
-    console.log(err)
+    //console.log(err)
 
     res.status(403).json({
       message:

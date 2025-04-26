@@ -1,5 +1,5 @@
-import '../styles/css/Input.css'
 import React from 'react'
+import '../styles/css/Input.css'
 
 function Input({
   includeSpaces,

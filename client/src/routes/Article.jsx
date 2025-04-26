@@ -1,21 +1,22 @@
-import '../styles/css/Article.css'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import ArticleFront from '../components/ArticleFront.jsx'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../axios.js'
-import AdminContext from '../contexts/Admin.jsx'
-import AuthContext from '../contexts/Auth.jsx'
-import heart from '../imgs/heart.svg'
-import bookmark from '../imgs/bookmark.svg'
-import pen from '../imgs/pen.svg'
-import bin from '../imgs/bin.svg'
+import ArticleFront from '../components/ArticleFront.jsx'
 import Button from '../components/Button.jsx'
 import ErrorHandler from '../components/ErrorHandler.jsx'
+import config from '../config.json'
+import { useAdminContext } from '../contexts/Admin.jsx'
+import { useAuthContext } from '../contexts/Auth.jsx'
+import bin from '../imgs/bin.svg'
+import bookmark from '../imgs/bookmark.svg'
+import heart from '../imgs/heart.svg'
+import pen from '../imgs/pen.svg'
+import '../styles/css/Article.css'
 
 function Article() {
   const navigator = useNavigate()
-  const { token } = useContext(AuthContext)
-  const { admin } = useContext(AdminContext)
+  const { refreshToken, accessToken, setAccessToken } = useAuthContext()
+  const { admin } = useAdminContext()
   const { article_id } = useParams()
   const [data, setData] = useState(null)
   const [isLiked, setIsLiked] = useState(false)
@@ -41,12 +42,17 @@ function Article() {
     axios
       .delete(`/articles/${article_id}/delete`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then(() => navigator('/articles'))
       .catch(err => {
         console.log(err)
+
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
 
         setErr(err.response)
       })
@@ -57,7 +63,7 @@ function Article() {
     axios
       .get(`/likes/${article_id}/state`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then(response => {
@@ -66,9 +72,14 @@ function Article() {
       .catch(err => {
         console.log(err)
 
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
+
         setErr(err.response)
       })
-  }, [article_id])
+  }, [article_id, accessToken])
 
   const likeArticle = () => {
     if (isLiked) return
@@ -79,7 +90,7 @@ function Article() {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -88,6 +99,11 @@ function Article() {
       })
       .catch(err => {
         console.log(err)
+
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
 
         setErr(err.response)
       })
@@ -102,7 +118,7 @@ function Article() {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -111,6 +127,11 @@ function Article() {
       })
       .catch(err => {
         console.log(err)
+
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
 
         setErr(err.response)
       })
@@ -121,7 +142,7 @@ function Article() {
     axios
       .get(`/saves/${article_id}/state`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then(response => {
@@ -130,9 +151,14 @@ function Article() {
       .catch(err => {
         console.log(err)
 
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
+
         setErr(err.response)
       })
-  }, [article_id])
+  }, [article_id, accessToken])
 
   const saveArticle = () => {
     if (isSaved) return
@@ -143,7 +169,7 @@ function Article() {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -152,6 +178,11 @@ function Article() {
       })
       .catch(err => {
         console.log(err)
+
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
 
         setErr(err.response)
       })
@@ -166,7 +197,7 @@ function Article() {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -175,6 +206,11 @@ function Article() {
       })
       .catch(err => {
         console.log(err)
+
+        if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
+          setAccessToken(null)
+          return
+        }
 
         setErr(err.response)
       })
@@ -188,6 +224,10 @@ function Article() {
   //   console.log(err)
   // }, [err])
 
+  // useEffect(() => {
+  //   console.log(isLiked, isSaved)
+  // }, [isLiked, isSaved])
+
   return (
     <div className="article__container f-md">
       {data ? (
@@ -197,7 +237,7 @@ function Article() {
             subtitle={new Date(data.Updated)
               .toLocaleDateString()
               .replaceAll('.', '/')}
-            text={data.Text}
+            content={data.Content}
           />
           <div className="article__btns">
             <div className="article__btns-group">
@@ -205,7 +245,7 @@ function Article() {
                 isPressed={isLiked}
                 isInverted={true}
                 onClick={() => {
-                  if (!token) {
+                  if (!refreshToken) {
                     navigator('/login')
                     return
                   }
@@ -231,7 +271,7 @@ function Article() {
               isPressed={isSaved}
               isInverted={true}
               onClick={() => {
-                if (!token) {
+                if (!refreshToken) {
                   navigator('/login')
                   return
                 }
