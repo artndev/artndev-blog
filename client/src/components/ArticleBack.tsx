@@ -2,7 +2,7 @@ import React from 'react'
 import config from '../config.json'
 import '../styles/css/ArticleBack.css'
 
-const readingTime = content => {
+const readingTime = (content: string | undefined) => {
   if (!content) return '..m'
 
   const words = content.trim().split(/\s+/).length
@@ -11,7 +11,7 @@ const readingTime = content => {
   return time.toString()
 }
 
-function ArticleBack({ data }) {
+const ArticleBack: React.FC<IArticleBackProps> = ({ data }) => {
   return (
     <div className="article__back f-md">
       <div className="article__back-group">

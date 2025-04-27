@@ -1,7 +1,10 @@
 import MDPreview from '@uiw/react-markdown-preview'
 import React from 'react'
 
-function MarkdownPreview({ source, className }) {
+const MarkdownPreview: React.FC<IMarkdownPreviewProps> = ({
+  source,
+  className,
+}) => {
   return (
     <div data-color-mode="light">
       <MDPreview

@@ -1,7 +1,10 @@
 import MDEditor, { commands } from '@uiw/react-md-editor'
 import React from 'react'
 
-function MarkdownEditor({ value, onChange }) {
+const MarkdownEditor: React.FC<IMarkdownEditorProps> = ({
+  value,
+  onChange,
+}) => {
   return (
     <div data-color-mode="light">
       <MDEditor

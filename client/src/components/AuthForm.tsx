@@ -2,18 +2,27 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import config from '../config.json'
 import '../styles/css/AuthForm.css'
-import Button from './Button.jsx'
-import Input from './Input.jsx'
+import Button from './Button'
+import Input from './Input'
 
-function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
-  const inputRef = useRef(null)
-  const btnRef = useRef(null)
+const AuthForm: React.FC<IAuthFormProps> = ({
+  formTitle,
+  btnText,
+  btnLink,
+  onSubmit,
+  err,
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const btnRef = useRef<HTMLButtonElement>(null)
   const [inputType, setInputType] = useState(false)
 
   useEffect(() => {
-    inputRef.current.type = inputType ? 'text' : 'password'
-    btnRef.current.classList.remove(inputType ? 'closed' : 'opened')
-    btnRef.current.classList.add(inputType ? 'opened' : 'closed')
+    if (!inputRef.current) return
+    inputRef.current!.type = inputType ? 'text' : 'password'
+
+    if (!btnRef.current) return
+    btnRef.current!.classList.remove(inputType ? 'closed' : 'opened')
+    btnRef.current!.classList.add(inputType ? 'opened' : 'closed')
   }, [inputType])
 
   return (
@@ -86,8 +95,8 @@ function AuthForm({ formTitle, err, onSubmit, btnText, btnLink }) {
               type={'submit'}
               content={'Submit'}
             />
-            <Link className="lnk f-smx" id="grey" to={btnLink}>
-              {btnText}
+            <Link className="lnk f-smx" id="grey" to={btnLink || '/'}>
+              {btnText || 'Sign up'}
             </Link>
           </div>
         </form>

@@ -13,7 +13,8 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
-    "lib": ["es5", "es6", "dom", "dom.iterable"]
+    "jsx": "react",
+    "lib": ["ES2021", "ES5", "ES6", "DOM", "DOM.Iterable"]
   },
-  "exclude": ["client"]
+  "exclude": ["eslint.config.mjs"]
 }

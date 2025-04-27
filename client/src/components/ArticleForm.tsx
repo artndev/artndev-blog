@@ -1,30 +1,25 @@
 import React, { useState } from 'react'
 import config from '../config.json'
-import '../styles/css/ArticleForm.css'
-import Button from './Button.jsx'
-import Input from './Input.jsx'
+import '../styles/css/ArticleForm'
+import Button from './Button'
+import Input from './Input'
 import MarkdownEditor from './MarkdownEditor'
 
-const minmax = (n, min, max) => {
+const minmax = (n: number, min: number, max: number) => {
   return n >= min && n <= max
 }
 
-function ArticleForm({
+const ArticleForm: React.FC<IArticleFormProps> = ({
   formTitle,
   defaultTitle,
   defaultSubtitle,
-  defaultText,
-  err,
+  defaultContent,
   onSubmit,
-}) {
-  const [title, setTitle] = useState(defaultTitle || '')
-  const [subtitle, setSubtitle] = useState(defaultSubtitle || '')
-  const [text, setText] = useState(defaultText || '')
-  const [err2, setErr2] = useState(err)
-
-  // useEffect(() => {
-  //   console.log(title, subtitle, text)
-  // }, [title, subtitle, text])
+}) => {
+  const [title, setTitle] = useState<string>(defaultTitle || '')
+  const [subtitle, setSubtitle] = useState<string>(defaultSubtitle || '')
+  const [content, setContent] = useState<string>(defaultContent || '')
+  const [err, setErr] = useState<boolean | undefined>(undefined)
 
   return (
     <div className="article__form-subcontainer">
@@ -35,27 +30,27 @@ function ArticleForm({
         onSubmit={e => {
           e.preventDefault()
 
-          const regexp = !new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL)
+          const regexp = new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL)
           if (!minmax(title.replaceAll(regexp, '').length, 5, 100)) {
-            setErr2(true)
+            setErr(true)
             return
           }
 
           if (!minmax(subtitle.replaceAll(regexp, '').length, 5, 100)) {
-            setErr2(true)
+            setErr(true)
             return
           }
 
-          if (!minmax(text.replaceAll(regexp, '').length, 5, 5000)) {
-            setErr2(true)
+          if (!minmax(content.replaceAll(regexp, '').length, 5, 5000)) {
+            setErr(true)
             return
           }
 
-          onSubmit(title.trim(), subtitle.trim(), text.trim())
+          onSubmit(title.trim(), subtitle.trim(), content.trim())
         }}
       >
         <div className="article__form-groups">
-          {err2 && (
+          {err && (
             <span id="red">
               An unknown error has been occurred or the validation has not been
               passed
@@ -104,7 +99,7 @@ function ArticleForm({
               :
             </div>
             <div className="f-smx">Must contain 5 to 5000 characters</div>
-            <MarkdownEditor value={text} onChange={setText} />
+            <MarkdownEditor value={content} onChange={setContent} />
           </div>
         </div>
         <Button

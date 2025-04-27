@@ -3,7 +3,7 @@ import config from '../config.json'
 import '../styles/css/ArticleFront.css'
 import MarkdownPreview from './MarkdownPreview.jsx'
 
-const readingTime = content => {
+const readingTime = (content: string) => {
   if (!content) return '..m'
 
   const words = content.trim().split(/\s+/).length
@@ -12,7 +12,11 @@ const readingTime = content => {
   return time.toString()
 }
 
-function ArticleFront({ title, subtitle, content }) {
+const ArticleFront: React.FC<IArticleFrontProps> = ({
+  title,
+  subtitle,
+  content,
+}) => {
   return (
     <div className="article__front f-md">
       <div className="article__front-group">
@@ -21,7 +25,7 @@ function ArticleFront({ title, subtitle, content }) {
           {`${readingTime(content)}m • ${subtitle}`}
         </div>
       </div>
-      <MarkdownPreview source={content} />
+      <MarkdownPreview source={content} className="" />
     </div>
   )
 }

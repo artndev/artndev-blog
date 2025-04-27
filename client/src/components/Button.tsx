@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/css/Button.css'
 
-function Button({
+const Button: React.FC<IButtonProps> = ({
   isInverted,
   isStatic,
   isPressed,
@@ -12,7 +12,7 @@ function Button({
   ref,
   type,
   content,
-}) {
+}) => {
   return (
     <button
       onClick={onClick}

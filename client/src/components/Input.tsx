@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/css/Input.css'
 
-function Input({
+const Input: React.FC<IInputProps> = ({
   includeSpaces,
   onChange,
   width,
@@ -15,7 +15,7 @@ function Input({
   pattern,
   placeholder,
   content,
-}) {
+}) => {
   return (
     <input
       onKeyDown={
@@ -23,7 +23,7 @@ function Input({
           ? e => {
               if (e.code === 'Space') e.preventDefault()
             }
-          : null
+          : undefined
       }
       onChange={onChange}
       className={'ipt f-smx'}

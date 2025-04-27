@@ -4,6 +4,7 @@ import axios from '../axios.js'
 import ArticleForm from '../components/ArticleForm.jsx'
 import config from '../config.json'
 import { useAuthContext } from '../contexts/Auth.jsx'
+import ErrorHandler from '../components/ErrorHandler.js'
 
 function CreateForm() {
   const navigator = useNavigate()
@@ -40,7 +41,11 @@ function CreateForm() {
 
   return (
     <div className="article__form-container f-md">
-      <ArticleForm formTitle={'Create.'} err={err} onSubmit={createArticle} />
+      {!err ? (
+        <ArticleForm formTitle={'Create.'} onSubmit={createArticle} />
+      ) : (
+        <ErrorHandler err={err} />
+      )}
     </div>
   )
 }

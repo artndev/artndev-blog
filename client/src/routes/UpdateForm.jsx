@@ -56,13 +56,12 @@ function UpdateForm() {
 
   return (
     <div className="article__form-container f-md">
-      {data ? (
+      {!err ? (
         <ArticleForm
           formTitle={'Update.'}
           defaultTitle={data.Title}
           defaultText={data.Text}
           defaultSubtitle={data.Subtitle}
-          err={err}
           onSubmit={updateArticle}
         />
       ) : (

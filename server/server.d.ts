@@ -1,3 +1,4 @@
+export {}
 import type { Request } from 'express'
 import type { JwtPayload } from 'jsonwebtoken'
 import type { RowDataPacket } from 'mysql2'
