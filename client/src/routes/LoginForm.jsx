@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../axios.js'
-import AuthForm from '../components/AuthForm.jsx'
+import AuthForm from '../components/AuthForm.tsx'
 import AdminContext from '../contexts/Admin.jsx'
 import AuthContext from '../contexts/Auth.jsx'
 

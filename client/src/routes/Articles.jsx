@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from '../axios.js'
-import ArticleBack from '../components/ArticleBack.jsx'
-import Button from '../components/Button.jsx'
-import ErrorHandler from '../components/ErrorHandler.jsx'
+import ArticleBack from '../components/ArticleBack.tsx'
+import Button from '../components/Button.tsx'
+import ErrorHandler from '../components/ErrorHandler.tsx'
 import config from '../config.json'
 import '../styles/css/Articles.css'
 

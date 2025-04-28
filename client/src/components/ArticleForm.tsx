@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import config from '../config.json'
-import '../styles/css/ArticleForm'
+import '../styles/css/ArticleForm.css'
 import Button from './Button'
 import Input from './Input'
 import MarkdownEditor from './MarkdownEditor'

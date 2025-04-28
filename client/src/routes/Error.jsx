@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Button from '../components/Button.jsx'
+import Button from '../components/Button.tsx'
 
 function Error() {
   const navigator = useNavigate()

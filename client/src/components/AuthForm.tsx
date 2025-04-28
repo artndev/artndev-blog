@@ -12,9 +12,9 @@ const AuthForm: React.FC<IAuthFormProps> = ({
   onSubmit,
   err,
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const btnRef = useRef<HTMLButtonElement>(null)
-  const [inputType, setInputType] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(undefined)
+  const btnRef = useRef<HTMLButtonElement>(undefined)
+  const [inputType, setInputType] = useState<boolean>(false)
 
   useEffect(() => {
     if (!inputRef.current) return

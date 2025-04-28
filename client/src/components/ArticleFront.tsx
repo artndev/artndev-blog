@@ -1,7 +1,7 @@
 import React from 'react'
 import config from '../config.json'
 import '../styles/css/ArticleFront.css'
-import MarkdownPreview from './MarkdownPreview.jsx'
+import MarkdownPreview from './MarkdownPreview'
 
 const readingTime = (content: string) => {
   if (!content) return '..m'

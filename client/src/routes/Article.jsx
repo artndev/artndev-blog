@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../axios.js'
-import ArticleFront from '../components/ArticleFront.jsx'
-import Button from '../components/Button.jsx'
-import ErrorHandler from '../components/ErrorHandler.jsx'
+import ArticleFront from '../components/ArticleFront.tsx'
+import Button from '../components/Button.tsx'
+import ErrorHandler from '../components/ErrorHandler.tsx'
 import config from '../config.json'
 import { useAdminContext } from '../contexts/Admin.jsx'
 import { useAuthContext } from '../contexts/Auth.jsx'
@@ -15,6 +15,7 @@ import '../styles/css/Article.css'
 
 function Article() {
   const navigator = useNavigate()
+  const context = useAuthContext()
   const { refreshToken, accessToken, setAccessToken } = useAuthContext()
   const { admin } = useAdminContext()
   const { article_id } = useParams()
@@ -22,6 +23,10 @@ function Article() {
   const [isLiked, setIsLiked] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [err, setErr] = useState(null)
+
+  useEffect(() => {
+    console.log(context)
+  }, [])
 
   // GET / DELETE requests don't need blank curly brackets
   // ========= DATA =========

@@ -51,12 +51,34 @@ declare global {
   }
 
   export interface IMarkdownEditorProps {
-    value?: string
-    onChange?: (...args) => void
+    value: string
+    onChange: (...args) => void
   }
 
   export interface IMarkdownPreviewProps {
-    source?: string
-    className?: string
+    source: string
+    className: string
+  }
+
+  export interface IUserData {
+    user_id: number
+    username: string
+    is_admin: boolean
+  }
+
+  export interface IAuthContext {
+    accessToken: string | undefined
+    refreshToken: string | undefined
+    setCookie: (...args) => void | undefined
+    removeCookie: (...args) => void | undefined
+    setAccessToken: (accessToken: string) => void | undefined
+    setRefreshToken: (refreshToken: string) => void | undefined
+    setUserData: (userData: IUserData) => void | undefined
+    userData: IUserData | undefined
+  }
+
+  export interface IAdminContext {
+    admin: boolean | undefined
+    setAdmin: (admin: boolean) => void | undefined
   }
 }

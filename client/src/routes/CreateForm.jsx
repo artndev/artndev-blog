@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../axios.js'
-import ArticleForm from '../components/ArticleForm.jsx'
+import ArticleForm from '../components/ArticleForm.tsx'
 import config from '../config.json'
 import { useAuthContext } from '../contexts/Auth.jsx'
-import ErrorHandler from '../components/ErrorHandler.js'
+import ErrorHandler from '../components/ErrorHandler.tsx'
 
 function CreateForm() {
   const navigator = useNavigate()

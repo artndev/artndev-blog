@@ -1,14 +1,18 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import axios from '../axios'
 import config from '../config.json'
 
-const AuthContext = createContext({})
-export const AuthProvider = ({ children }) => {
+const AuthContext = createContext<IAuthContext>({} as IAuthContext)
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cookies, setCookie, removeCookie] = useCookies(['refresh_token'])
-  const [refreshToken, setRefreshToken] = useState(cookies?.refresh_token)
-  const [accessToken, setAccessToken] = useState(null)
-  const [userData, setUserData] = useState(null)
+  const [refreshToken, setRefreshToken] = useState<string | undefined>(
+    cookies?.refresh_token
+  )
+  const [accessToken, setAccessToken] = useState<string | undefined>(undefined)
+  const [userData, setUserData] = useState<IUserData | undefined>(undefined)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,7 +26,7 @@ export const AuthProvider = ({ children }) => {
           console.log(err)
 
           if (config.ACCEPTED_ERR_CODES.includes(err.response.status))
-            setAccessToken(null)
+            setAccessToken(undefined)
         })
     }, 30000)
 
@@ -75,19 +79,3 @@ export const AuthProvider = ({ children }) => {
 export const useAuthContext = () => useContext(AuthContext)
 
 export default AuthContext
-
-// import React, { useContext, createContext, FC, useState } from 'react'
-//import { getTokenManager } from './../tokenManager'
-
-// type AccessTokenContext = [string, React.Dispatch<React.SetStateAction<string>>]
-
-// const AccessTokenProvider: FC = (props) => {
-//     const [accessToken, setAccessToken] = useState<string>(null)
-//     return <AccessToken.Provider value={[accessToken, setAccessToken]} {...props} />
-// }
-
-// const AccessToken = createContext<AccessTokenContext>(null)
-
-// const useAccessToken = (): AccessTokenContext => useContext<AccessTokenContext>(AccessToken)
-
-// export { AccessTokenProvider, useAccessToken }
