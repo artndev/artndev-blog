@@ -25,11 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         .catch(err => {
           console.log(err)
 
-          if (
-            config.ACCEPTED_ERR_CODES.includes(
-              err?.response?.status || err?.code
-            )
-          )
+          if (config.ACCEPTED_ERR_CODES.includes(err.response.status))
             setAccessToken(undefined)
         })
     }, 30000)
