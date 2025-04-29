@@ -35,6 +35,7 @@ const LoginForm = () => {
           const { user, refresh_token, access_token } = response.data.answer
 
           setCookie('refresh_token', refresh_token, {
+            path: '/',
             secure: true,
             sameSite: 'none',
             maxAge: 86400,
