@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ESNext",
     "lib": ["ES2021", "ES5", "ES6", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
