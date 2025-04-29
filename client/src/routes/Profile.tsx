@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from '../axios.js'
-import ArticleBack from '../components/ArticleBack.tsx'
-import Button from '../components/Button.tsx'
-import ErrorHandler from '../components/ErrorHandler.tsx'
+import axios from '../axios'
+import ArticleBack from '../components/ArticleBack'
+import Button from '../components/Button'
+import ErrorHandler from '../components/ErrorHandler'
 import config from '../config.json'
-import { useAdminContext } from '../contexts/Admin.jsx'
-import { useAuthContext } from '../contexts/Auth.jsx'
+import { useAdminContext } from '../contexts/Admin'
+import { useAuthContext } from '../contexts/Auth'
 import exit from '../imgs/exit.svg'
 import '../styles/css/Profile.css'
 
-function Profile() {
+const Profile = () => {
   const navigator = useNavigate()
   const { admin, setAdmin } = useAdminContext()
   const {
@@ -21,19 +21,19 @@ function Profile() {
     userData,
     setUserData,
   } = useAuthContext()
-  const [data, setData] = useState(null)
-  const [err, setErr] = useState(null)
+  const [data, setData] = useState<IArticlesData | undefined>(undefined)
+  const [err, setErr] = useState<IAxiosErrorResponse>(undefined)
 
-  const logout = e => {
+  const logout = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     navigator('/articles')
     setTimeout(() => {
       removeCookie('refresh_token')
-      setRefreshToken(null)
-      setAccessToken(null)
-      setUserData(null)
-      setAdmin(null)
+      setRefreshToken(undefined)
+      setAccessToken(undefined)
+      setUserData(undefined)
+      setAdmin(undefined)
     }, 4)
   }
 
@@ -51,7 +51,7 @@ function Profile() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -74,7 +74,7 @@ function Profile() {
           <div className="profile__group">
             <div className="profile__info">
               You are logged as{' '}
-              <span className="bold">@{userData.username}</span> (
+              <span className="bold">@{userData!.username}</span> (
               {admin ? (
                 <span id="red">admin</span>
               ) : (
@@ -107,7 +107,7 @@ function Profile() {
           )}
         </div>
       ) : (
-        <ErrorHandler to={err} />
+        <ErrorHandler err={err} />
       )}
     </div>
   )

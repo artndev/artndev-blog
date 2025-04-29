@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from '../axios.js'
-import ArticleForm from '../components/ArticleForm.tsx'
-import ErrorHandler from '../components/ErrorHandler.tsx'
+import axios from '../axios'
+import ArticleForm from '../components/ArticleForm'
+import ErrorHandler from '../components/ErrorHandler'
 import config from '../config.json'
-import { useAuthContext } from '../contexts/Auth.jsx'
+import { useAuthContext } from '../contexts/Auth'
 
 function UpdateForm() {
   const navigator = useNavigate()
   const { accessToken, setAccessToken } = useAuthContext()
   const { article_id } = useParams()
-  const [data, setData] = useState(null)
-  const [err, setErr] = useState(null)
+  const [data, setData] = useState<IArticleData | undefined>(undefined)
+  const [err, setErr] = useState<IAxiosErrorResponse>(undefined)
 
-  const updateArticle = (title, subtitle, content) => {
+  const updateArticle = (title: string, subtitle: string, content: string) => {
     axios
       .put(
         `/articles/${article_id}/update`,
@@ -33,7 +33,7 @@ function UpdateForm() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -56,12 +56,12 @@ function UpdateForm() {
 
   return (
     <div className="article__form-container f-md">
-      {!err ? (
+      {data && !err ? (
         <ArticleForm
           formTitle={'Update.'}
-          defaultTitle={data.Title}
-          defaultText={data.Text}
-          defaultSubtitle={data.Subtitle}
+          defaultTitle={data!.Title}
+          defaultContent={data!.Content}
+          defaultSubtitle={data!.Subtitle}
           onSubmit={updateArticle}
         />
       ) : (

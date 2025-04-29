@@ -1,6 +1,5 @@
 export {}
 import type { AxiosResponse } from 'axios'
-import React from 'react'
 
 declare global {
   export interface IButtonProps
@@ -39,7 +38,7 @@ declare global {
     btnText?: string
     btnLink?: string
     onSubmit: (...args) => void
-    err: AxiosResponse
+    err: IAxiosErrorResponse
   }
 
   export interface IArticleFormProps {
@@ -71,14 +70,37 @@ declare global {
     refreshToken: string | undefined
     setCookie: (...args) => void | undefined
     removeCookie: (...args) => void | undefined
-    setAccessToken: (accessToken: string) => void | undefined
-    setRefreshToken: (refreshToken: string) => void | undefined
-    setUserData: (userData: IUserData) => void | undefined
+    setAccessToken: (accessToken: string | undefined) => void | undefined
+    setRefreshToken: (refreshToken: string | undefined) => void | undefined
+    setUserData: (userData: IUserData | undefined) => void | undefined
     userData: IUserData | undefined
   }
 
   export interface IAdminContext {
     admin: boolean | undefined
-    setAdmin: (admin: boolean) => void | undefined
+    setAdmin: (admin: boolean | undefined) => void | undefined
+  }
+
+  export interface IArticleData {
+    Id: number
+    Title: string
+    Subtitle: string
+    Content: string
+    Updated: string
+    Likes: number
+  }
+
+  export type IArticlesDataItem = Omit<IArticleData, 'Likes'>
+
+  export type IArticlesData = IArticlesDataItem[]
+
+  export type IAxiosErrorResponse = AxiosResponse | undefined
+
+  declare module '*.svg' {
+    import React = require('react')
+
+    export const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>
+    const src: string
+    export default src
   }
 }

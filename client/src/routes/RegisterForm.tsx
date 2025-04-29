@@ -1,24 +1,24 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from '../axios.js'
-import AuthForm from '../components/AuthForm.tsx'
-import AdminContext from '../contexts/Admin.jsx'
-import AuthContext from '../contexts/Auth.jsx'
+import axios from '../axios'
+import AuthForm from '../components/AuthForm'
+import AdminContext from '../contexts/Admin'
+import AuthContext from '../contexts/Auth'
 
-function RegisterForm() {
+const RegisterForm = () => {
   const navigator = useNavigate()
   const { setCookie, setRefreshToken, setAccessToken, setUserData } =
     useContext(AuthContext)
   const { setAdmin } = useContext(AdminContext)
-  const [err, setErr] = React.useState(null)
+  const [err, setErr] = React.useState<IAxiosErrorResponse>(undefined)
 
-  const registerUser = e => {
+  const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.currentTarget)
     console.log(formData)
 
-    let data = {}
+    let data: Record<string, FormDataEntryValue> = {}
     formData.forEach((val, key) => (data[key] = val))
 
     axios

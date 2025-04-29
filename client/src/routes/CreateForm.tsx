@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from '../axios.js'
-import ArticleForm from '../components/ArticleForm.tsx'
+import axios from '../axios'
+import ArticleForm from '../components/ArticleForm'
+import ErrorHandler from '../components/ErrorHandler'
 import config from '../config.json'
-import { useAuthContext } from '../contexts/Auth.jsx'
-import ErrorHandler from '../components/ErrorHandler.tsx'
+import { useAuthContext } from '../contexts/Auth'
 
-function CreateForm() {
+const CreateForm = () => {
   const navigator = useNavigate()
   const { accessToken, setAccessToken } = useAuthContext()
-  const [err, setErr] = useState(null)
+  const [err, setErr] = useState<IAxiosErrorResponse>(undefined)
 
-  const createArticle = (title, subtitle, content) => {
+  const createArticle = (title: string, subtitle: string, content: string) => {
     axios
       .post(
         '/articles/create',
@@ -31,7 +31,7 @@ function CreateForm() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 

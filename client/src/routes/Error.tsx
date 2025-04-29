@@ -1,8 +1,7 @@
-import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Button from '../components/Button.tsx'
+import Button from '../components/Button'
 
-function Error() {
+const Error = () => {
   const navigator = useNavigate()
   const { code } = useParams()
 
@@ -14,7 +13,7 @@ function Error() {
           <div className="hero__info">
             <div>
               You have just got an error with the code{' '}
-              <span id="red">{code.substring(0, 3)}</span>...
+              <span id="red">{code ? code.substring(0, 3) : '500'}</span>...
             </div>
             <div>Do not worry, whatever happens happens!</div>
           </div>

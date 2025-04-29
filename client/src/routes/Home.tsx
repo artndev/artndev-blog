@@ -1,10 +1,9 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Typewriter from 'typewriter-effect'
 import Button from '../components/Button'
 import config from '../config.json'
 
-function Home() {
+const Home = () => {
   const navigator = useNavigate()
 
   return (

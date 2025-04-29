@@ -1,10 +1,9 @@
-import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { useAdminContext } from '../contexts/Admin'
 import { useAuthContext } from '../contexts/Auth'
 import '../styles/css/Header.css'
 
-function Layout() {
+const Layout = () => {
   const { refreshToken } = useAuthContext()
   const { admin } = useAdminContext()
 

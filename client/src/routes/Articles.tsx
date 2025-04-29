@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from '../axios.js'
-import ArticleBack from '../components/ArticleBack.tsx'
-import Button from '../components/Button.tsx'
-import ErrorHandler from '../components/ErrorHandler.tsx'
+import axios from '../axios'
+import ArticleBack from '../components/ArticleBack'
+import Button from '../components/Button'
+import ErrorHandler from '../components/ErrorHandler'
 import config from '../config.json'
 import '../styles/css/Articles.css'
 
-const sliceArray = (arr, n) => {
-  let ans = [null]
-  let dict = []
+const sliceArray = (arr: IArticlesData, n: number) => {
+  let ans: (IArticlesDataItem | undefined)[][] = [[undefined]]
+  let dict: IArticlesData = []
 
   arr.forEach(val => {
     dict.push(val)
@@ -25,11 +25,13 @@ const sliceArray = (arr, n) => {
   return ans
 }
 
-function Articles() {
-  const [data, setData] = useState([])
-  const [pages, setPages] = useState(0)
-  const [page, setPage] = useState(1)
-  const [err, setErr] = useState(null)
+const Articles = () => {
+  const [data, setData] = useState<
+    (IArticlesDataItem | undefined)[][] | undefined
+  >(undefined)
+  const [pages, setPages] = useState<number>(0)
+  const [page, setPage] = useState<number>(1)
+  const [err, setErr] = useState<IAxiosErrorResponse>(undefined)
 
   useEffect(() => {
     axios
@@ -60,9 +62,9 @@ function Articles() {
         {data && pages > 0 ? (
           <div className="articles__subcontainer">
             <div className="articles">
-              {data[page].map((val, i) => {
+              {data[page]!.map((val, i) => {
                 return (
-                  <Link key={i} to={`/articles/${val.Id}`}>
+                  <Link key={i} to={`/articles/${val!.Id}`}>
                     <ArticleBack data={val} />
                   </Link>
                 )

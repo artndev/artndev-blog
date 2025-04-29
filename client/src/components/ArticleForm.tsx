@@ -30,7 +30,7 @@ const ArticleForm: React.FC<IArticleFormProps> = ({
         onSubmit={e => {
           e.preventDefault()
 
-          const regexp = new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL)
+          const regexp = new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL, 'g')
           if (!minmax(title.replaceAll(regexp, '').length, 5, 100)) {
             setErr(true)
             return

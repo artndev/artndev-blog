@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from '../axios.js'
-import ArticleFront from '../components/ArticleFront.tsx'
-import Button from '../components/Button.tsx'
-import ErrorHandler from '../components/ErrorHandler.tsx'
+import axios from '../axios'
+import ArticleFront from '../components/ArticleFront'
+import Button from '../components/Button'
+import ErrorHandler from '../components/ErrorHandler'
 import config from '../config.json'
-import { useAdminContext } from '../contexts/Admin.jsx'
-import { useAuthContext } from '../contexts/Auth.jsx'
+import { useAdminContext } from '../contexts/Admin'
+import { useAuthContext } from '../contexts/Auth'
 import bin from '../imgs/bin.svg'
 import bookmark from '../imgs/bookmark.svg'
 import heart from '../imgs/heart.svg'
 import pen from '../imgs/pen.svg'
 import '../styles/css/Article.css'
 
-function Article() {
+const Article = () => {
   const navigator = useNavigate()
-  const context = useAuthContext()
   const { refreshToken, accessToken, setAccessToken } = useAuthContext()
   const { admin } = useAdminContext()
   const { article_id } = useParams()
-  const [data, setData] = useState(null)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isSaved, setIsSaved] = useState(false)
-  const [err, setErr] = useState(null)
-
-  useEffect(() => {
-    console.log(context)
-  }, [])
+  const [data, setData] = useState<IArticleData | undefined>(undefined)
+  const [isLiked, setIsLiked] = useState<boolean>(false)
+  const [isSaved, setIsSaved] = useState<boolean>(false)
+  const [err, setErr] = useState<IAxiosErrorResponse>(undefined)
 
   // GET / DELETE requests don't need blank curly brackets
   // ========= DATA =========
@@ -55,7 +50,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -78,7 +73,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -106,7 +101,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -134,7 +129,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -157,7 +152,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -185,7 +180,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -213,7 +208,7 @@ function Article() {
         console.log(err)
 
         if (config.ACCEPTED_ERR_CODES.includes(err.response.status)) {
-          setAccessToken(null)
+          setAccessToken(undefined)
           return
         }
 
@@ -290,7 +285,7 @@ function Article() {
               }}
               width={35}
               height={35}
-              content={<img src={bookmark} alt="Like" />}
+              content={<img src={bookmark} alt="Save" />}
             />
             {admin && (
               <>

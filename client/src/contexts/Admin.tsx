@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
-import { useAuthContext } from './Auth.js'
+import { useAuthContext } from './Auth'
 
 const AdminContext = createContext<IAdminContext>({} as IAdminContext)
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({
