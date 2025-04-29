@@ -1,0 +1,35 @@
+ CREATE TABLE Articles (
+     Id INT AUTO_INCREMENT,
+     Title VARCHAR(100) NOT NULL,
+     Subtitle VARCHAR(100) NOT NULL,
+     Content VARCHAR(5000) NOT NULL,
+     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
+     PRIMARY KEY(Id)
+ );
+
+ CREATE TABLE Likes (
+     ArticleId INT NOT NULL,
+     UserId INT NOT NULL,
+     PRIMARY KEY(ArticleId, UserId),
+     CONSTRAINT ArticleIdFK FOREIGN KEY(ArticleId) REFERENCES Articles(Id),
+ 	   CONSTRAINT UserIdFK FOREIGN KEY(UserId) REFERENCES Users(Id)
+ );
+
+ CREATE TABLE Saves (
+     ArticleId INT NOT NULL,
+     UserId INT NOT NULL,
+     PRIMARY KEY(ArticleId, UserId),
+     CONSTRAINT ArticleIdFK_2 FOREIGN KEY(ArticleId) REFERENCES Articles(Id),
+ 	 CONSTRAINT UserIdFK_2 FOREIGN KEY(UserId) REFERENCES Users(Id)
+ );
+
+ CREATE TABLE Users (
+     Id INT AUTO_INCREMENT,
+     Username VARCHAR(20) NOT NULL UNIQUE,
+      NULL is important
+      VARCHAR(255) bc there is hashed password
+     Password VARCHAR(255),
+     Role VARCHAR(20) DEFAULT "User",
+     Updated DATETIME DEFAULT CURRENT_TIMESTAMP(),
+     PRIMARY KEY(Id)
+ );
