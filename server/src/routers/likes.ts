@@ -1,6 +1,6 @@
 import express from 'express'
-import * as likesController from '../controllers/likes_controller'
-import * as middlewares from '../middlewares'
+import * as likesController from '../controllers/likes_controller.js'
+import * as middlewares from '../middlewares.js'
 
 const router = express.Router()
 
