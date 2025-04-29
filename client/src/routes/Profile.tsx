@@ -69,7 +69,7 @@ const Profile = () => {
 
   return (
     <div className="profile__container f-md">
-      {data ? (
+      {data && !err ? (
         <div className="profile">
           <div className="profile__group">
             <div className="profile__info">

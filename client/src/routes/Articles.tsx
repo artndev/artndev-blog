@@ -59,7 +59,7 @@ const Articles = () => {
   return (
     <>
       <div className="articles__container f-md">
-        {data && pages > 0 ? (
+        {data && pages > 0 && !err ? (
           <div className="articles__subcontainer">
             <div className="articles">
               {data[page]!.map((val, i) => {

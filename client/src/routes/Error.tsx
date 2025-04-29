@@ -13,7 +13,7 @@ const Error = () => {
           <div className="hero__info">
             <div>
               You have just got an error with the code{' '}
-              <span id="red">{code ? code.substring(0, 3) : '500'}</span>...
+              <span id="red">{code ? code.substring(0, 3) : '418'}</span>...
             </div>
             <div>Do not worry, whatever happens happens!</div>
           </div>

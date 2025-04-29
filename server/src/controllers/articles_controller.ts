@@ -68,12 +68,12 @@ export async function Delete(req: Request, res: Response) {
   try {
     await pool.query<ResultSetHeader>(
       `
-        DELETE FROM Likes, Saves
-        USING Likes, Saves
-        WHERE 
-          Likes.UserId = Likes.UserId AND 
-          Likes.ArticleId = Saves.ArticleId AND
-          Likes.ArticleId = ?;
+        DELETE Likes, Saves
+        FROM Likes
+        JOIN Saves ON 
+          Likes.UserId = Saves.UserId AND 
+          Likes.ArticleId = Saves.ArticleId
+        WHERE Likes.ArticleId = ?;
       `,
       req.params.article_id
     )

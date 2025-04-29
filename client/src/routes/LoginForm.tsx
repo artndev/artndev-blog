@@ -4,6 +4,7 @@ import axios from '../axios'
 import AuthForm from '../components/AuthForm'
 import AdminContext from '../contexts/Admin'
 import AuthContext from '../contexts/Auth'
+import ErrorHandler from '../components/ErrorHandler'
 
 const LoginForm = () => {
   const navigator = useNavigate()
@@ -16,8 +17,6 @@ const LoginForm = () => {
     e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
-    console.log(formData)
-
     let data: Record<string, FormDataEntryValue> = {}
     formData.forEach((val, key) => (data[key] = val))
 
@@ -54,13 +53,19 @@ const LoginForm = () => {
   }
 
   return (
-    <AuthForm
-      formTitle="Login."
-      err={err}
-      onSubmit={submitCredentials}
-      btnLink={'/register'}
-      btnText={'I want to register'}
-    />
+    <>
+      {!err ? (
+        <AuthForm
+          formTitle="Login."
+          err={err}
+          onSubmit={submitCredentials}
+          btnLink={'/register'}
+          btnText={'I want to register'}
+        />
+      ) : (
+        <ErrorHandler err={err} />
+      )}
+    </>
   )
 }
 

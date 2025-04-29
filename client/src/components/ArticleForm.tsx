@@ -9,6 +9,8 @@ const minmax = (n: number, min: number, max: number) => {
   return n >= min && n <= max
 }
 
+const regexp = new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL, 'g')
+
 const ArticleForm: React.FC<IArticleFormProps> = ({
   formTitle,
   defaultTitle,
@@ -30,23 +32,26 @@ const ArticleForm: React.FC<IArticleFormProps> = ({
         onSubmit={e => {
           e.preventDefault()
 
-          const regexp = new RegExp(config.PATTERNS.ARTICLE_FORM.UNIVERSAL, 'g')
-          if (!minmax(title.replaceAll(regexp, '').length, 5, 100)) {
+          const newTitle = title.trim().replaceAll(regexp, ' ')
+          const newSubtitle = subtitle.trim().replaceAll(regexp, ' ')
+          const newContent = content.trim()
+
+          if (!minmax(newTitle.length, 5, 100)) {
             setErr(true)
             return
           }
 
-          if (!minmax(subtitle.replaceAll(regexp, '').length, 5, 100)) {
+          if (!minmax(newSubtitle.length, 5, 100)) {
             setErr(true)
             return
           }
 
-          if (!minmax(content.replaceAll(regexp, '').length, 5, 5000)) {
+          if (!minmax(newContent.length, 5, 5000)) {
             setErr(true)
             return
           }
 
-          onSubmit(title.trim(), subtitle.trim(), content.trim())
+          onSubmit(newTitle, newSubtitle, newContent)
         }}
       >
         <div className="article__form-groups">
@@ -66,6 +71,7 @@ const ArticleForm: React.FC<IArticleFormProps> = ({
             </label>
             <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
+              includeSpaces={true}
               onChange={e => setTitle(e.target.value)}
               width={'min(500px, 100%)'}
               height={45}
@@ -83,6 +89,7 @@ const ArticleForm: React.FC<IArticleFormProps> = ({
             </label>
             <div className="f-smx">Must contain 5 to 100 characters</div>
             <Input
+              includeSpaces={true}
               onChange={e => setSubtitle(e.target.value)}
               width={'min(500px, 100%)'}
               height={45}

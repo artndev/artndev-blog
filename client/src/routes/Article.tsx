@@ -230,7 +230,7 @@ const Article = () => {
 
   return (
     <div className="article__container f-md">
-      {data ? (
+      {data && !err ? (
         <div className="article">
           <ArticleFront
             title={data.Title}
