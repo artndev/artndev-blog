@@ -1,6 +1,6 @@
 import express from 'express'
-import * as usersController from '../controllers/users_controller'
-import * as middlewares from '../middlewares'
+import * as usersController from '../controllers/users_controller.js'
+import * as middlewares from '../middlewares.js'
 
 const router = express.Router()
 

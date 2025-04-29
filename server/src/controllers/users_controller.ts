@@ -3,7 +3,7 @@ import type { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import type { ResultSetHeader } from 'mysql2'
 import { v4 as uuidv4 } from 'uuid'
-import pool from '../pool'
+import pool from '../pool.js'
 
 export async function Register(req: Request, res: Response) {
   try {

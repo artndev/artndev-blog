@@ -1,6 +1,6 @@
 import express from 'express'
-import * as savesController from '../controllers/saves_controller'
-import * as middlewares from '../middlewares'
+import * as savesController from '../controllers/saves_controller.js'
+import * as middlewares from '../middlewares.js'
 
 const router = express.Router()
 
