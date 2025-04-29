@@ -15,5 +15,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "noUncheckedIndexedAccess": true
-  }
+  },
+  "exclude": ["dist", "node_modules"]
 }
