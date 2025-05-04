@@ -11,9 +11,9 @@ P.S.: Deployed on Vercel.
 <img src="./assets/sass.svg" width=50 />
 
 <img src="./assets/react.svg" width=50 />&nbsp;&nbsp;&nbsp;
-<img src="./assets/simple-icons--express.svg" width=50 />
+<img src="./assets/express.svg" width=50 />
 <img src="./assets/axios.svg" width=50 />
-<img src="./assets/ri--vercel-fill.svg" width=50 />&nbsp;&nbsp;
+<img src="./assets/vercel.svg" width=50 />&nbsp;&nbsp;
 <img src="./assets/figma.svg" width=50 />
 
 ## OAuth 2.0 Implementation (Cheat-Sheet)
